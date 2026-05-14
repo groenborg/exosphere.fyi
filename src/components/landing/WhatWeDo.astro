@@ -1,0 +1,35 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import SectionTitle from '../SectionTitle.astro';
+import CapabilityCard from '../cards/CapabilityCard.astro';
+import { capabilities } from '../../data/capabilities';
+---
+<section id="what">
+  <div class="wrap">
+    <Eyebrow>01 · What we do</Eyebrow>
+    <SectionTitle>Four disciplines, one studio.</SectionTitle>
+    <p class="section-lede">
+      We don’t divide design from engineering — every project ships with the
+      same hands that drew it. The result is software with a heartbeat.
+    </p>
+    <div class="caps" id="caps">
+      {capabilities.map((capability) => <CapabilityCard capability={capability} />)}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.cap').forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty(
+        '--mx',
+        `${((event.clientX - rect.left) / rect.width) * 100}%`,
+      );
+      card.style.setProperty(
+        '--my',
+        `${((event.clientY - rect.top) / rect.height) * 100}%`,
+      );
+    });
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+---
+<section id="signup">
+  <div class="wrap">
+    <div class="signup">
+      <div>
+        <Eyebrow>05 · Dispatch</Eyebrow>
+        <h2 class="signup__title">Postcards from the exosphere.</h2>
+        <p class="signup__body">
+          A monthly note from the studio — what we shipped, what we
+          learned, the odd weekend experiment. No tracking, no funnels.
+        </p>
+      </div>
+      <form class="signup__form" id="signup-form" novalidate>
+        <label class="signup__field">
+          <input type="email" id="signup-email" placeholder="you@orbit.zone" autocomplete="email" required />
+          <button type="submit">Transmit →</button>
+        </label>
+        <span class="signup__fine" id="signup-fine">One short email each month. Unsubscribe with a click.</span>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('signup-form') as HTMLFormElement | null;
+  const fine = document.getElementById('signup-fine');
+  const emailInput = document.getElementById('signup-email') as HTMLInputElement | null;
+
+  if (form && fine && emailInput) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = emailInput.value.trim();
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        fine.textContent = 'Please enter a valid email.';
+        fine.style.color = 'var(--accent-2)';
+        return;
+      }
+      fine.textContent = '✓ Transmission received. Welcome to the dispatch.';
+      fine.style.color = 'var(--accent)';
+      emailInput.value = '';
+    });
+  }
+</script>

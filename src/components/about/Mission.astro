@@ -1,0 +1,36 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+
+const stats = [
+  { num: '12+', label: 'Years orbiting' },
+  { num: '140', label: 'Shipped projects' },
+  { num: '8', label: 'Humans on board' },
+  { num: '1', label: 'Mantra (above)' },
+];
+---
+<section>
+  <div class="wrap">
+    <Eyebrow>Our mission</Eyebrow>
+    <div class="mission" style="margin-top:48px;">
+      <div class="mission__body">
+        <p>
+          We focus on building <em>fun, personal and exciting</em> software,
+          backed by many years of experience in automation, design, and a
+          steady drive for joyful experiences.
+        </p>
+        <p>
+          Software exists to put <em>smiles on people’s faces</em>. That’s
+          the only brief we never compromise on.
+        </p>
+      </div>
+      <div class="mission__stats">
+        {stats.map((stat) => (
+          <div>
+            <div class="stat__num">{stat.num}</div>
+            <div class="stat__label">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

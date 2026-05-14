@@ -1,0 +1,20 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import SectionTitle from '../SectionTitle.astro';
+import ProjectCard from '../cards/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+<section id="work">
+  <div class="wrap">
+    <Eyebrow>04 · Selected work</Eyebrow>
+    <SectionTitle>A few things we’re proud of.</SectionTitle>
+    <p class="section-lede">
+      Real projects, anonymised where they need to be. Ask us for the long
+      version over coffee — we have stories.
+    </p>
+
+    <div class="work">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import SectionTitle from '../SectionTitle.astro';
+import TimelineItem from './TimelineItem.astro';
+import { timeline } from '../../data/timeline';
+---
+<section>
+  <div class="wrap">
+    <Eyebrow>History · twelve orbits</Eyebrow>
+    <SectionTitle>Twelve years, in milestones.</SectionTitle>
+
+    <div class="timeline">
+      {timeline.map((entry) => <TimelineItem entry={entry} />)}
+    </div>
+  </div>
+</section>

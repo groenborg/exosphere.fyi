@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exosphere — Software that puts smiles on faces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-mood="deep" data-hero="minimal">
+
+  <canvas id="sky"></canvas>
+  <div id="sky-grid" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__brand" href="index.html">
+      <span class="nav__brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <circle cx="12" cy="12" r="3.6"></circle>
+          <ellipse cx="12" cy="12" rx="10.5" ry="4" transform="rotate(-22 12 12)"></ellipse>
+        </svg>
+      </span>
+      <span>Exosphere</span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html" aria-current="page">Index</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a class="nav__cta" href="#signup">Get in touch ↗</a>
+  </header>
+
+  <main>
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero__inner">
+          <div>
+            <div class="hero__meta">
+              <span class="hero__meta-dot" aria-hidden="true"></span>
+              <span>Studio · est. 2014</span>
+              <span>·</span>
+              <span>Open for new orbits</span>
+            </div>
+            <h1 class="hero__title">
+              We build <em>fun</em><br/>software for<br/>real people.
+            </h1>
+            <p class="hero__sub">
+              Exosphere is a small, joyful studio shipping personal, exciting
+              software — automation, design and experiences that put a smile
+              on the face of whoever opens them.
+            </p>
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#work">See selected work <span class="arrow">→</span></a>
+              <a class="btn btn--ghost" href="#mantra">Read our mantra</a>
+            </div>
+          </div>
+
+          <!-- Orbit variant -->
+          <div class="hero__orbit" aria-hidden="true">
+            <svg class="orbit-svg" viewBox="-260 -260 520 520" style="color:var(--accent)">
+              <!-- glow (stacked translucent rings; html-to-image is unreliable with SVG gradients) -->
+              <circle r="120" fill="currentColor" opacity="0.05" />
+              <circle r="90"  fill="currentColor" opacity="0.08" />
+              <circle r="60"  fill="currentColor" opacity="0.14" />
+              <circle r="38"  fill="currentColor" opacity="0.22" />
+              <!-- rings -->
+              <circle class="orbit-ring" r="90" />
+              <circle class="orbit-ring orbit-ring--accent" r="150" />
+              <circle class="orbit-ring" r="210" />
+              <circle class="orbit-ring" r="252" />
+              <!-- core -->
+              <circle r="22" class="orbit-core" />
+              <circle r="36" fill="none" stroke="currentColor" stroke-width="1" class="orbit-ring--accent" style="color:var(--accent)" />
+              <!-- orbiting bodies -->
+              <g class="orbit-spin">
+                <circle cx="150" cy="0" r="7" class="orbit-planet--2" />
+              </g>
+              <g class="orbit-spin--rev">
+                <circle cx="0" cy="-210" r="5" class="orbit-planet" />
+                <circle cx="-148" cy="-148" r="3" class="orbit-planet" opacity=".55" />
+              </g>
+              <g class="orbit-spin--fast">
+                <circle cx="-90" cy="0" r="4" class="orbit-planet" />
+              </g>
+              <!-- labels -->
+              <text class="orbit-label" x="0" y="-260" text-anchor="middle">N · 60°24′</text>
+              <text class="orbit-label" x="256" y="6">E</text>
+              <text class="orbit-label" x="-256" y="6" text-anchor="end">W</text>
+              <text class="orbit-label" x="0" y="270" text-anchor="middle">S · 10°08′</text>
+              <!-- crosshair -->
+              <line x1="-12" y1="0" x2="12" y2="0" stroke="currentColor" stroke-width="1" opacity=".35" />
+              <line x1="0" y1="-12" x2="0" y2="12" stroke="currentColor" stroke-width="1" opacity=".35" />
+            </svg>
+          </div>
+
+          <!-- Planet variant -->
+          <div class="hero__planet" aria-hidden="true">
+            <div class="planet"></div>
+            <div class="planet__ring"></div>
+            <div class="hero__planet-orbit">
+              <div class="planet__moon"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== WHAT WE DO ============================== -->
+    <section id="what">
+      <div class="wrap">
+        <span class="eyebrow">01 · What we do</span>
+        <h2 class="section-title">Four disciplines, one studio.</h2>
+        <p class="section-lede">
+          We don't divide design from engineering — every project ships with the
+          same hands that drew it. The result is software with a heartbeat.
+        </p>
+        <div class="caps" id="caps">
+
+          <article class="cap">
+            <div class="cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="5" y="9" width="22" height="14" rx="2"/>
+                <path d="M9 13l3 3-3 3M14 19h6"/>
+              </svg>
+            </div>
+            <div class="cap__num">— 01</div>
+            <h3 class="cap__title">Automation</h3>
+            <p class="cap__body">Internal tools, integrations and quietly-running services that take the boring out of your day.</p>
+          </article>
+
+          <article class="cap">
+            <div class="cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
+                <circle cx="16" cy="16" r="9"/>
+                <path d="M16 7v18M7 16h18"/>
+              </svg>
+            </div>
+            <div class="cap__num">— 02</div>
+            <h3 class="cap__title">Design</h3>
+            <p class="cap__body">Interfaces, identity systems and motion — drawn with the care of someone who is going to use them every day.</p>
+          </article>
+
+          <article class="cap">
+            <div class="cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M16 6l8 4-8 4-8-4 8-4z"/>
+                <path d="M8 14l8 4 8-4M8 20l8 4 8-4"/>
+              </svg>
+            </div>
+            <div class="cap__num">— 03</div>
+            <h3 class="cap__title">Software</h3>
+            <p class="cap__body">Web apps, desktop tools and the odd CLI. Boringly reliable on the inside, delightful on the outside.</p>
+          </article>
+
+          <article class="cap">
+            <div class="cap__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M8 22c0-4 3.5-8 8-8s8 4 8 8"/>
+                <circle cx="13" cy="14" r="1.2" fill="currentColor"/>
+                <circle cx="19" cy="14" r="1.2" fill="currentColor"/>
+                <path d="M16 6v2"/>
+              </svg>
+            </div>
+            <div class="cap__num">— 04</div>
+            <h3 class="cap__title">Experiences</h3>
+            <p class="cap__body">Installations, microsites, weird little websites — the kind of work people screenshot and send to a friend.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== MANTRA ============================== -->
+    <section id="mantra" class="mantra">
+      <div class="wrap">
+        <span class="eyebrow">02 · Mantra</span>
+        <blockquote class="mantra__quote">
+          We build <em>fun, personal and exciting</em> software, with many
+          years behind us in automation, design and a drive for joyful
+          experiences. <em>Software exists to put smiles on people's faces.</em>
+        </blockquote>
+        <div class="mantra__attr">The studio, in one breath</div>
+      </div>
+    </section>
+
+    <!-- ============================== SERVICES ============================== -->
+    <section id="services">
+      <div class="wrap">
+        <span class="eyebrow">03 · Services</span>
+        <h2 class="section-title">Engagements we like.</h2>
+        <p class="section-lede">
+          From a one-week sprint to a multi-year build. Each engagement starts
+          with a conversation and a clear scope — never a 40-page proposal.
+        </p>
+
+        <div class="svc">
+          <div class="svc__row">
+            <span class="svc__num">/ 001</span>
+            <span class="svc__name">Product design</span>
+            <span class="svc__desc">End-to-end design from kickoff to launch. Research, IA, UI, motion and a built prototype.</span>
+            <span class="svc__tag">6–14 weeks</span>
+          </div>
+          <div class="svc__row">
+            <span class="svc__num">/ 002</span>
+            <span class="svc__name">Automation systems</span>
+            <span class="svc__desc">Internal tooling, scripts and integrations that quietly run your operation in the background.</span>
+            <span class="svc__tag">2–8 weeks</span>
+          </div>
+          <div class="svc__row">
+            <span class="svc__num">/ 003</span>
+            <span class="svc__name">Build &amp; ship</span>
+            <span class="svc__desc">A small team building your product. Full-stack, native or web — staying through launch and beyond.</span>
+            <span class="svc__tag">Ongoing</span>
+          </div>
+          <div class="svc__row">
+            <span class="svc__num">/ 004</span>
+            <span class="svc__name">Studio residency</span>
+            <span class="svc__desc">Embed with us for a sprint. We pair, we ship, your team leaves with the keys and the muscle memory.</span>
+            <span class="svc__tag">2 weeks</span>
+          </div>
+          <div class="svc__row">
+            <span class="svc__num">/ 005</span>
+            <span class="svc__name">Joyful experiments</span>
+            <span class="svc__desc">A weird microsite, a launch toy, an interactive press kit. We love these. Bring us yours.</span>
+            <span class="svc__tag">1–3 weeks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== SELECTED WORK ============================== -->
+    <section id="work">
+      <div class="wrap">
+        <span class="eyebrow">04 · Selected work</span>
+        <h2 class="section-title">A few things we're proud of.</h2>
+        <p class="section-lede">
+          Real projects, anonymised where they need to be. Ask us for the long
+          version over coffee — we have stories.
+        </p>
+
+        <div class="work">
+
+          <article class="proj proj--lg">
+            <div class="proj__head">
+              <h3 class="proj__title">Helios Control</h3>
+              <span class="proj__meta">2024 · Industrial</span>
+            </div>
+            <p class="proj__body">A monitoring console for a fleet of off-grid power stations. We turned a 14-tab dashboard into a single, calm room you can run from your phone.</p>
+            <div class="proj__visual" data-label="[ Helios Control · screenshot slot ]"></div>
+            <div class="proj__tags">
+              <span class="proj__tag">Design</span>
+              <span class="proj__tag">Software</span>
+              <span class="proj__tag">Automation</span>
+            </div>
+          </article>
+
+          <article class="proj proj--md">
+            <div class="proj__head">
+              <h3 class="proj__title">Pocket Observatory</h3>
+              <span class="proj__meta">2023 · Consumer</span>
+            </div>
+            <p class="proj__body">A pocket-sized app that turns your phone toward the sky and whispers the names of the stars overhead.</p>
+            <div class="proj__visual" data-label="[ Observatory · screenshot slot ]"></div>
+            <div class="proj__tags">
+              <span class="proj__tag">Design</span>
+              <span class="proj__tag">iOS</span>
+            </div>
+          </article>
+
+          <article class="proj proj--sm">
+            <div class="proj__head">
+              <h3 class="proj__title">Tinpot</h3>
+              <span class="proj__meta">2023 · Experiment</span>
+            </div>
+            <p class="proj__body">A toy synth that turns office Slack into ambient music. Yes, really.</p>
+            <div class="proj__tags">
+              <span class="proj__tag">Joyful</span>
+              <span class="proj__tag">Audio</span>
+            </div>
+          </article>
+
+          <article class="proj proj--sm">
+            <div class="proj__head">
+              <h3 class="proj__title">Foundry CMS</h3>
+              <span class="proj__meta">2022 · Internal</span>
+            </div>
+            <p class="proj__body">A bespoke CMS we built for a children's magazine. Editing feels like decorating a notebook.</p>
+            <div class="proj__tags">
+              <span class="proj__tag">Software</span>
+              <span class="proj__tag">Editorial</span>
+            </div>
+          </article>
+
+          <article class="proj proj--sm">
+            <div class="proj__head">
+              <h3 class="proj__title">Routine</h3>
+              <span class="proj__meta">2021 · Self-initiated</span>
+            </div>
+            <p class="proj__body">A weather-aware calendar that gently nudges you outside on the good days.</p>
+            <div class="proj__tags">
+              <span class="proj__tag">Design</span>
+              <span class="proj__tag">macOS</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== NEWSLETTER ============================== -->
+    <section id="signup">
+      <div class="wrap">
+        <div class="signup">
+          <div>
+            <span class="eyebrow">05 · Dispatch</span>
+            <h2 class="signup__title">Postcards from the exosphere.</h2>
+            <p class="signup__body">
+              A monthly note from the studio — what we shipped, what we
+              learned, the odd weekend experiment. No tracking, no funnels.
+            </p>
+          </div>
+          <form class="signup__form" id="signup-form" novalidate>
+            <label class="signup__field">
+              <input type="email" id="signup-email" placeholder="you@orbit.zone" autocomplete="email" required />
+              <button type="submit">Transmit →</button>
+            </label>
+            <span class="signup__fine" id="signup-fine">One short email each month. Unsubscribe with a click.</span>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <div class="foot__brand">Exosphere ✦</div>
+          <p class="foot__tag">A small studio building joyful, personal software from somewhere quiet near the sky.</p>
+        </div>
+        <div class="foot__col">
+          <h4 class="foot__col-h">Studio</h4>
+          <ul>
+            <li><a href="about.html">About &amp; history</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Selected work</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <h4 class="foot__col-h">Channels</h4>
+          <ul>
+            <li><a href="#signup">Newsletter</a></li>
+            <li><a href="#">Field notes</a></li>
+            <li><a href="#">Are.na</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <h4 class="foot__col-h">Signal</h4>
+          <ul>
+            <li><a href="mailto:hello@exosphere.studio">hello@exosphere.studio</a></li>
+            <li><a href="#">+45 00 00 00 00</a></li>
+            <li><a href="#">@exosphere</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot__bottom">
+        <span>© 2026 Exosphere Studio · 60°24′N 10°08′E</span>
+        <span>v 3.14 — released into orbit</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="tweaks-root"></div>
+
+  <!-- effects -->
+  <script src="sky.js"></script>
+
+  <!-- form + card hover -->
+  <script>
+    // Card hover light
+    document.querySelectorAll('.cap').forEach(card => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+    // Newsletter
+    const form = document.getElementById('signup-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('signup-email').value.trim();
+        const fine = document.getElementById('signup-fine');
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+          fine.textContent = 'Please enter a valid email.';
+          fine.style.color = 'var(--accent-2)';
+          return;
+        }
+        fine.textContent = '✓ Transmission received. Welcome to the dispatch.';
+        fine.style.color = 'var(--accent)';
+        form.querySelector('input').value = '';
+      });
+    }
+  </script>
+
+  <!-- React + Tweaks panel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="tweaks.jsx"></script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroMinimal from '../components/hero/HeroMinimal.astro';
+import WhatWeDo from '../components/landing/WhatWeDo.astro';
+import Mantra from '../components/landing/Mantra.astro';
+import Services from '../components/landing/Services.astro';
+import SelectedWork from '../components/landing/SelectedWork.astro';
+import Newsletter from '../components/landing/Newsletter.astro';
+---
+<BaseLayout
+  title="Exosphere — Software that puts smiles on faces"
+  description="Exosphere is a small, joyful studio shipping personal, exciting software."
+  currentPath="/"
+>
+  <HeroMinimal />
+  <WhatWeDo />
+  <Mantra />
+  <Services />
+  <SelectedWork />
+  <Newsletter />
+</BaseLayout>

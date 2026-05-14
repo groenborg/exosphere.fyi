@@ -1,0 +1,26 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import SectionTitle from '../SectionTitle.astro';
+import { services } from '../../data/services';
+---
+<section id="services">
+  <div class="wrap">
+    <Eyebrow>03 · Services</Eyebrow>
+    <SectionTitle>Engagements we like.</SectionTitle>
+    <p class="section-lede">
+      From a one-week sprint to a multi-year build. Each engagement starts
+      with a conversation and a clear scope — never a 40-page proposal.
+    </p>
+
+    <div class="svc">
+      {services.map((service) => (
+        <div class="svc__row">
+          <span class="svc__num">{service.num}</span>
+          <span class="svc__name">{service.name}</span>
+          <span class="svc__desc">{service.desc}</span>
+          <span class="svc__tag">{service.duration}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

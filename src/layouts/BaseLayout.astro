@@ -1,0 +1,49 @@
+---
+import Sky from '../components/Sky.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/components.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  mood?: 'deep' | 'retro' | 'glassy';
+  hero?: 'minimal' | 'orbit' | 'planet';
+  currentPath?: string;
+}
+
+const {
+  title,
+  description = 'A small studio building joyful, personal software.',
+  mood = 'deep',
+  hero = 'minimal',
+  currentPath = Astro.url.pathname,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-mood={mood} data-hero={hero}>
+    <Sky />
+    <Nav currentPath={currentPath} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

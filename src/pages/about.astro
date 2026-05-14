@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutHero from '../components/about/AboutHero.astro';
+import Mission from '../components/about/Mission.astro';
+import Team from '../components/about/Team.astro';
+import Timeline from '../components/about/Timeline.astro';
+---
+<BaseLayout
+  title="Exosphere — About & history"
+  description="A twelve-year history of a small studio building joyful software."
+  currentPath="/about"
+>
+  <AboutHero />
+  <Mission />
+  <Team />
+  <Timeline />
+</BaseLayout>

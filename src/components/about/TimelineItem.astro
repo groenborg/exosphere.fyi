@@ -1,0 +1,21 @@
+---
+import type { TimelineEntry } from '../../data/timeline';
+
+interface Props {
+  entry: TimelineEntry;
+}
+const { entry } = Astro.props;
+const cls = `tl-item${entry.current ? ' tl-item--current' : ''}`;
+---
+<article class={cls}>
+  <div class="tl-year">{entry.year}</div>
+  <span class="tl-dot" aria-hidden="true"></span>
+  <div class="tl-body">
+    {entry.titleHtml
+      ? <h3 class="tl-title" set:html={entry.titleHtml}></h3>
+      : <h3 class="tl-title">{entry.title}</h3>}
+    {entry.descHtml
+      ? <p class="tl-desc" set:html={entry.descHtml}></p>
+      : <p class="tl-desc">{entry.desc}</p>}
+  </div>
+</article>

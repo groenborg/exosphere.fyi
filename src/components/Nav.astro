@@ -1,0 +1,32 @@
+---
+import BrandMark from './BrandMark.astro';
+
+interface Props {
+  currentPath?: string;
+}
+const { currentPath = '/' } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Index', match: '/' },
+  { href: '/#work', label: 'Work', match: null },
+  { href: '/#services', label: 'Services', match: null },
+  { href: '/about', label: 'About', match: '/about' },
+];
+---
+<header class="nav">
+  <a class="nav__brand" href="/">
+    <BrandMark />
+    <span>Exosphere</span>
+  </a>
+  <nav class="nav__links">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        aria-current={link.match === currentPath ? 'page' : undefined}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+  <a class="nav__cta" href="mailto:hello@exosphere.studio">Get in touch ↗</a>
+</header>

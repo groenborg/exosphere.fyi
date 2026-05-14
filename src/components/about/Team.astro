@@ -1,0 +1,20 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import SectionTitle from '../SectionTitle.astro';
+import TeamMember from './TeamMember.astro';
+import { team } from '../../data/team';
+---
+<section>
+  <div class="wrap">
+    <Eyebrow>The crew</Eyebrow>
+    <SectionTitle>Eight people, one signal.</SectionTitle>
+    <p class="section-lede">
+      A flat studio — everyone designs, everyone ships. No project managers,
+      no account directors, no middle layer between you and the work.
+    </p>
+
+    <div class="team">
+      {team.map((member) => <TeamMember member={member} />)}
+    </div>
+  </div>
+</section>
