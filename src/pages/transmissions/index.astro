@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import TransmissionCard from '../../components/transmissions/TransmissionCard.astro';
+
+const all = await getCollection('transmissions', ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true,
+);
+
+const sorted = all.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const enriched = await Promise.all(
+  sorted.map(async (entry) => {
+    const { remarkPluginFrontmatter } = await render(entry);
+    return { entry, minutesRead: remarkPluginFrontmatter?.minutesRead as string | undefined };
+  }),
+);
+---
+<BaseLayout
+  title="Exosphere — Transmissions"
+  description="Postcards, notes, and field reports from a small studio building joyful software."
+  currentPath="/transmissions"
+>
+  <section class="tx-list-hero">
+    <div class="wrap">
+      <Eyebrow>Transmissions · {sorted.length} {sorted.length === 1 ? 'post' : 'posts'}</Eyebrow>
+      <h1 class="tx-list-hero__title">
+        Signals from <em>the studio</em>.
+      </h1>
+      <p class="tx-list-hero__lede">
+        Long-form notes, half-formed ideas, and the occasional weekend
+        experiment. We post when we have something worth saying.
+        <a href="/rss.xml" style="color:var(--accent);margin-left:8px">RSS ↗</a>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="tx-list">
+        {enriched.length === 0 && (
+          <div class="tx-list__empty">No transmissions yet — check back soon.</div>
+        )}
+        {enriched.map(({ entry, minutesRead }) => (
+          <TransmissionCard
+            href={`/transmissions/${entry.id}`}
+            title={entry.data.title}
+            description={entry.data.description}
+            pubDate={entry.data.pubDate}
+            author={entry.data.author}
+            tags={entry.data.tags}
+            minutesRead={minutesRead}
+            draft={entry.data.draft}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
