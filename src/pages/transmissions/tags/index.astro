@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Eyebrow from '../../../components/Eyebrow.astro';
+
+const all = await getCollection('transmissions', ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true,
+);
+
+const counts = new Map<string, number>();
+for (const entry of all) {
+  for (const tag of entry.data.tags) {
+    counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+}
+const tags = Array.from(counts.entries())
+  .map(([tag, count]) => ({ tag, count }))
+  .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+---
+<BaseLayout
+  title="Exosphere — Transmission tags"
+  description="Browse Transmissions by topic."
+  currentPath="/transmissions"
+>
+  <section class="tx-list-hero">
+    <div class="wrap">
+      <Eyebrow>Transmissions · Tags</Eyebrow>
+      <h1 class="tx-list-hero__title">Browse by <em>topic</em>.</h1>
+      <p class="tx-list-hero__lede">
+        <a href="/transmissions" style="color:var(--accent)">← All transmissions</a>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="tx-tags">
+        {tags.length === 0 && (
+          <div class="tx-list__empty">No tags yet.</div>
+        )}
+        {tags.map(({ tag, count }) => (
+          <a class="tx-tags__chip" href={`/transmissions/tags/${tag}`}>
+            {tag}
+            <span class="tx-tags__chip-count">{count}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

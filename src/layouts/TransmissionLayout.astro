@@ -1,0 +1,50 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author: string;
+  tags: string[];
+  minutesRead?: string;
+  draft?: boolean;
+}
+const { title, description, pubDate, updatedDate, author, tags, minutesRead, draft } = Astro.props;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+<BaseLayout title={`${title} — Transmissions`} description={description} currentPath="/transmissions">
+  <article class="tx-post">
+    <div class="wrap">
+      <header class="tx-post__head">
+        <Eyebrow>Transmission · {fmt(pubDate)}{minutesRead ? ` · ${minutesRead}` : ''}</Eyebrow>
+        <h1 class="tx-post__title">{title}</h1>
+        <p class="tx-post__lede">{description}</p>
+        <div class="tx-post__byline">
+          <span>By {author}</span>
+          {updatedDate && <span>· Updated {fmt(updatedDate)}</span>}
+          {draft && <span class="tx__draft">Draft</span>}
+        </div>
+        {tags.length > 0 && (
+          <div class="tx-post__tags">
+            {tags.map((tag) => (
+              <a class="tx__tag" href={`/transmissions/tags/${tag}`}>{tag}</a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="prose">
+        <slot />
+      </div>
+
+      <footer class="tx-post__foot">
+        <a class="tx-post__back" href="/transmissions">← All transmissions</a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
