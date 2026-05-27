@@ -17,7 +17,7 @@ const { title, description, pubDate, updatedDate, author, tags, minutesRead, dra
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
-<BaseLayout title={`${title} — Transmissions`} description={description} currentPath="/transmissions">
+<BaseLayout title={`${title} — Transmissions`} description={description} currentPath="/transmissions" page="transmissions">
   <article class="tx-post">
     <div class="wrap">
       <header class="tx-post__head">

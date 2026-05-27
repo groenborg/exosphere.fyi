@@ -15,6 +15,7 @@ interface Props {
   mood?: 'deep' | 'retro' | 'glassy';
   hero?: 'minimal' | 'orbit' | 'planet';
   currentPath?: string;
+  page?: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   mood = 'deep',
   hero = 'minimal',
   currentPath = Astro.url.pathname,
+  page,
 } = Astro.props;
 ---
 <!doctype html>
@@ -41,7 +43,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body data-mood={mood} data-hero={hero}>
+  <body data-mood={mood} data-hero={hero} {...(page ? { 'data-page': page } : {})}>
     <Sky />
     <Nav currentPath={currentPath} />
     <main>
