@@ -5,6 +5,7 @@
 :root {
   /* type */
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* default mood: deep space */
