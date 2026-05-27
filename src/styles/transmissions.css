@@ -5,6 +5,7 @@
 
 body[data-page="transmissions"] {
   --bg: #08090a;
+  --accent: rgb(235, 238, 242);
 }
 body[data-page="transmissions"] #sky,
 body[data-page="transmissions"] #sky-grid {
@@ -18,18 +19,21 @@ body[data-page="transmissions"] #sky-grid {
   padding-bottom: 56px;
 }
 .tx-list-hero__title {
+  font-family: var(--font-serif);
   font-size: clamp(48px, 7vw, 96px);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
-  margin: 18px 0 0;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: rgb(235, 238, 242);
+  margin: 20px 0 0;
   text-wrap: balance;
   max-width: 16ch;
 }
 .tx-list-hero__title em { font-style: normal; color: var(--accent); }
 .tx-list-hero__lede {
+  font-family: var(--font-serif);
   font-size: clamp(17px, 1.5vw, 21px);
-  color: var(--fg-2);
+  color: rgb(208, 214, 224);
   max-width: 56ch;
   margin: 28px 0 0;
 }
@@ -95,18 +99,20 @@ body[data-page="transmissions"] #sky-grid {
 }
 
 .tx__title {
+  font-family: var(--font-serif);
   font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.015em;
-  line-height: 1.15;
-  margin: 12px 0 0;
-  color: var(--fg);
+  line-height: 1.2;
+  margin: 14px 0 0;
+  color: rgb(235, 238, 242);
   text-wrap: balance;
 }
 .tx:hover .tx__title { color: var(--accent); }
 
 .tx__body {
-  color: var(--fg-2);
+  font-family: var(--font-serif);
+  color: rgb(208, 214, 224);
   font-size: 15.5px;
   line-height: 1.55;
   margin: 12px 0 0;
@@ -142,52 +148,73 @@ a.tx__tag:hover {
 }
 
 .tx-post__head {
-  max-width: 68ch;
-  margin: 0 auto 56px;
-  text-align: left;
+  max-width: 72ch;
+  margin: 0 auto 72px;
+  text-align: center;
 }
 
 .tx-post__title {
+  font-family: var(--font-serif);
   font-size: clamp(38px, 5.4vw, 72px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.02;
-  margin: 16px 0 0;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  color: rgb(235, 238, 242);
+  margin: 20px auto 0;
+  max-width: 20ch;
   text-wrap: balance;
 }
 
 .tx-post__lede {
+  font-family: var(--font-serif);
   font-size: clamp(18px, 1.5vw, 22px);
-  color: var(--fg-2);
-  margin: 22px 0 0;
-  line-height: 1.5;
+  color: rgb(208, 214, 224);
+  margin: 24px auto 0;
+  max-width: 54ch;
+  line-height: 1.55;
   text-wrap: pretty;
+}
+
+.tx-post__hero {
+  margin: 48px auto 0;
+  max-width: 900px;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+.tx-post__hero img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .tx-post__byline {
   display: flex;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 15px;
   color: var(--fg-3);
-  margin-top: 28px;
+  margin-top: 36px;
+}
+.tx-post__byline-sep {
+  color: var(--fg-3);
+  opacity: 0.5;
 }
 
 .tx-post__tags {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-top: 18px;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
 .tx-post__foot {
   max-width: 68ch;
-  margin: 80px auto 0;
-  padding-top: 32px;
+  margin: 96px auto 0;
+  padding-top: 40px;
   border-top: 1px solid var(--hairline);
 }
 .tx-post__back {
