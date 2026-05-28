@@ -40,9 +40,16 @@ body[data-page="transmissions"] #sky-grid {
 
 .tx-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 32px;
+  row-gap: 48px;
   padding-bottom: 140px;
+}
+@media (max-width: 959px) {
+  .tx-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 639px) {
+  .tx-list { grid-template-columns: 1fr; }
 }
 
 .tx-list__empty {
@@ -61,32 +68,66 @@ body[data-page="transmissions"] #sky-grid {
 
 .tx {
   display: block;
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: 16px;
-  padding: 26px 28px;
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  backdrop-filter: blur(20px) saturate(140%);
-  transition: transform .3s ease, border-color .3s ease;
   color: inherit;
+  text-decoration: none;
 }
-.tx:hover {
-  transform: translateY(-3px);
+
+.tx__thumb {
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  transition: transform .3s ease, border-color .3s ease;
+}
+.tx__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tx:hover .tx__thumb {
+  transform: translateY(-2px);
   border-color: color-mix(in oklab, var(--accent) 55%, var(--hairline));
 }
 
-.tx__meta {
+.tx__title {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 16px 0 0;
+  color: rgb(235, 238, 242);
+  text-wrap: balance;
+  transition: color .2s ease;
+}
+.tx:hover .tx__title { color: var(--accent); }
+
+.tx__body {
+  font-family: var(--font-serif);
+  color: rgb(208, 214, 224);
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 10px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tx__byline {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-3);
+  margin-top: 16px;
 }
-.tx__dot { color: var(--fg-3); }
+.tx__dot { color: var(--fg-3); opacity: 0.6; }
 .tx__draft {
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -98,49 +139,6 @@ body[data-page="transmissions"] #sky-grid {
   border-radius: 999px;
 }
 
-.tx__title {
-  font-family: var(--font-serif);
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  margin: 14px 0 0;
-  color: rgb(235, 238, 242);
-  text-wrap: balance;
-}
-.tx:hover .tx__title { color: var(--accent); }
-
-.tx__body {
-  font-family: var(--font-serif);
-  color: rgb(208, 214, 224);
-  font-size: 15.5px;
-  line-height: 1.55;
-  margin: 12px 0 0;
-  max-width: 64ch;
-}
-
-.tx__tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-.tx__tag {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fg-2);
-  padding: 5px 10px;
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-  transition: border-color .2s ease, color .2s ease;
-}
-a.tx__tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 /* ── Single post ────────────────────────────────────────────── */
 
 .tx-post {
@@ -148,7 +146,7 @@ a.tx__tag:hover {
 }
 
 .tx-post__head {
-  max-width: 72ch;
+  max-width: 1200px;
   margin: 0 auto 72px;
   text-align: center;
 }
@@ -177,9 +175,15 @@ a.tx__tag:hover {
 
 .tx-post__hero {
   margin: 48px auto 0;
-  max-width: 900px;
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  max-width: 1200px;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 .tx-post__hero img {
   display: block;

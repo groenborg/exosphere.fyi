@@ -1,39 +1,72 @@
 ---
-title: "Hello from the exosphere"
-description: "A short note to mark the start of Transmissions — what we're going to write about here, and why we're bothering to write at all."
+title: "An agentic company"
+description: "How we want to operate as a small team — taking primitives, and finding ways to solve them with self-improving agents."
 pubDate: 2026-05-22
 author: "Exosphere"
-tags: ["studio", "meta"]
+tags: ["studio"]
 heroImage: "/images/transmissions/hello-hero.png"
 draft: false
 ---
 
 import Eyebrow from "../../components/Eyebrow.astro";
 
-This is the first Transmission. There will be others.
+This is what we want Exosphere to be: an agentic company.
 
-We started Exosphere because we wanted to build software that *feels* like
-something — not just runs. This blog is the long-form sibling of that project:
-a place to put the thinking that doesn't fit on a homepage or in a tweet.
+That means starting with **primitives** — the small, durable units of work that
+make a company go. Answering a support ticket. Reconciling an invoice. Triaging
+a bug report. Writing a release note. Most companies hire to do this work and
+think about automation later. We want to invert that order: design the work
+around agents first, and bring people in for the things only people can do.
 
-## What you'll find here
+## Primitives, not jobs
 
-A short, honest list:
+A "job" is a shifting bundle of responsibilities — fuzzy, political, hard to
+measure. A primitive is sharper. *Reply to this email. Decide which of these
+three customers to call. Summarise this week's product changes.* You can write
+a spec for a primitive. You can hand one to an agent and check the result.
 
-- **Postcards from inside projects.** Things we're shipping, mid-flight.
-- **Small ideas.** Half-formed, sometimes wrong, always sincere.
-- **Field notes on tools.** Why we picked this stack, what we'd swap.
-- **The occasional weekend experiment** that didn't make it into a product.
+So the team builds in two directions at once:
+
+- **Down to the primitive.** Break each operational task into the smallest unit
+  that's still useful on its own.
+- **Up to the agent.** Wire those primitives into agents that can run them
+  end-to-end, with the right tools and guardrails.
+
+It's tedious. It's also the only way we've found to keep the company from
+quietly accreting headcount as it grows.
+
+## Self-improving, not just smart
+
+The hard part isn't getting an agent to do something once. It's getting it to
+do the same thing slightly better the second time, and meaningfully better the
+hundredth time. That's where *self-improving* does real work:
+
+- Agents log what they did and what happened next.
+- They rewrite their own prompts and tool-use patterns when outcomes drift.
+- They escalate when they're not confident, and the escalations become the
+  training data for the next iteration.
+
+None of these mechanics are individually new. Wiring them together as the
+**default operating layer** of a company — instead of as one-off projects
+bolted onto an existing org chart — is the bet.
 
 <Eyebrow>Side note</Eyebrow>
 
-We're writing in **MDX**, which means a Transmission can be a paragraph,
-a working demo, or a small interactive component. Whatever the idea needs.
+This is not a "no humans" pitch. It's a "very few humans, all doing leveraged
+work" pitch. We think the right team for an agentic company is small, senior,
+and unusually opinionated about systems.
 
-> The studio is small on purpose. The writing will be too.
+> The agent does the primitive. The team designs the agent.
+> The company is what comes out the other end.
 
-## What's next
+## What we'll write about
 
-A handful of pieces are queued up: a deep-dive on how we built `Helios Control`,
-notes on the OKLCH colour system we use across the site, and an honest
-post-mortem on a project we shelved. See you in the next one.
+This blog is partly a notebook for that bet. Expect:
+
+- Notes on which primitives have been easiest and hardest to hand off.
+- Honest write-ups when an agent loop gets stuck, and what we tried.
+- The pieces of infrastructure we've had to build because nothing off-the-shelf
+  quite fit.
+
+If you're thinking along the same lines — or think we're wrong about it —
+we'd like to hear from you.

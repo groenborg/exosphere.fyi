@@ -8,31 +8,24 @@ interface Props {
   tags: string[];
   minutesRead?: string;
   draft?: boolean;
+  heroImage?: string;
 }
-const { href, title, description, pubDate, author, tags, minutesRead, draft } = Astro.props;
+const { href, title, description, pubDate, author, draft, heroImage } = Astro.props;
 
 const dateLabel = pubDate.toLocaleDateString('en-GB', {
   day: '2-digit', month: 'short', year: 'numeric',
 });
 ---
 <a class="tx" href={href}>
-  <div class="tx__meta">
-    <time datetime={pubDate.toISOString()}>{dateLabel}</time>
-    <span class="tx__dot" aria-hidden="true">·</span>
-    <span>{author}</span>
-    {minutesRead && (
-      <>
-        <span class="tx__dot" aria-hidden="true">·</span>
-        <span>{minutesRead}</span>
-      </>
-    )}
-    {draft && <span class="tx__draft">Draft</span>}
+  <div class="tx__thumb">
+    {heroImage && <img src={heroImage} alt="" loading="lazy" />}
   </div>
   <h3 class="tx__title">{title}</h3>
   <p class="tx__body">{description}</p>
-  {tags.length > 0 && (
-    <div class="tx__tags">
-      {tags.map((tag) => <span class="tx__tag">{tag}</span>)}
-    </div>
-  )}
+  <div class="tx__byline">
+    <span>{author}</span>
+    <span class="tx__dot" aria-hidden="true">·</span>
+    <time datetime={pubDate.toISOString()}>{dateLabel}</time>
+    {draft && <span class="tx__draft">Draft</span>}
+  </div>
 </a>
