@@ -1,19 +1,19 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { toRoman } from '../lib/roman';
 
 interface Props {
   title: string;
   description: string;
-  order: number;
+  position: number;
   updatedDate?: Date;
   draft?: boolean;
   heroImage?: string;
-  prev?: { id: string; title: string; order: number } | null;
-  next?: { id: string; title: string; order: number } | null;
+  prev?: { id: string; title: string; position: number } | null;
+  next?: { id: string; title: string; position: number } | null;
 }
-const { title, description, order, updatedDate, draft, heroImage, prev, next } = Astro.props;
+const { title, description, position, updatedDate, draft, heroImage, prev, next } = Astro.props;
 
-const pad = (n: number) => n.toString().padStart(2, '0');
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' });
 ---
@@ -21,7 +21,7 @@ const fmt = (d: Date) =>
   <article class="cr-post">
     <div class="wrap">
       <header class="cr-post__head">
-        <div class="cr-post__num">№ {pad(order)}</div>
+        <div class="cr-post__num">№ {toRoman(position)}</div>
         <h1 class="cr-post__title">{title}</h1>
         <p class="cr-post__lede">{description}</p>
         {heroImage && (
@@ -46,13 +46,13 @@ const fmt = (d: Date) =>
         <div class="cr-post__pager">
           {prev && (
             <a class="cr-post__pager-link cr-post__pager-link--prev" href={`/craft/${prev.id}`}>
-              <span class="cr-post__pager-label">← Previous · {pad(prev.order)}</span>
+              <span class="cr-post__pager-label">{`← Previous · ${toRoman(prev.position)}`}</span>
               <span class="cr-post__pager-title">{prev.title}</span>
             </a>
           )}
           {next && (
             <a class="cr-post__pager-link cr-post__pager-link--next" href={`/craft/${next.id}`}>
-              <span class="cr-post__pager-label">Next · {pad(next.order)} →</span>
+              <span class="cr-post__pager-label">{`Next · ${toRoman(next.position)} →`}</span>
               <span class="cr-post__pager-title">{next.title}</span>
             </a>
           )}

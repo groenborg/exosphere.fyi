@@ -15,24 +15,25 @@ export async function getStaticPaths() {
       params: { slug: entry.id },
       props: {
         entry,
+        position: i + 1,
         prev: prevEntry
-          ? { id: prevEntry.id, title: prevEntry.data.title, order: prevEntry.data.order }
+          ? { id: prevEntry.id, title: prevEntry.data.title, position: i }
           : null,
         next: nextEntry
-          ? { id: nextEntry.id, title: nextEntry.data.title, order: nextEntry.data.order }
+          ? { id: nextEntry.id, title: nextEntry.data.title, position: i + 2 }
           : null,
       },
     };
   });
 }
 
-const { entry, prev, next } = Astro.props;
+const { entry, position, prev, next } = Astro.props;
 const { Content } = await render(entry);
 ---
 <CraftLayout
   title={entry.data.title}
   description={entry.data.description}
-  order={entry.data.order}
+  position={position}
   updatedDate={entry.data.updatedDate}
   draft={entry.data.draft}
   heroImage={entry.data.heroImage}
