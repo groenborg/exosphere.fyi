@@ -1,18 +1,18 @@
 ---
-import BrandMark from './BrandMark.astro';
+import BrandMark from "./BrandMark.astro";
 
 interface Props {
   currentPath?: string;
 }
-const { currentPath = '/' } = Astro.props;
+const { currentPath = "/" } = Astro.props;
 
 const links = [
-  { href: '/', label: 'Index', match: '/' },
-  { href: '/made', label: 'Made', match: '/made' },
-  { href: '/#services', label: 'Services', match: null },
-  { href: '/transmissions', label: 'Transmissions', match: '/transmissions' },
-  { href: '/craft', label: 'Craft', match: '/craft' },
-  { href: '/about', label: 'About', match: '/about' },
+  { href: "/", label: "Index", match: "/" },
+  { href: "/made", label: "Made", match: "/made" },
+  { href: "/#services", label: "Services", match: null },
+  { href: "/transmissions", label: "Transmissions", match: "/transmissions" },
+  { href: "/craft", label: "Craft", match: "/craft" },
+  { href: "/about", label: "About", match: "/about" },
 ];
 ---
 <header class="nav">

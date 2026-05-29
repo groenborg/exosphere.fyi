@@ -1,5 +1,5 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   title: string;
@@ -12,10 +12,11 @@ interface Props {
   draft?: boolean;
   heroImage?: string;
 }
-const { title, description, pubDate, updatedDate, author, tags, minutesRead, draft, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, author, tags, minutesRead, draft, heroImage } =
+  Astro.props;
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' });
+  d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
 ---
 <BaseLayout title={`${title} — Transmissions`} description={description} currentPath="/transmissions" page="transmissions">
   <article class="tx-post">

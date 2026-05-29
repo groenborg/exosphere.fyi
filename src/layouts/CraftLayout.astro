@@ -1,6 +1,6 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import { toRoman } from '../lib/roman';
+import BaseLayout from "./BaseLayout.astro";
+import { toRoman } from "../lib/roman";
 
 interface Props {
   title: string;
@@ -15,7 +15,7 @@ interface Props {
 const { title, description, position, updatedDate, draft, heroImage, prev, next } = Astro.props;
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' });
+  d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
 ---
 <BaseLayout title={`${title} — Craft`} description={description} currentPath="/craft" page="craft">
   <article class="cr-post">

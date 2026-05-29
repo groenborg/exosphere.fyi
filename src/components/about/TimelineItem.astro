@@ -1,11 +1,11 @@
 ---
-import type { TimelineEntry } from '../../data/timeline';
+import type { TimelineEntry } from "../../data/timeline";
 
 interface Props {
   entry: TimelineEntry;
 }
 const { entry } = Astro.props;
-const cls = `tl-item${entry.current ? ' tl-item--current' : ''}`;
+const cls = `tl-item${entry.current ? " tl-item--current" : ""}`;
 ---
 <article class={cls}>
   <div class="tl-year">{entry.year}</div>

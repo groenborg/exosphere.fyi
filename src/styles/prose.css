@@ -28,9 +28,16 @@
   margin-top: 2.6em;
   text-wrap: balance;
 }
-.prose h2 { font-size: clamp(26px, 2.6vw, 34px); }
-.prose h3 { font-size: clamp(20px, 2vw, 24px); }
-.prose h4 { font-size: 19px; color: rgb(208, 214, 224); }
+.prose h2 {
+  font-size: clamp(26px, 2.6vw, 34px);
+}
+.prose h3 {
+  font-size: clamp(20px, 2vw, 24px);
+}
+.prose h4 {
+  font-size: 19px;
+  color: rgb(208, 214, 224);
+}
 
 .prose p {
   margin: 0;
@@ -50,23 +57,34 @@
 .prose a {
   color: var(--accent);
   border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
-  transition: border-color .2s ease, color .2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 .prose a:hover {
   color: var(--fg);
   border-bottom-color: var(--fg);
 }
 
-.prose strong { font-weight: 600; color: rgb(235, 238, 242); }
-.prose em { font-style: italic; }
+.prose strong {
+  font-weight: 600;
+  color: rgb(235, 238, 242);
+}
+.prose em {
+  font-style: italic;
+}
 
 .prose ul,
 .prose ol {
   padding-left: 1.4em;
   margin: 0;
 }
-.prose li + li { margin-top: 0.5em; }
-.prose ul li::marker { color: var(--accent); }
+.prose li + li {
+  margin-top: 0.5em;
+}
+.prose ul li::marker {
+  color: var(--accent);
+}
 
 .prose blockquote {
   margin: 0;
@@ -121,7 +139,9 @@
   border: 1px solid var(--hairline);
 }
 
-.prose figure { margin: 0; }
+.prose figure {
+  margin: 0;
+}
 .prose figure figcaption {
   font-family: var(--font-mono);
   font-size: 11.5px;

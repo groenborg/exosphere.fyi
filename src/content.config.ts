@@ -1,15 +1,15 @@
-import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
-import { z } from 'astro/zod';
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const transmissions = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/transmissions' }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/transmissions" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
-    author: z.string().default('Exosphere'),
+    author: z.string().default("Exosphere"),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     heroImage: z.string().optional(),
@@ -17,7 +17,7 @@ const transmissions = defineCollection({
 });
 
 const craft = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/craft' }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/craft" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -29,13 +29,13 @@ const craft = defineCollection({
 });
 
 const made = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/made' }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/made" }),
   schema: z.object({
     name: z.string(),
     description: z.string(),
     url: z.string().url(),
     repo: z.string().url().optional(),
-    type: z.enum(['oss', 'product', 'tool', 'experiment']).default('product'),
+    type: z.enum(["oss", "product", "tool", "experiment"]).default("product"),
     year: z.union([z.number(), z.string()]).optional(),
     tags: z.array(z.string()).default([]),
     image: z.string().optional(),

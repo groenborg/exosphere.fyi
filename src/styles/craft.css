@@ -30,7 +30,10 @@ body[data-page="craft"] #sky-grid {
   text-wrap: balance;
   max-width: 16ch;
 }
-.cr-hero__title em { font-style: normal; color: var(--accent); }
+.cr-hero__title em {
+  font-style: normal;
+  color: var(--accent);
+}
 .cr-hero__lede {
   font-family: var(--font-serif);
   font-size: clamp(17px, 1.5vw, 21px);
@@ -70,7 +73,9 @@ body[data-page="craft"] #sky-grid {
   padding: 28px 8px;
   color: inherit;
   text-decoration: none;
-  transition: background .25s ease, padding-left .25s ease;
+  transition:
+    background 0.25s ease,
+    padding-left 0.25s ease;
 }
 .cr-toc__link:hover {
   background: color-mix(in oklab, var(--accent) 4%, transparent);
@@ -82,9 +87,11 @@ body[data-page="craft"] #sky-grid {
   font-size: 13px;
   letter-spacing: 0.18em;
   color: var(--fg-3);
-  transition: color .2s ease;
+  transition: color 0.2s ease;
 }
-.cr-toc__link:hover .cr-toc__num { color: var(--accent); }
+.cr-toc__link:hover .cr-toc__num {
+  color: var(--accent);
+}
 
 .cr-toc__body {
   display: flex;
@@ -101,13 +108,15 @@ body[data-page="craft"] #sky-grid {
   line-height: 1.2;
   color: rgb(235, 238, 242);
   text-wrap: balance;
-  transition: color .2s ease;
+  transition: color 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
 }
-.cr-toc__link:hover .cr-toc__title { color: var(--accent); }
+.cr-toc__link:hover .cr-toc__title {
+  color: var(--accent);
+}
 
 .cr-toc__desc {
   font-family: var(--font-serif);
@@ -121,7 +130,9 @@ body[data-page="craft"] #sky-grid {
   font-family: var(--font-mono);
   font-size: 18px;
   color: var(--fg-3);
-  transition: transform .25s ease, color .2s ease;
+  transition:
+    transform 0.25s ease,
+    color 0.2s ease;
 }
 .cr-toc__link:hover .cr-toc__arrow {
   color: var(--accent);
@@ -145,10 +156,19 @@ body[data-page="craft"] #sky-grid {
     gap: 20px;
     padding: 22px 4px;
   }
-  .cr-toc__link:hover { padding-left: 8px; }
-  .cr-toc__num { font-size: 12px; letter-spacing: 0.14em; }
-  .cr-toc__title { font-size: 20px; }
-  .cr-toc__desc { font-size: 14.5px; }
+  .cr-toc__link:hover {
+    padding-left: 8px;
+  }
+  .cr-toc__num {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+  .cr-toc__title {
+    font-size: 20px;
+  }
+  .cr-toc__desc {
+    font-size: 14.5px;
+  }
 }
 
 /* ── Single post ────────────────────────────────────────────── */
@@ -249,10 +269,12 @@ body[data-page="craft"] #sky-grid {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-2);
-  transition: color .2s ease;
+  transition: color 0.2s ease;
   align-self: flex-start;
 }
-.cr-post__back:hover { color: var(--accent); }
+.cr-post__back:hover {
+  color: var(--accent);
+}
 
 .cr-post__pager {
   display: grid;
@@ -269,7 +291,9 @@ body[data-page="craft"] #sky-grid {
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
-  transition: border-color .2s ease, background .2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 .cr-post__pager-link:hover {
   border-color: color-mix(in oklab, var(--accent) 55%, var(--hairline));
@@ -299,7 +323,12 @@ body[data-page="craft"] #sky-grid {
 }
 
 @media (max-width: 639px) {
-  .cr-post__pager { grid-template-columns: 1fr; }
+  .cr-post__pager {
+    grid-template-columns: 1fr;
+  }
   .cr-post__pager-link--next,
-  .cr-post__pager-link--prev { grid-column: 1; text-align: left; }
+  .cr-post__pager-link--prev {
+    grid-column: 1;
+    text-align: left;
+  }
 }

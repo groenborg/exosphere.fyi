@@ -1,30 +1,30 @@
 ---
-import Sky from '../components/Sky.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import Sky from "../components/Sky.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 
-import '../styles/tokens.css';
-import '../styles/base.css';
-import '../styles/components.css';
-import '../styles/transmissions.css';
-import '../styles/craft.css';
-import '../styles/made.css';
-import '../styles/prose.css';
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/components.css";
+import "../styles/transmissions.css";
+import "../styles/craft.css";
+import "../styles/made.css";
+import "../styles/prose.css";
 
 interface Props {
   title: string;
   description?: string;
-  mood?: 'deep' | 'retro' | 'glassy';
-  hero?: 'minimal' | 'orbit' | 'planet';
+  mood?: "deep" | "retro" | "glassy";
+  hero?: "minimal" | "orbit" | "planet";
   currentPath?: string;
   page?: string;
 }
 
 const {
   title,
-  description = 'A small studio building joyful, personal software.',
-  mood = 'deep',
-  hero = 'minimal',
+  description = "A small studio building joyful, personal software.",
+  mood = "deep",
+  hero = "minimal",
   currentPath = Astro.url.pathname,
   page,
 } = Astro.props;

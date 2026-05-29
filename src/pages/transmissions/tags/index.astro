@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Eyebrow from '../../../components/Eyebrow.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Eyebrow from "../../../components/Eyebrow.astro";
 
-const all = await getCollection('transmissions', ({ data }) =>
-  import.meta.env.PROD ? data.draft !== true : true,
+const all = await getCollection("transmissions", ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true
 );
 
 const counts = new Map<string, number>();

@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Eyebrow from '../../components/Eyebrow.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Eyebrow from "../../components/Eyebrow.astro";
 
-const all = await getCollection('made', ({ data }) =>
-  import.meta.env.PROD ? data.draft !== true : true,
+const all = await getCollection("made", ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true
 );
 
 const sorted = all.sort((a, b) => {
@@ -16,10 +16,14 @@ const sorted = all.sort((a, b) => {
 
 const typeLabel = (t: string) => {
   switch (t) {
-    case 'oss': return 'Open source';
-    case 'tool': return 'Tool';
-    case 'experiment': return 'Experiment';
-    default: return 'Product';
+    case "oss":
+      return "Open source";
+    case "tool":
+      return "Tool";
+    case "experiment":
+      return "Experiment";
+    default:
+      return "Product";
   }
 };
 

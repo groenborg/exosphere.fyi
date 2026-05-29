@@ -1,22 +1,20 @@
 ---
-import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Eyebrow from '../../components/Eyebrow.astro';
-import TransmissionCard from '../../components/transmissions/TransmissionCard.astro';
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Eyebrow from "../../components/Eyebrow.astro";
+import TransmissionCard from "../../components/transmissions/TransmissionCard.astro";
 
-const all = await getCollection('transmissions', ({ data }) =>
-  import.meta.env.PROD ? data.draft !== true : true,
+const all = await getCollection("transmissions", ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true
 );
 
-const sorted = all.sort(
-  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-);
+const sorted = all.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 const enriched = await Promise.all(
   sorted.map(async (entry) => {
     const { remarkPluginFrontmatter } = await render(entry);
     return { entry, minutesRead: remarkPluginFrontmatter?.minutesRead as string | undefined };
-  }),
+  })
 );
 ---
 <BaseLayout

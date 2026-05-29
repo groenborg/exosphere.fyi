@@ -2,35 +2,41 @@
 // Renders: parallax stars (4 depths), nebula clouds, shooting stars, cursor stardust trail.
 
 (function () {
-  const canvas = document.getElementById('sky');
+  const canvas = document.getElementById("sky");
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
 
   let DPR = Math.min(window.devicePixelRatio || 1, 2);
-  let W = 0, H = 0;
+  let W = 0,
+    H = 0;
   let scrollY = 0;
   let lastT = performance.now();
 
   // tweakables (read from window.__sky)
-  const cfg = window.__sky = window.__sky || {
-    density: 1.0,       // 0..2
-    parallax: 1.0,      // 0..2
+  const cfg = (window.__sky = window.__sky || {
+    density: 1.0, // 0..2
+    parallax: 1.0, // 0..2
     nebula: true,
     star: [255, 255, 255],
-  };
+  });
 
-  const layers = [];   // star layers (depth, speed)
-  const nebulas = [];  // nebula blobs
+  const layers = []; // star layers (depth, speed)
+  const nebulas = []; // nebula blobs
   const shooting = []; // shooting stars
-  const dust = [];     // cursor trail particles
+  const dust = []; // cursor trail particles
 
   function rebuildLayers() {
     layers.length = 0;
     const base = Math.max(120, Math.floor((W * H) / 12000));
-    const counts = [0.55, 0.30, 0.10, 0.05];
-    const speeds = [0.05, 0.18, 0.38, 0.62];   // parallax depth (multiplied by cfg.parallax)
-    const sizes  = [[0.4, 0.9], [0.6, 1.3], [0.9, 1.8], [1.2, 2.6]];
-    const tw     = [0.0, 0.15, 0.45, 0.85];    // twinkle amount
+    const counts = [0.55, 0.3, 0.1, 0.05];
+    const speeds = [0.05, 0.18, 0.38, 0.62]; // parallax depth (multiplied by cfg.parallax)
+    const sizes = [
+      [0.4, 0.9],
+      [0.6, 1.3],
+      [0.9, 1.8],
+      [1.2, 2.6],
+    ];
+    const tw = [0.0, 0.15, 0.45, 0.85]; // twinkle amount
     for (let i = 0; i < 4; i++) {
       const n = Math.floor(base * counts[i] * cfg.density);
       const arr = [];
@@ -60,7 +66,7 @@
         h: 200 + Math.random() * 140, // hue
         ph: Math.random() * Math.PI * 2,
         sp: 0.0008 + Math.random() * 0.0014,
-        a: 0.10 + Math.random() * 0.16,
+        a: 0.1 + Math.random() * 0.16,
       });
     }
   }
@@ -71,8 +77,8 @@
     H = window.innerHeight;
     canvas.width = W * DPR;
     canvas.height = H * DPR;
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     rebuildLayers();
     rebuildNebula();
@@ -95,7 +101,7 @@
   function drawNebula() {
     if (!cfg.nebula) return;
     ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalCompositeOperation = "lighter";
     for (const n of nebulas) {
       n.ph += n.sp;
       const x = n.x + Math.sin(n.ph) * 18;
@@ -122,7 +128,7 @@
         if (y < -10) y += layer.fieldH;
         if (y > H + 10) y -= layer.fieldH;
         if (y < -10 || y > H + 10) continue;
-        const tw = s.tw ? (0.6 + 0.4 * Math.sin(t * 0.001 * s.sp + s.ph)) : 1;
+        const tw = s.tw ? 0.6 + 0.4 * Math.sin(t * 0.001 * s.sp + s.ph) : 1;
         ctx.fillStyle = `rgba(${sr},${sg},${sb},${0.5 + 0.5 * tw})`;
         ctx.beginPath();
         ctx.arc(s.x, y, s.r * tw, 0, Math.PI * 2);
@@ -167,7 +173,10 @@
       p.vy *= 0.96;
       p.vy += 0.005; // very gentle "down" drift
       p.life -= 0.018;
-      if (p.life <= 0) { dust.splice(i, 1); continue; }
+      if (p.life <= 0) {
+        dust.splice(i, 1);
+        continue;
+      }
       const [sr, sg, sb] = cfg.star;
       const a = Math.max(0, p.life) * 0.9;
       ctx.fillStyle = `rgba(${sr},${sg},${sb},${a})`;
@@ -178,7 +187,8 @@
   }
 
   function frame(t) {
-    const dt = t - lastT; lastT = t;
+    const dt = t - lastT;
+    lastT = t;
     ctx.clearRect(0, 0, W, H);
     drawNebula();
     drawStars(t);
@@ -190,32 +200,51 @@
 
   // cursor stardust
   let lastDust = 0;
-  window.addEventListener('pointermove', (e) => {
-    const now = performance.now();
-    if (now - lastDust < 18) return;
-    lastDust = now;
-    const burst = 1 + Math.floor(Math.random() * 2);
-    for (let i = 0; i < burst; i++) {
-      dust.push({
-        x: e.clientX + (Math.random() - 0.5) * 6,
-        y: e.clientY + (Math.random() - 0.5) * 6,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6 - 0.1,
-        r: 1.0 + Math.random() * 1.4,
-        life: 1.0,
-      });
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "pointermove",
+    (e) => {
+      const now = performance.now();
+      if (now - lastDust < 18) return;
+      lastDust = now;
+      const burst = 1 + Math.floor(Math.random() * 2);
+      for (let i = 0; i < burst; i++) {
+        dust.push({
+          x: e.clientX + (Math.random() - 0.5) * 6,
+          y: e.clientY + (Math.random() - 0.5) * 6,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6 - 0.1,
+          r: 1.0 + Math.random() * 1.4,
+          life: 1.0,
+        });
+      }
+    },
+    { passive: true }
+  );
 
-  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
-  window.addEventListener('resize', resize);
+  window.addEventListener(
+    "scroll",
+    () => {
+      scrollY = window.scrollY;
+    },
+    { passive: true }
+  );
+  window.addEventListener("resize", resize);
 
   // expose for tweaks
   window.__skyAPI = {
-    setDensity(v)  { cfg.density = v; rebuildLayers(); },
-    setParallax(v) { cfg.parallax = v; },
-    setNebula(v)   { cfg.nebula = !!v; },
-    setStarColor(rgb) { cfg.star = rgb; },
+    setDensity(v) {
+      cfg.density = v;
+      rebuildLayers();
+    },
+    setParallax(v) {
+      cfg.parallax = v;
+    },
+    setNebula(v) {
+      cfg.nebula = !!v;
+    },
+    setStarColor(rgb) {
+      cfg.star = rgb;
+    },
   };
 
   resize();

@@ -1,10 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content';
-import CraftLayout from '../../layouts/CraftLayout.astro';
+import { getCollection, render } from "astro:content";
+import CraftLayout from "../../layouts/CraftLayout.astro";
 
 export async function getStaticPaths() {
-  const all = await getCollection('craft', ({ data }) =>
-    import.meta.env.PROD ? data.draft !== true : true,
+  const all = await getCollection("craft", ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
   );
   const sorted = all.sort((a, b) => a.data.order - b.data.order);
 
@@ -16,12 +16,8 @@ export async function getStaticPaths() {
       props: {
         entry,
         position: i + 1,
-        prev: prevEntry
-          ? { id: prevEntry.id, title: prevEntry.data.title, position: i }
-          : null,
-        next: nextEntry
-          ? { id: nextEntry.id, title: nextEntry.data.title, position: i + 2 }
-          : null,
+        prev: prevEntry ? { id: prevEntry.id, title: prevEntry.data.title, position: i } : null,
+        next: nextEntry ? { id: nextEntry.id, title: nextEntry.data.title, position: i + 2 } : null,
       },
     };
   });

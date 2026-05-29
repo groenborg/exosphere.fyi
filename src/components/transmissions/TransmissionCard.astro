@@ -12,8 +12,10 @@ interface Props {
 }
 const { href, title, description, pubDate, author, draft, heroImage } = Astro.props;
 
-const dateLabel = pubDate.toLocaleDateString('en-GB', {
-  day: '2-digit', month: 'short', year: 'numeric',
+const dateLabel = pubDate.toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
 });
 ---
 <a class="tx" href={href}>
