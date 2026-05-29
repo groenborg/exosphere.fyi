@@ -39,7 +39,7 @@ const enriched = await Promise.all(
 >
   <section class="tx-list-hero">
     <div class="wrap">
-      <Eyebrow>Tag · {tag} · {posts.length} {posts.length === 1 ? 'post' : 'posts'}</Eyebrow>
+      <Eyebrow>{`Tag · ${tag} · ${posts.length} ${posts.length === 1 ? 'post' : 'posts'}`}</Eyebrow>
       <h1 class="tx-list-hero__title">
         On <em>{tag}</em>.
       </h1>
