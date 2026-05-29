@@ -119,7 +119,7 @@ section {
 }
 
 /* ============================================================
-   HERO  (3 variants via body[data-hero])
+   HERO
    ============================================================ */
 
 .hero {
@@ -229,184 +229,6 @@ section {
 }
 .btn:hover .arrow {
   transform: translateX(3px);
-}
-
-/* ── hero variant: minimal (default) ── */
-.hero__orbit,
-.hero__planet {
-  display: none;
-}
-
-/* ── hero variant: orbit ── */
-body[data-hero="orbit"] .hero__inner {
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 60px;
-}
-body[data-hero="orbit"] .hero__orbit {
-  display: block;
-  position: relative;
-  aspect-ratio: 1;
-  width: 100%;
-  max-width: 520px;
-  justify-self: end;
-}
-body[data-hero="orbit"] .hero__title {
-  font-size: clamp(56px, 7vw, 124px);
-}
-
-.orbit-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  overflow: visible;
-}
-.orbit-ring {
-  fill: none;
-  stroke: var(--hairline);
-  stroke-width: 1;
-}
-.orbit-ring--accent {
-  stroke: var(--accent);
-  stroke-opacity: 0.5;
-  stroke-dasharray: 4 8;
-}
-.orbit-core {
-  fill: var(--accent);
-}
-.orbit-planet {
-  fill: var(--fg);
-}
-.orbit-planet--2 {
-  fill: var(--accent-2);
-}
-
-.orbit-spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: spin 40s linear infinite;
-}
-.orbit-spin--rev {
-  animation: spin 60s linear infinite reverse;
-}
-.orbit-spin--fast {
-  animation: spin 22s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.orbit-label {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  fill: var(--fg-3);
-}
-
-/* ── hero variant: planet ── */
-body[data-hero="planet"] .hero__inner {
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
-}
-body[data-hero="planet"] .hero__planet {
-  display: block;
-  position: relative;
-  aspect-ratio: 1;
-  width: 100%;
-  max-width: 480px;
-  justify-self: end;
-}
-body[data-hero="planet"] .hero__title {
-  font-size: clamp(56px, 7vw, 124px);
-}
-
-.planet {
-  position: absolute;
-  inset: 6%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 32% 30%,
-    color-mix(in oklab, var(--accent) 70%, white 20%) 0%,
-    color-mix(in oklab, var(--accent) 60%, var(--bg) 10%) 28%,
-    color-mix(in oklab, var(--accent-2) 50%, var(--bg) 60%) 60%,
-    color-mix(in oklab, var(--bg) 90%, black) 100%
-  );
-  box-shadow:
-    inset -30px -50px 90px color-mix(in oklab, var(--bg) 80%, black),
-    inset 40px 30px 70px color-mix(in oklab, var(--accent) 30%, transparent),
-    0 0 80px color-mix(in oklab, var(--accent) 40%, transparent),
-    0 0 160px color-mix(in oklab, var(--accent-2) 25%, transparent);
-  animation: planet-rot 80s linear infinite;
-  overflow: hidden;
-}
-.planet::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      ellipse 60% 30% at 20% 40%,
-      color-mix(in oklab, var(--bg) 50%, transparent) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 40% 20% at 70% 65%,
-      color-mix(in oklab, var(--bg) 40%, transparent) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 25% 15% at 50% 20%,
-      color-mix(in oklab, var(--accent-2) 40%, transparent) 0%,
-      transparent 70%
-    );
-  mix-blend-mode: overlay;
-  animation: planet-rot 120s linear infinite reverse;
-}
-.planet__ring {
-  position: absolute;
-  left: -8%;
-  right: -8%;
-  top: 48%;
-  height: 14%;
-  border-radius: 50%;
-  border: 1px solid var(--hairline);
-  border-top-color: var(--accent);
-  transform: rotateZ(-18deg);
-  box-shadow: 0 0 30px color-mix(in oklab, var(--accent) 30%, transparent);
-}
-.planet__moon {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--fg);
-  box-shadow: 0 0 18px color-mix(in oklab, var(--fg) 50%, transparent);
-}
-.hero__planet-orbit {
-  position: absolute;
-  inset: -8%;
-  border-radius: 50%;
-  animation: spin 28s linear infinite;
-}
-.hero__planet-orbit::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px dashed var(--hairline);
-  opacity: 0.45;
-}
-.hero__planet-orbit .planet__moon {
-  top: -7px;
-  left: calc(50% - 7px);
-}
-@keyframes planet-rot {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* ============================================================
@@ -713,13 +535,6 @@ body[data-hero="planet"] .hero__title {
   color: var(--fg-3);
   margin-top: 4px;
 }
-.signup__success {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin-top: 4px;
-}
 
 /* ============================================================
    FOOTER
@@ -880,16 +695,4 @@ footer {
   text-transform: uppercase;
   color: var(--fg-3);
   margin-top: 10px;
-}
-
-/* ============================================================
-   Reduced-motion
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  .planet,
-  .planet::before,
-  .hero__planet-orbit,
-  .orbit-spin {
-    animation: none !important;
-  }
 }

@@ -14,14 +14,12 @@ import "../styles/prose.css";
 interface Props {
   title: string;
   description?: string;
-  hero?: "minimal" | "orbit" | "planet";
   currentPath?: string;
 }
 
 const {
   title,
   description = "A small studio building joyful, personal software.",
-  hero = "minimal",
   currentPath = Astro.url.pathname,
 } = Astro.props;
 ---
@@ -41,7 +39,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body data-hero={hero}>
+  <body>
     <Sky />
     <Nav currentPath={currentPath} />
     <main>
