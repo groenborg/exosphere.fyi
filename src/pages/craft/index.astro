@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+
+const all = await getCollection('craft', ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true,
+);
+
+const sorted = all.sort((a, b) => a.data.order - b.data.order);
+
+const pad = (n: number) => n.toString().padStart(2, '0');
+---
+<BaseLayout
+  title="Exosphere — Craft"
+  description="How we build, what we believe, and why. A small set of essays on the craft of a joyful software studio."
+  currentPath="/craft"
+  page="craft"
+>
+  <section class="cr-hero">
+    <div class="wrap">
+      <Eyebrow>{`Craft · ${sorted.length} ${sorted.length === 1 ? 'entry' : 'entries'}`}</Eyebrow>
+      <h1 class="cr-hero__title">
+        How we build, <em>and why</em>.
+      </h1>
+      <p class="cr-hero__lede">
+        A small set of essays on the craft of a joyful software studio —
+        values, working habits, opinions strong enough to act on. Best read
+        in order, but each piece stands alone.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <ol class="cr-toc">
+        {sorted.length === 0 && (
+          <li class="cr-toc__empty">No entries yet — check back soon.</li>
+        )}
+        {sorted.map((entry) => (
+          <li class="cr-toc__item">
+            <a class="cr-toc__link" href={`/craft/${entry.id}`}>
+              <span class="cr-toc__num">{pad(entry.data.order)}</span>
+              <span class="cr-toc__body">
+                <span class="cr-toc__title">
+                  {entry.data.title}
+                  {entry.data.draft && <span class="cr-toc__draft">Draft</span>}
+                </span>
+                <span class="cr-toc__desc">{entry.data.description}</span>
+              </span>
+              <span class="cr-toc__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

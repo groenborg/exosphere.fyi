@@ -16,4 +16,16 @@ const transmissions = defineCollection({
   }),
 });
 
-export const collections = { transmissions };
+const craft = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/craft' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    order: z.number(),
+    updatedDate: z.coerce.date().optional(),
+    draft: z.boolean().default(false),
+    heroImage: z.string().optional(),
+  }),
+});
+
+export const collections = { transmissions, craft };

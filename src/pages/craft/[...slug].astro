@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import CraftLayout from '../../layouts/CraftLayout.astro';
+
+export async function getStaticPaths() {
+  const all = await getCollection('craft', ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true,
+  );
+  const sorted = all.sort((a, b) => a.data.order - b.data.order);
+
+  return sorted.map((entry, i) => {
+    const prevEntry = sorted[i - 1];
+    const nextEntry = sorted[i + 1];
+    return {
+      params: { slug: entry.id },
+      props: {
+        entry,
+        prev: prevEntry
+          ? { id: prevEntry.id, title: prevEntry.data.title, order: prevEntry.data.order }
+          : null,
+        next: nextEntry
+          ? { id: nextEntry.id, title: nextEntry.data.title, order: nextEntry.data.order }
+          : null,
+      },
+    };
+  });
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+---
+<CraftLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  order={entry.data.order}
+  updatedDate={entry.data.updatedDate}
+  draft={entry.data.draft}
+  heroImage={entry.data.heroImage}
+  prev={prev}
+  next={next}
+>
+  <Content />
+</CraftLayout>
