@@ -4,14 +4,6 @@
    a table of contents rather than a feed.
    ============================================================ */
 
-body[data-page="craft"] {
-  --bg: #08090a;
-  --accent: rgb(235, 238, 242);
-}
-body[data-page="craft"] #sky {
-  display: none;
-}
-
 /* ── Hero ───────────────────────────────────────────────────── */
 
 .cr-hero {

@@ -3,14 +3,6 @@
    Re-uses tokens + visual language from .proj / .cap / .eyebrow.
    ============================================================ */
 
-body[data-page="transmissions"] {
-  --bg: #08090a;
-  --accent: rgb(235, 238, 242);
-}
-body[data-page="transmissions"] #sky {
-  display: none;
-}
-
 /* ── Listing page ───────────────────────────────────────────── */
 
 .tx-list-hero {

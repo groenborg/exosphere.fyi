@@ -17,7 +17,7 @@ const { title, description, position, updatedDate, draft, heroImage, prev, next 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
 ---
-<BaseLayout title={`${title} — Craft`} description={description} currentPath="/craft" page="craft">
+<BaseLayout title={`${title} — Craft`} description={description} currentPath="/craft">
   <article class="cr-post">
     <div class="wrap">
       <header class="cr-post__head">

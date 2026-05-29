@@ -3,14 +3,6 @@
    Card grid that links straight out to the thing itself.
    ============================================================ */
 
-body[data-page="made"] {
-  --bg: #08090a;
-  --accent: rgb(235, 238, 242);
-}
-body[data-page="made"] #sky {
-  display: none;
-}
-
 /* ── Hero ───────────────────────────────────────────────────── */
 
 .md-hero {

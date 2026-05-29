@@ -16,7 +16,6 @@ interface Props {
   description?: string;
   hero?: "minimal" | "orbit" | "planet";
   currentPath?: string;
-  page?: string;
 }
 
 const {
@@ -24,7 +23,6 @@ const {
   description = "A small studio building joyful, personal software.",
   hero = "minimal",
   currentPath = Astro.url.pathname,
-  page,
 } = Astro.props;
 ---
 <!doctype html>
@@ -43,7 +41,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body data-hero={hero} {...(page ? { 'data-page': page } : {})}>
+  <body data-hero={hero}>
     <Sky />
     <Nav currentPath={currentPath} />
     <main>
