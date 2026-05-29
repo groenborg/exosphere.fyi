@@ -7,8 +7,7 @@ body[data-page="made"] {
   --bg: #08090a;
   --accent: rgb(235, 238, 242);
 }
-body[data-page="made"] #sky,
-body[data-page="made"] #sky-grid {
+body[data-page="made"] #sky {
   display: none;
 }
 

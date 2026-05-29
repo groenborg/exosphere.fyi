@@ -14,7 +14,6 @@ import "../styles/prose.css";
 interface Props {
   title: string;
   description?: string;
-  mood?: "deep" | "retro" | "glassy";
   hero?: "minimal" | "orbit" | "planet";
   currentPath?: string;
   page?: string;
@@ -23,7 +22,6 @@ interface Props {
 const {
   title,
   description = "A small studio building joyful, personal software.",
-  mood = "deep",
   hero = "minimal",
   currentPath = Astro.url.pathname,
   page,
@@ -45,7 +43,7 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body data-mood={mood} data-hero={hero} {...(page ? { 'data-page': page } : {})}>
+  <body data-hero={hero} {...(page ? { 'data-page': page } : {})}>
     <Sky />
     <Nav currentPath={currentPath} />
     <main>

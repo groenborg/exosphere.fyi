@@ -1,5 +1,5 @@
 // EXOSPHERE — sky canvas
-// Renders: parallax stars (4 depths), nebula clouds, shooting stars, cursor stardust trail.
+// Renders: parallax stars (4 depths), shooting stars.
 
 (function () {
   const canvas = document.getElementById("sky");
@@ -16,14 +16,11 @@
   const cfg = (window.__sky = window.__sky || {
     density: 1.0, // 0..2
     parallax: 1.0, // 0..2
-    nebula: true,
     star: [255, 255, 255],
   });
 
   const layers = []; // star layers (depth, speed)
-  const nebulas = []; // nebula blobs
   const shooting = []; // shooting stars
-  const dust = []; // cursor trail particles
 
   function rebuildLayers() {
     layers.length = 0;
@@ -55,22 +52,6 @@
     }
   }
 
-  function rebuildNebula() {
-    nebulas.length = 0;
-    const c = 5;
-    for (let i = 0; i < c; i++) {
-      nebulas.push({
-        x: Math.random() * W,
-        y: Math.random() * H * 1.6,
-        r: 240 + Math.random() * 380,
-        h: 200 + Math.random() * 140, // hue
-        ph: Math.random() * Math.PI * 2,
-        sp: 0.0008 + Math.random() * 0.0014,
-        a: 0.1 + Math.random() * 0.16,
-      });
-    }
-  }
-
   function resize() {
     DPR = Math.min(window.devicePixelRatio || 1, 2);
     W = window.innerWidth;
@@ -81,7 +62,6 @@
     canvas.style.height = H + "px";
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     rebuildLayers();
-    rebuildNebula();
   }
 
   function maybeSpawnShooting() {
@@ -96,27 +76,6 @@
         len: 80 + Math.random() * 80,
       });
     }
-  }
-
-  function drawNebula() {
-    if (!cfg.nebula) return;
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    for (const n of nebulas) {
-      n.ph += n.sp;
-      const x = n.x + Math.sin(n.ph) * 18;
-      const y = n.y - scrollY * 0.08 + Math.cos(n.ph * 0.7) * 14;
-      const r = n.r;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0, `hsla(${n.h}, 80%, 60%, ${n.a})`);
-      g.addColorStop(0.5, `hsla(${n.h + 40}, 70%, 50%, ${n.a * 0.4})`);
-      g.addColorStop(1, `hsla(${n.h}, 80%, 50%, 0)`);
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
   }
 
   function drawStars(t) {
@@ -164,62 +123,15 @@
     }
   }
 
-  function drawDust() {
-    for (let i = dust.length - 1; i >= 0; i--) {
-      const p = dust[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vx *= 0.96;
-      p.vy *= 0.96;
-      p.vy += 0.005; // very gentle "down" drift
-      p.life -= 0.018;
-      if (p.life <= 0) {
-        dust.splice(i, 1);
-        continue;
-      }
-      const [sr, sg, sb] = cfg.star;
-      const a = Math.max(0, p.life) * 0.9;
-      ctx.fillStyle = `rgba(${sr},${sg},${sb},${a})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
   function frame(t) {
     const dt = t - lastT;
     lastT = t;
     ctx.clearRect(0, 0, W, H);
-    drawNebula();
     drawStars(t);
     maybeSpawnShooting();
     drawShooting();
-    drawDust();
     requestAnimationFrame(frame);
   }
-
-  // cursor stardust
-  let lastDust = 0;
-  window.addEventListener(
-    "pointermove",
-    (e) => {
-      const now = performance.now();
-      if (now - lastDust < 18) return;
-      lastDust = now;
-      const burst = 1 + Math.floor(Math.random() * 2);
-      for (let i = 0; i < burst; i++) {
-        dust.push({
-          x: e.clientX + (Math.random() - 0.5) * 6,
-          y: e.clientY + (Math.random() - 0.5) * 6,
-          vx: (Math.random() - 0.5) * 0.6,
-          vy: (Math.random() - 0.5) * 0.6 - 0.1,
-          r: 1.0 + Math.random() * 1.4,
-          life: 1.0,
-        });
-      }
-    },
-    { passive: true }
-  );
 
   window.addEventListener(
     "scroll",
@@ -238,9 +150,6 @@
     },
     setParallax(v) {
       cfg.parallax = v;
-    },
-    setNebula(v) {
-      cfg.nebula = !!v;
     },
     setStarColor(rgb) {
       cfg.star = rgb;

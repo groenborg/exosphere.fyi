@@ -8,8 +8,7 @@ body[data-page="craft"] {
   --bg: #08090a;
   --accent: rgb(235, 238, 242);
 }
-body[data-page="craft"] #sky,
-body[data-page="craft"] #sky-grid {
+body[data-page="craft"] #sky {
   display: none;
 }
 
