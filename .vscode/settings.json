@@ -6,6 +6,6 @@
     "quickfix.biome": "explicit"
   },
   "[astro]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "astro-build.astro-vscode"
   }
 }
