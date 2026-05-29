@@ -1,0 +1,233 @@
+/* ============================================================
+   MADE — portfolio of products, OSS, and experiments
+   Card grid that links straight out to the thing itself.
+   ============================================================ */
+
+body[data-page="made"] {
+  --bg: #08090a;
+  --accent: rgb(235, 238, 242);
+}
+body[data-page="made"] #sky,
+body[data-page="made"] #sky-grid {
+  display: none;
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+
+.md-hero {
+  padding-top: 140px;
+  padding-bottom: 72px;
+}
+.md-hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: rgb(235, 238, 242);
+  margin: 20px 0 0;
+  text-wrap: balance;
+  max-width: 16ch;
+}
+.md-hero__title em { font-style: normal; color: var(--accent); }
+.md-hero__lede {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 1.5vw, 21px);
+  color: rgb(208, 214, 224);
+  max-width: 56ch;
+  margin: 28px 0 0;
+}
+
+/* ── Grid ───────────────────────────────────────────────────── */
+
+.md-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 140px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+@media (max-width: 720px) {
+  .md-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.md-grid__empty {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  padding: 56px 0;
+  text-align: center;
+  border: 1px dashed var(--hairline);
+  border-radius: 14px;
+}
+
+/* ── Card ───────────────────────────────────────────────────── */
+
+.md-card {
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  overflow: hidden;
+  background: color-mix(in oklab, var(--accent) 1.5%, transparent);
+  transition: border-color .25s ease, transform .25s ease, background .25s ease;
+}
+.md-card:hover {
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--hairline));
+  transform: translateY(-2px);
+  background: color-mix(in oklab, var(--accent) 3.5%, transparent);
+}
+
+.md-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.md-card__thumb {
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 20%, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 55%),
+    radial-gradient(circle at 80% 80%, color-mix(in oklab, var(--accent-2) 14%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, color-mix(in oklab, var(--bg) 80%, white) 0%, var(--bg) 100%);
+}
+.md-card__thumb[data-type="oss"] {
+  background:
+    radial-gradient(circle at 80% 20%, color-mix(in oklab, var(--accent) 14%, transparent) 0%, transparent 60%),
+    linear-gradient(135deg, color-mix(in oklab, var(--bg) 78%, white) 0%, var(--bg) 100%);
+}
+.md-card__thumb[data-type="experiment"] {
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--accent-2) 18%, transparent) 0%, transparent 65%),
+    linear-gradient(135deg, color-mix(in oklab, var(--bg) 75%, white) 0%, var(--bg) 100%);
+}
+.md-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.md-card__thumb-name {
+  font-family: var(--font-mono);
+  font-size: clamp(18px, 2vw, 28px);
+  letter-spacing: -0.01em;
+  color: color-mix(in oklab, var(--accent) 70%, var(--fg-2));
+  opacity: 0.75;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.md-card__body {
+  padding: 24px 24px 22px;
+}
+
+.md-card__meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.md-card__type {
+  color: color-mix(in oklab, var(--accent) 65%, var(--fg-2));
+}
+.md-card__year::before {
+  content: '·';
+  margin-right: 12px;
+  color: var(--fg-3);
+  opacity: 0.5;
+}
+
+.md-card__name {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: rgb(235, 238, 242);
+  margin: 10px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-wrap: balance;
+  transition: color .2s ease;
+}
+.md-card:hover .md-card__name { color: var(--accent); }
+
+.md-card__arrow {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--fg-3);
+  transition: transform .25s ease, color .2s ease;
+}
+.md-card:hover .md-card__arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+.md-card__desc {
+  font-family: var(--font-serif);
+  color: rgb(208, 214, 224);
+  font-size: 15.5px;
+  line-height: 1.55;
+  margin: 12px 0 0;
+}
+
+.md-card__foot {
+  margin-top: 18px;
+}
+
+.md-card__tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.md-card__tags li {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  padding: 4px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+}
+
+/* ── Repo link overlay (secondary action) ───────────────────── */
+
+.md-card__repo {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg) 60%, black);
+  color: var(--fg-2);
+  border: 1px solid var(--hairline);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+  z-index: 2;
+}
+.md-card__repo:hover {
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--hairline));
+  background: color-mix(in oklab, var(--bg) 40%, black);
+}

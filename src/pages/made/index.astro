@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+
+const all = await getCollection('made', ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true,
+);
+
+const sorted = all.sort((a, b) => {
+  const ao = a.data.order ?? Number.POSITIVE_INFINITY;
+  const bo = b.data.order ?? Number.POSITIVE_INFINITY;
+  if (ao !== bo) return ao - bo;
+  return a.data.name.localeCompare(b.data.name);
+});
+
+const typeLabel = (t: string) => {
+  switch (t) {
+    case 'oss': return 'Open source';
+    case 'tool': return 'Tool';
+    case 'experiment': return 'Experiment';
+    default: return 'Product';
+  }
+};
+
+const isExternal = (u: string) => /^https?:\/\//i.test(u);
+---
+<BaseLayout
+  title="Exosphere — Made"
+  description="Things we've shipped, open-sourced, or quietly maintained — products, tools, and small experiments."
+  currentPath="/made"
+  page="made"
+>
+  <section class="md-hero">
+    <div class="wrap">
+      <Eyebrow>{`Made · ${sorted.length} ${sorted.length === 1 ? 'project' : 'projects'}`}</Eyebrow>
+      <h1 class="md-hero__title">
+        Things we've <em>made</em>.
+      </h1>
+      <p class="md-hero__lede">
+        Products in the world, open-source tools, and the occasional weekend
+        experiment. Each link goes straight to the thing itself.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <ul class="md-grid">
+        {sorted.length === 0 && (
+          <li class="md-grid__empty">Nothing here yet — check back soon.</li>
+        )}
+        {sorted.map((entry) => {
+          const { name, description, url, repo, type, year, tags, image } = entry.data;
+          const external = isExternal(url);
+          return (
+            <li class="md-card">
+              <a
+                class="md-card__link"
+                href={url}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                <div class="md-card__thumb" data-type={type}>
+                  {image
+                    ? <img src={image} alt="" />
+                    : <span class="md-card__thumb-name">{name}</span>}
+                </div>
+                <div class="md-card__body">
+                  <div class="md-card__meta">
+                    <span class="md-card__type">{typeLabel(type)}</span>
+                    {year && <span class="md-card__year">{year}</span>}
+                  </div>
+                  <h2 class="md-card__name">
+                    {name}
+                    <span class="md-card__arrow" aria-hidden="true">↗</span>
+                  </h2>
+                  <p class="md-card__desc">{description}</p>
+                  {(tags.length > 0 || (repo && repo !== url)) && (
+                    <div class="md-card__foot">
+                      {tags.length > 0 && (
+                        <ul class="md-card__tags">
+                          {tags.map((tag) => <li>{tag}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </a>
+              {repo && repo !== url && (
+                <a
+                  class="md-card__repo"
+                  href={repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${name} — view source on GitHub`}
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                    <path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.58.1.79-.25.79-.55v-2.13c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.71 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.41-5.27 5.7.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.5 11.5 0 0 0 12 .5Z"/>
+                  </svg>
+                </a>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

@@ -28,4 +28,20 @@ const craft = defineCollection({
   }),
 });
 
-export const collections = { transmissions, craft };
+const made = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/made' }),
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    url: z.string().url(),
+    repo: z.string().url().optional(),
+    type: z.enum(['oss', 'product', 'tool', 'experiment']).default('product'),
+    year: z.union([z.number(), z.string()]).optional(),
+    tags: z.array(z.string()).default([]),
+    image: z.string().optional(),
+    order: z.number().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { transmissions, craft, made };
