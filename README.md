@@ -40,6 +40,23 @@ All commands are run from the root of the project, from a terminal:
 - **Vanilla CSS**: Used for styling with tokens, components, and base styles.
 - **TypeScript**: Typed JavaScript for better development experience.
 
+## 📡 The Signals landing page
+
+The landing page (`/`) is a numbered catalogue of the studio's values — one
+flat, saturated colour and nothing but a list of type.
+
+- It is generated from the **Craft** collection: `src/components/signals/SignalList.astro`
+  reads `src/content/craft/`, sorts by the `order` frontmatter, and numbers the
+  entries `01`, `02`, … Add or reorder a Craft entry and the landing page
+  renumbers itself. `00. Start here` is the one hard-coded signal (→ `/about`).
+- Each row links to the full essay at `/craft/<slug>`.
+- The background hue is picked per page load from `src/data/signal-themes.ts` by
+  a small inline script in `BaseLayout.astro`, before first paint, never
+  repeating the previous load in the session. With JS off it stays black.
+- Styles live in `src/styles/signals.css`, scoped entirely under
+  `.signals-page`. The starfield canvas and the standard footer are swapped out
+  via `variant="signals"` on `BaseLayout`.
+
 ## ✉️ Writing a Transmission
 
 Posts live in `src/content/transmissions/` as `.md` or `.mdx` files. The

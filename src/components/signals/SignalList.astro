@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Signal from "./Signal.astro";
+
+/**
+ * The whole landing page: a numbered catalogue of the studio's values.
+ *
+ * Signals are the Craft entries, sourced live from the collection and ordered
+ * by their `order` frontmatter — add or reorder a Craft entry and this list
+ * renumbers itself. `00` is the standing invitation, everything after it is an
+ * essay.
+ */
+const craft = await getCollection("craft", ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true
+);
+
+const sorted = craft.sort((a, b) => a.data.order - b.data.order);
+
+const signals = [
+  { num: "00", title: "Start here", href: "/about" },
+  ...sorted.map((entry, i) => ({
+    num: String(i + 1).padStart(2, "0"),
+    title: entry.data.title,
+    href: `/craft/${entry.id}`,
+  })),
+];
+---
+<div class="cluster cluster--index">
+  {signals.map((signal) => (
+    <Signal num={signal.num} title={signal.title} href={signal.href} />
+  ))}
+</div>

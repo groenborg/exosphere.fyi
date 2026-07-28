@@ -1,0 +1,19 @@
+---
+interface Props {
+  /** Zero-padded index, e.g. "00", "07", "14". */
+  num: string;
+  title: string;
+  href: string;
+}
+const { num, title, href } = Astro.props;
+---
+<section class="signal">
+  <header class="signal__header">
+    <a href={href} aria-label={`Signal ${num}. ${title}`}>
+      <dl>
+        <dt>{num}.</dt>
+        <dd>{title}</dd>
+      </dl>
+    </a>
+  </header>
+</section>

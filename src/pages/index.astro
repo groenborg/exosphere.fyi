@@ -1,19 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HeroMinimal from "../components/hero/HeroMinimal.astro";
-import WhatWeDo from "../components/landing/WhatWeDo.astro";
-import Mantra from "../components/landing/Mantra.astro";
-import Services from "../components/landing/Services.astro";
-import Newsletter from "../components/landing/Newsletter.astro";
+import SignalList from "../components/signals/SignalList.astro";
 ---
 <BaseLayout
-  title="Exosphere — Software that puts smiles on faces"
-  description="Exosphere is a small, joyful studio shipping personal, exciting software."
+  title="Exosphere — Signals"
+  description="A catalogue of ideas — signals — that drive the studio."
   currentPath="/"
+  variant="signals"
 >
-  <HeroMinimal />
-  <WhatWeDo />
-  <Mantra />
-  <Services />
-  <Newsletter />
+  <SignalList />
 </BaseLayout>
