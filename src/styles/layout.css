@@ -2,9 +2,9 @@
    LAYOUT — the shape every page shares
 
    A page is a headline and then one of two things: a body of
-   prose, or a list. Header and footer fade out of the ground
-   rather than sitting on bars. No surfaces, no borders, no
-   cards anywhere.
+   prose, or a list. The header fades out of the ground rather
+   than sitting on a bar. No surfaces, no borders, no cards
+   anywhere.
    ============================================================ */
 
 .page {
@@ -289,22 +289,8 @@
 }
 
 /* ============================================================
-   FOOTER — a compact link list, fading back into the ground.
+   FOOTER — a compact link list.
    ============================================================ */
-
-/* Fixed bottom fade, mirroring the header. Above the content,
-   below the footer itself. */
-body::after {
-  content: "";
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 3;
-  width: 100%;
-  height: calc(3.7em + var(--spacing));
-  background: linear-gradient(0deg, rgba(var(--rgb-ground), 1) 0, rgba(var(--rgb-ground), 0) 100%);
-  pointer-events: none;
-}
 
 footer {
   position: relative;
