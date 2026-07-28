@@ -3,7 +3,7 @@
  *
  * One hue is picked at random per page load (never the same as the previous
  * load in the session), sometimes joined by a second hue a little way around
- * the wheel — see the inline script in BaseLayout.astro. The mesh itself is
+ * the wheel — see the inline script in lib/mesh-script.ts. The mesh itself is
  * always anchored in true black; these are only the colours that bloom out of
  * it, so they carry the "which one did I get this time" of the old flat ground.
  *

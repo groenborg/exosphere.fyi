@@ -296,19 +296,36 @@
   text-decoration: underline;
 }
 
-/* The page itself says where you are — bracketed, never underlined. */
+/* The page itself says where you are — bracketed, never underlined.
+   A ceiling bracket opens and a floor bracket closes, so the marks sit on
+   opposite corners like crop marks around the current page. The `/ ""` on
+   each content value is alt text: aria-current already announces the state,
+   so the brackets stay silent.
+
+   Every link carries both brackets and only the current one shows them.
+   `visibility: hidden` still reserves the glyph's width, so the row is laid
+   out identically on all four pages and the links can't jog sideways as you
+   navigate. Widths have to be reserved on the hover and focus states too,
+   or the brackets would collapse the moment the pointer lands. */
 .nav__links a[aria-current="page"],
 .nav__links a[aria-current="page"]:hover,
 .nav__links a[aria-current="page"]:focus {
   text-decoration: none;
 }
 
-.nav__links a[aria-current="page"]::before {
-  content: "[";
+.nav__links a::before {
+  content: "\2308" / "";
+  visibility: hidden;
 }
 
+.nav__links a::after {
+  content: "\230B" / "";
+  visibility: hidden;
+}
+
+.nav__links a[aria-current="page"]::before,
 .nav__links a[aria-current="page"]::after {
-  content: "]";
+  visibility: visible;
 }
 
 /* ============================================================
