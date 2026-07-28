@@ -1,10 +1,10 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import TransmissionList from "../../../components/transmissions/TransmissionList.astro";
+import BroadcastList from "../../../components/broadcasts/BroadcastList.astro";
 
 export async function getStaticPaths() {
-  const all = await getCollection("transmissions", ({ data }) =>
+  const all = await getCollection("broadcasts", ({ data }) =>
     import.meta.env.PROD ? data.draft !== true : true
   );
 
@@ -35,20 +35,20 @@ const items = await Promise.all(
 );
 ---
 <BaseLayout
-  title={`Exosphere — Transmissions tagged "${tag}"`}
-  description={`Transmissions on the topic of ${tag}.`}
-  currentPath="/transmissions"
+  title={`Exosphere — Broadcasts tagged "${tag}"`}
+  description={`Broadcasts on the topic of ${tag}.`}
+  currentPath="/broadcasts"
 >
   <section class="page">
     <div class="page__headline">
       <h6>{`Tag · ${items.length} ${items.length === 1 ? "post" : "posts"}`}</h6>
       <h1>On {tag}.</h1>
       <ul class="links">
-        <li><a href="/transmissions/tags">All tags</a></li>
-        <li><a href="/transmissions">All transmissions</a></li>
+        <li><a href="/broadcasts/tags">All tags</a></li>
+        <li><a href="/broadcasts">All broadcasts</a></li>
       </ul>
     </div>
 
-    <TransmissionList items={items} empty={`Nothing tagged ${tag} yet.`} />
+    <BroadcastList items={items} empty={`Nothing tagged ${tag} yet.`} />
   </section>
 </BaseLayout>

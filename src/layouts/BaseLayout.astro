@@ -6,10 +6,10 @@ import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/layout.css";
 import "../styles/prose.css";
-import "../styles/signals.css";
+import "../styles/objectives.css";
 import "../styles/made.css";
 
-import { signalThemes } from "../data/signal-themes";
+import { objectiveThemes } from "../data/objective-themes";
 
 interface Props {
   title: string;
@@ -25,7 +25,7 @@ const {
 
 /* The ground colour is picked before first paint so there's no flash of the
    fallback, and never repeats the previous load within a session. */
-const themeScript = `(function(){var p=${JSON.stringify(signalThemes)};try{var l=sessionStorage.getItem('signal-theme');var o=p.filter(function(c){return c!==l});if(!o.length)o=p;var c=o[Math.floor(Math.random()*o.length)];sessionStorage.setItem('signal-theme',c);document.documentElement.style.setProperty('--rgb-theme',c)}catch(e){}})();`;
+const themeScript = `(function(){var p=${JSON.stringify(objectiveThemes)};try{var l=sessionStorage.getItem('objective-theme');var o=p.filter(function(c){return c!==l});if(!o.length)o=p;var c=o[Math.floor(Math.random()*o.length)];sessionStorage.setItem('objective-theme',c);document.documentElement.style.setProperty('--rgb-theme',c)}catch(e){}})();`;
 ---
 <!doctype html>
 <html lang="en">
@@ -35,7 +35,7 @@ const themeScript = `(function(){var p=${JSON.stringify(signalThemes)};try{var l
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title="Exosphere — Transmissions" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Exosphere — Broadcasts" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

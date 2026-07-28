@@ -1,5 +1,5 @@
 /**
- * Flat, saturated background hues for the Signals landing page.
+ * Flat, saturated background hues for the Objectives landing page.
  *
  * One is picked at random per page load (never the same as the previous load
  * in the session — see the inline script in BaseLayout.astro). Stored as
@@ -10,7 +10,7 @@
  * All hues are held at a mid luminance so that both white text and the
  * 43.75%-white dimmed text stay legible on top.
  */
-export const signalThemes = [
+export const objectiveThemes = [
   "214, 64, 145", // aurora magenta
   "150, 78, 240", // violet
   "104, 106, 240", // periwinkle

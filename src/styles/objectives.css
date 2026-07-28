@@ -1,11 +1,11 @@
 /* ============================================================
-   SIGNALS — the landing page list
+   OBJECTIVES — the Mission list
 
    A catalogue of values as one big typographic list. Nothing
    else: no hero, no cards, no calls to action. The list is the
    page.
 
-   Each signal is a disclosure: click the line and its
+   Each objective is a disclosure: click the line and its
    description unfolds in place, with a link on to the essay.
    Only one is open at a time (the shared `name` on <details>).
    ============================================================ */
@@ -27,16 +27,16 @@
   font-weight: 700;
 }
 
-/* ── One signal ──────────────────────────────────────────────
+/* ── One objective ──────────────────────────────────────────────
    A fixed number column with tabular figures keeps every title
    on the same optical left edge.                                */
 
-.signal {
+.objective {
   position: relative;
   color: rgb(var(--rgb-white));
 }
 
-.signal__header {
+.objective__header {
   display: flex;
   padding: 0.15em 0;
   cursor: pointer;
@@ -44,31 +44,31 @@
 }
 
 /* No triangle, no disclosure furniture — the type is the control. */
-.signal__header::marker,
-.signal__header::-webkit-details-marker {
+.objective__header::marker,
+.objective__header::-webkit-details-marker {
   display: none;
   content: "";
 }
 
-.signal__header:focus-visible {
+.objective__header:focus-visible {
   outline: 2px solid rgb(var(--rgb-white));
   outline-offset: 0.1em;
 }
 
-.signal__num {
+.objective__num {
   flex: none;
   width: 2.8ch;
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
 }
 
-.signal__title {
+.objective__title {
   width: calc(100% - 2.8ch);
   text-wrap: pretty;
 }
 
-/* The one signal that navigates instead of unfolding (`00`). */
-.signal__link {
+/* The one objective that navigates instead of unfolding (`00`). */
+.objective__link {
   display: flex;
   width: 100%;
   color: inherit;
@@ -76,15 +76,15 @@
 }
 
 /* ── The open panel ──────────────────────────────────────────
-   The outer element still runs at signal size, so its 2.8ch
+   The outer element still runs at objective size, so its 2.8ch
    indent lines the text up under the title; the inner one drops
    to reading size.                                              */
 
-.signal__panel {
+.objective__panel {
   padding-left: 2.8ch;
 }
 
-.signal__panel-body {
+.objective__panel-body {
   display: flex;
   flex-direction: column;
   gap: 0.7em;
@@ -99,7 +99,7 @@
 
 /* Unfold rather than jump, where the browser can animate it. */
 @supports selector(::details-content) {
-  .signal__disclosure::details-content {
+  .objective__disclosure::details-content {
     block-size: 0;
     overflow: clip;
     opacity: 0;
@@ -109,28 +109,28 @@
       content-visibility 0.3s allow-discrete;
   }
 
-  .signal__disclosure[open]::details-content {
+  .objective__disclosure[open]::details-content {
     block-size: auto;
     opacity: 1;
   }
 }
 
 /* ── Attention ───────────────────────────────────────────────
-   Open one signal and the rest recede, so the thing you asked
+   Open one objective and the rest recede, so the thing you asked
    for is the only thing at full strength.                       */
 
-.cluster--index:has(.signal__disclosure[open]) .signal__header {
+.cluster--index:has(.objective__disclosure[open]) .objective__header {
   color: rgba(var(--rgb-white), var(--dim));
 }
 
-.cluster--index .signal__disclosure[open] > .signal__header {
+.cluster--index .objective__disclosure[open] > .objective__header {
   color: rgb(var(--rgb-white));
 }
 
 /* ── Desktop ─────────────────────────────────────────────────
    Bigger type, tighter leading, and the hover behaviour that
-   makes the reference sing: point at one signal and every other
-   one recedes. An open signal stays lit.                        */
+   makes the reference sing: point at one objective and every other
+   one recedes. An open objective stays lit.                        */
 
 @media (min-width: 64em) and (hover: hover) and (pointer: fine) {
   .cluster {
@@ -138,27 +138,27 @@
     margin-bottom: 44.4vh;
   }
 
-  .signal__header {
+  .objective__header {
     padding: 0;
   }
 
-  .cluster--index:hover .signal__header:not(:hover),
-  .cluster--index:focus-within .signal__header:not(:focus-visible) {
+  .cluster--index:hover .objective__header:not(:hover),
+  .cluster--index:focus-within .objective__header:not(:focus-visible) {
     color: rgba(var(--rgb-white), var(--dim));
   }
 
-  .cluster--index .signal__disclosure[open] > .signal__header {
+  .cluster--index .objective__disclosure[open] > .objective__header {
     color: rgb(var(--rgb-white));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .signal__header {
+  .objective__header {
     transition: none;
   }
 
   @supports selector(::details-content) {
-    .signal__disclosure::details-content {
+    .objective__disclosure::details-content {
       transition: none;
     }
   }

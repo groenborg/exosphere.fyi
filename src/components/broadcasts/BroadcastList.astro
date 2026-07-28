@@ -15,7 +15,7 @@ interface Props {
   empty?: string;
 }
 
-const { items, empty = "No transmissions yet — check back soon." } = Astro.props;
+const { items, empty = "No broadcasts yet — check back soon." } = Astro.props;
 
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
@@ -30,11 +30,11 @@ const fmt = (d: Date) =>
           {item.minutesRead && <li>{item.minutesRead}</li>}
           {item.draft && <li>Draft</li>}
           {item.tags.map((tag) => (
-            <li><a href={`/transmissions/tags/${tag}`}>{tag}</a></li>
+            <li><a href={`/broadcasts/tags/${tag}`}>{tag}</a></li>
           ))}
         </ul>
         <h2 class="list__title">
-          <a href={`/transmissions/${item.id}`}>{item.title}</a>
+          <a href={`/broadcasts/${item.id}`}>{item.title}</a>
         </h2>
         <p>{item.description}</p>
       </article>

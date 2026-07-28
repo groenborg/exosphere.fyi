@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
-const all = await getCollection("transmissions", ({ data }) =>
+const all = await getCollection("broadcasts", ({ data }) =>
   import.meta.env.PROD ? data.draft !== true : true
 );
 
@@ -17,13 +17,13 @@ const tags = Array.from(counts.entries())
   .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 ---
 <BaseLayout
-  title="Exosphere — Transmission tags"
-  description="Browse Transmissions by topic."
-  currentPath="/transmissions"
+  title="Exosphere — Broadcast tags"
+  description="Browse Broadcasts by topic."
+  currentPath="/broadcasts"
 >
   <section class="page">
     <div class="page__headline">
-      <h6>Transmissions · Tags</h6>
+      <h6>Broadcasts · Tags</h6>
       <h1>Browse by topic.</h1>
       <p>Every topic in the archive, most written about first.</p>
     </div>
@@ -35,14 +35,14 @@ const tags = Array.from(counts.entries())
         <ul class="links">
           {tags.map(({ tag, count }) => (
             <li>
-              <a href={`/transmissions/tags/${tag}`}>{tag}</a> <small>{count}</small>
+              <a href={`/broadcasts/tags/${tag}`}>{tag}</a> <small>{count}</small>
             </li>
           ))}
         </ul>
       )}
 
       <ul class="links">
-        <li><a href="/transmissions">All transmissions</a></li>
+        <li><a href="/broadcasts">All broadcasts</a></li>
       </ul>
     </div>
   </section>

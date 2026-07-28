@@ -1,16 +1,16 @@
 ---
 import { getCollection } from "astro:content";
-import Signal from "./Signal.astro";
+import Objective from "./Objective.astro";
 
 /**
  * The whole landing page: a numbered catalogue of the studio's values.
  *
- * Signals are the Craft entries, sourced live from the collection and ordered
+ * Objectives are the Craft entries, sourced live from the collection and ordered
  * by their `order` frontmatter — add or reorder a Craft entry and this list
  * renumbers itself. `00` is the standing invitation, everything after it is an
  * essay.
  *
- * Clicking a signal opens it in place: the description unfolds under the
+ * Clicking a objective opens it in place: the description unfolds under the
  * title, with a link on to the essay itself. Only one stays open at a time.
  */
 const craft = await getCollection("craft", ({ data }) =>
@@ -19,7 +19,7 @@ const craft = await getCollection("craft", ({ data }) =>
 
 const sorted = craft.sort((a, b) => a.data.order - b.data.order);
 
-const signals = [
+const objectives = [
   {
     num: "00",
     title: "Start here",
@@ -38,13 +38,13 @@ const signals = [
 ];
 ---
 <div class="cluster cluster--index">
-  {signals.map((signal) => (
-    <Signal
-      num={signal.num}
-      title={signal.title}
-      href={signal.href}
-      description={signal.description}
-      linkLabel={signal.linkLabel}
+  {objectives.map((objective) => (
+    <Objective
+      num={objective.num}
+      title={objective.title}
+      href={objective.href}
+      description={objective.description}
+      linkLabel={objective.linkLabel}
     />
   ))}
 </div>

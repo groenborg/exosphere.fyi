@@ -18,10 +18,10 @@ const num = (n: number) => String(n).padStart(2, "0");
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
 ---
-<BaseLayout title={`${title} — Signals`} description={description} currentPath="/">
+<BaseLayout title={`${title} — Objectives`} description={description} currentPath="/">
   <article class="page">
     <div class="page__headline">
-      <h6>{`Signal ${num(position)}`}</h6>
+      <h6>{`Objective ${num(position)}`}</h6>
       <h1>{title}</h1>
       <p>{description}</p>
     </div>
@@ -44,9 +44,9 @@ const fmt = (d: Date) =>
         <slot />
       </div>
 
-      <nav aria-label="Signal navigation">
+      <nav aria-label="Objective navigation">
         <ul class="links">
-          <li><a href="/">All signals</a></li>
+          <li><a href="/">All objectives</a></li>
           {prev && (
             <li>
               <a href={`/craft/${prev.id}`}>{`← ${num(prev.position)}. ${prev.title}`}</a>

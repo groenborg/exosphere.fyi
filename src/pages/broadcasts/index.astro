@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import TransmissionList from "../../components/transmissions/TransmissionList.astro";
+import BroadcastList from "../../components/broadcasts/BroadcastList.astro";
 
-const all = await getCollection("transmissions", ({ data }) =>
+const all = await getCollection("broadcasts", ({ data }) =>
   import.meta.env.PROD ? data.draft !== true : true
 );
 
@@ -21,24 +21,24 @@ const items = await Promise.all(
 );
 ---
 <BaseLayout
-  title="Exosphere — Transmissions"
+  title="Exosphere — Broadcasts"
   description="Postcards, notes, and field reports from a small studio building joyful software."
-  currentPath="/transmissions"
+  currentPath="/broadcasts"
 >
   <section class="page">
     <div class="page__headline">
-      <h6>{`Transmissions · ${items.length} ${items.length === 1 ? "post" : "posts"}`}</h6>
-      <h1>Signals from the studio.</h1>
+      <h6>{`Broadcasts · ${items.length} ${items.length === 1 ? "post" : "posts"}`}</h6>
+      <h1>Dispatches from the studio.</h1>
       <p>
         Long-form notes, half-formed ideas, and the occasional weekend
         experiment. We post when we have something worth saying.
       </p>
       <ul class="links">
-        <li><a href="/transmissions/tags">Browse by topic</a></li>
+        <li><a href="/broadcasts/tags">Browse by topic</a></li>
         <li><a href="/rss.xml">Subscribe by RSS</a></li>
       </ul>
     </div>
 
-    <TransmissionList items={items} />
+    <BroadcastList items={items} />
   </section>
 </BaseLayout>

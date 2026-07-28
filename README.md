@@ -36,7 +36,7 @@ All commands are run from the root of the project, from a terminal:
 ## 🌟 Tech Stack
 
 - **Astro**: For building fast content sites.
-- **MDX**: For long-form posts in `src/content/transmissions/`.
+- **MDX**: For long-form posts in `src/content/broadcasts/`.
 - **Vanilla CSS**: Used for styling with tokens, base, layout, and page styles.
 - **TypeScript**: Typed JavaScript for better development experience.
 
@@ -46,7 +46,7 @@ Every page shares one treatment: a single flat, saturated colour, white type,
 and a header and footer that fade out of the ground rather than sitting on
 bars. No surfaces, no borders, no cards, one typeface.
 
-- The hue is picked per page load from `src/data/signal-themes.ts` by a small
+- The hue is picked per page load from `src/data/objective-themes.ts` by a small
   inline script in `BaseLayout.astro`, before first paint, never repeating the
   previous load in the session. With JS off it stays black.
 - **One type scale** drives everything. `--font-size` sets the body size and
@@ -63,8 +63,8 @@ bars. No surfaces, no borders, no cards, one typeface.
 | `tokens.css`  | The scale, the colours, the fonts                            |
 | `base.css`    | Reset and element defaults                                   |
 | `layout.css`  | `.page` chrome, header, footer, and the shared primitives     |
-| `prose.css`   | `.prose` — the body of an essay or transmission (MDX output) |
-| `signals.css` | The landing list                                             |
+| `prose.css`   | `.prose` — the body of an essay or broadcast (MDX output) |
+| `objectives.css` | The Mission list                                          |
 | `made.css`    | The optional image column on `/made`                         |
 
 Three primitives in `layout.css` cover nearly every page, so a new one rarely
@@ -72,25 +72,27 @@ needs new CSS:
 
 - **`.page`** — a `.page__headline` (optional `h6` label, `h1`, lede) followed
   by either a `.page__body` of prose or a `.list`.
-- **`.list`** — stacked entries behind `/made` and `/transmissions`:
+- **`.list`** — stacked entries behind `/made` and `/broadcasts`:
   a meta line, a big linked title, a paragraph.
 - **`.meta`** and **`.links`** — a dimmed line of facts (dates, tags, counts)
   and a row of onward links. Both size themselves relative to whatever
   container they sit in.
 
-### The landing page — Signals
+### The landing page — Mission
 
-A numbered catalogue of the studio's values, and nothing else.
+A numbered catalogue of the studio's values — one **Objective** per value — and
+nothing else. "Mission" is the page; an "Objective" is a row on it.
 
-- It is generated from the **Craft** collection: `src/components/signals/SignalList.astro`
+- It is generated from the **Craft** collection: `src/components/objectives/ObjectiveList.astro`
   reads `src/content/craft/`, sorts by the `order` frontmatter, and numbers the
-  entries `01`, `02`, … Add or reorder a Craft entry and the landing page
-  renumbers itself. `00. Start here` is the one hard-coded signal (→ `/about`).
-- Each row is a disclosure: click (or tab to and press Enter on) a signal and
-  its description unfolds in place, with a `Read in full →` link on to the
-  essay at `/craft/<slug>`. Only one signal is open at a time — the `<details>`
-  elements share a `name`, so the browser closes the last one for us. No JS.
-- Hovering (or tabbing to) one signal dims all the others; an open one stays
+  entries `01`, `02`, … Add or reorder a Craft entry and the page renumbers
+  itself. `00. Start here` is the one hard-coded objective (→ `/about`).
+- Each row is a disclosure: click (or tab to and press Enter on) an objective
+  and its description unfolds in place, with a `Read in full →` link on to the
+  essay at `/craft/<slug>`. Only one objective is open at a time — the
+  `<details>` elements share a `name`, so the browser closes the last one for
+  us. No JS.
+- Hovering (or tabbing to) one objective dims all the others; an open one stays
   lit.
 - The open panel animates via `::details-content` + `interpolate-size`, and
   simply snaps open where that isn't supported.
@@ -108,14 +110,15 @@ thing itself.
 
 ### Craft
 
-The Craft collection has no index of its own — the landing page *is* the index,
-so `/craft/<slug>` just renders one essay. Numbering is derived from the
-collection's `order` frontmatter in both places, so the signal numbers always
-agree, and each essay links back to `/` ("All signals") plus its neighbours.
+The Craft collection has no index of its own — the Mission page *is* the index,
+so `/craft/<slug>` just renders one essay, headed `Objective 07`. Numbering is
+derived from the collection's `order` frontmatter in both places, so the
+objective numbers always agree, and each essay links back to `/`
+("All objectives") plus its neighbours.
 
-## ✉️ Writing a Transmission
+## ✉️ Writing a Broadcast
 
-Posts live in `src/content/transmissions/` as `.md` or `.mdx` files. The
+Posts live in `src/content/broadcasts/` as `.md` or `.mdx` files. The
 collection schema is defined in `src/content.config.ts`.
 
 ```mdx
@@ -124,7 +127,7 @@ title: "Title of the post"
 description: "Short summary — used on the listing and in RSS."
 pubDate: 2026-05-22
 author: "Exosphere"             # optional, defaults to "Exosphere"
-tags: ["studio", "field-notes"] # optional, used by /transmissions/tags
+tags: ["studio", "field-notes"] # optional, used by /broadcasts/tags
 draft: false                    # set true to hide from production builds
 ---
 
@@ -132,7 +135,7 @@ Post body in Markdown. In `.mdx` files you can also import and use Astro
 components inline.
 ```
 
-- The listing is at `/transmissions`, single posts at `/transmissions/<slug>`.
+- The listing is at `/broadcasts`, single posts at `/broadcasts/<slug>`.
 - Reading time is computed at build via a remark plugin.
 - The RSS feed is exposed at `/rss.xml`.
 - `draft: true` posts show up locally (`npm run dev`) and are excluded from

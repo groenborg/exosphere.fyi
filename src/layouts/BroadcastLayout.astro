@@ -18,7 +18,7 @@ const { title, description, pubDate, updatedDate, author, tags, minutesRead, dra
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
 ---
-<BaseLayout title={`${title} — Transmissions`} description={description} currentPath="/transmissions">
+<BaseLayout title={`${title} — Broadcasts`} description={description} currentPath="/broadcasts">
   <article class="page">
     <div class="page__headline">
       <h1>{title}</h1>
@@ -39,7 +39,7 @@ const fmt = (d: Date) =>
         {minutesRead && <li>{minutesRead}</li>}
         {draft && <li>Draft</li>}
         {tags.map((tag) => (
-          <li><a href={`/transmissions/tags/${tag}`}>{tag}</a></li>
+          <li><a href={`/broadcasts/tags/${tag}`}>{tag}</a></li>
         ))}
       </ul>
 
@@ -47,9 +47,9 @@ const fmt = (d: Date) =>
         <slot />
       </div>
 
-      <nav aria-label="Transmission navigation">
+      <nav aria-label="Broadcast navigation">
         <ul class="links">
-          <li><a href="/transmissions">All transmissions</a></li>
+          <li><a href="/broadcasts">All broadcasts</a></li>
           <li><a href="/rss.xml">Subscribe by RSS</a></li>
         </ul>
       </nav>
