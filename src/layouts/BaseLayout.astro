@@ -25,6 +25,10 @@ const {
   currentPath = Astro.url.pathname,
 } = Astro.props;
 
+/* Unfurlers need absolute URLs, so both are resolved against `site` from
+   astro.config.mjs rather than emitted as site-root paths. */
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og.jpg", Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -40,6 +44,30 @@ const {
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" as="image" href="/logo-sprite.png" />
     <meta name="theme-color" content="#000000" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Exosphere" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A ringed pixel-art planet above the Exosphere wordmark"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta
+      name="twitter:image:alt"
+      content="A ringed pixel-art planet above the Exosphere wordmark"
+    />
+
     <link rel="alternate" type="application/rss+xml" title="Exosphere — Broadcasts" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
