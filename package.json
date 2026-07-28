@@ -19,8 +19,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.4",
-    "reading-time": "^1.5.0",
-    "side-note": "github:Trolzie/marginalia"
+    "reading-time": "^1.5.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

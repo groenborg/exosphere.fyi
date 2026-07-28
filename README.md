@@ -11,8 +11,10 @@ Inside of this project, you'll see the following folders and files:
 ├── public/
 ├── src/
 │   ├── components/
-│   ├── data/
+│   ├── content/     # the broadcasts, craft and made collections
+│   ├── data/        # small static tables (nav links, mesh palette)
 │   ├── layouts/
+│   ├── lib/         # shared helpers (collections, dates, mesh script)
 │   ├── pages/
 │   └── styles/
 ├── package.json
@@ -46,9 +48,10 @@ Every page shares one treatment: a single flat, saturated colour, white type,
 and a header and footer that fade out of the ground rather than sitting on
 bars. No surfaces, no borders, no cards, one typeface.
 
-- The hue is picked per page load from `src/data/objective-themes.ts` by a small
-  inline script in `BaseLayout.astro`, before first paint, never repeating the
-  previous load in the session. With JS off it stays black.
+- The ground is a five-blob radial mesh. Its hue is picked per page load from
+  `src/data/mesh-palette.ts` by `src/lib/mesh-script.ts`, inlined into `<head>`
+  and run before first paint, never repeating the previous load in the session.
+  With JS off the fallback mesh in `mesh.css` stands in.
 - **One type scale** drives everything. `--font-size` sets the body size and
   every other size is a percentage of it (`--font-size-small`,
   `--font-size-xxx-large`, …), while spacing is expressed in `em` and
@@ -58,14 +61,16 @@ bars. No surfaces, no borders, no cards, one typeface.
 
 ### Stylesheets
 
-| File          | Holds                                                        |
-| :------------ | :----------------------------------------------------------- |
-| `tokens.css`  | The scale, the colours, the fonts                            |
-| `base.css`    | Reset and element defaults                                   |
-| `layout.css`  | `.page` chrome, header, footer, and the shared primitives     |
-| `prose.css`   | `.prose` — the body of an essay or broadcast (MDX output) |
+| File             | Holds                                                     |
+| :--------------- | :-------------------------------------------------------- |
+| `tokens.css`     | The scale, the colours, the fonts                         |
+| `base.css`       | Reset and element defaults                                |
+| `mesh.css`       | The ground: blob geometry, grain, and the no-JS fallback   |
+| `layout.css`     | `.page` chrome, header, footer, and the shared primitives  |
+| `prose.css`      | `.prose` — the body of an essay or broadcast (MDX output)  |
 | `objectives.css` | The Mission list                                          |
-| `made.css`    | The optional image column on `/made`                         |
+| `made.css`       | The optional image column on `/made`                      |
+| `broadcast.css`  | The centred single-article treatment                       |
 
 Three primitives in `layout.css` cover nearly every page, so a new one rarely
 needs new CSS:

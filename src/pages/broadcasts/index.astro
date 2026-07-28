@@ -1,24 +1,11 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import BroadcastList from "../../components/broadcasts/BroadcastList.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { byNewest, isPublished, toBroadcastItems } from "../../lib/content";
 
-const all = await getCollection("broadcasts", ({ data }) =>
-  import.meta.env.PROD ? data.draft !== true : true
-);
-
-const sorted = all.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-
-const items = await Promise.all(
-  sorted.map(async (entry) => {
-    const { remarkPluginFrontmatter } = await render(entry);
-    return {
-      id: entry.id,
-      ...entry.data,
-      minutesRead: remarkPluginFrontmatter?.minutesRead as string | undefined,
-    };
-  })
-);
+const all = await getCollection("broadcasts", isPublished);
+const items = await toBroadcastItems(all.sort(byNewest));
 ---
 <BaseLayout
   title="Exosphere — Broadcasts"

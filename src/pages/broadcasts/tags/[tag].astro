@@ -1,12 +1,11 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import BroadcastList from "../../../components/broadcasts/BroadcastList.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { byNewest, isPublished, toBroadcastItems } from "../../../lib/content";
 
 export async function getStaticPaths() {
-  const all = await getCollection("broadcasts", ({ data }) =>
-    import.meta.env.PROD ? data.draft !== true : true
-  );
+  const all = await getCollection("broadcasts", isPublished);
 
   const tags = new Set<string>();
   for (const entry of all) {
@@ -14,25 +13,14 @@ export async function getStaticPaths() {
   }
 
   return Array.from(tags).map((tag) => {
-    const posts = all
-      .filter((e) => e.data.tags.includes(tag))
-      .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+    const posts = all.filter((e) => e.data.tags.includes(tag)).sort(byNewest);
     return { params: { tag }, props: { tag, posts } };
   });
 }
 
 const { tag, posts } = Astro.props;
 
-const items = await Promise.all(
-  posts.map(async (entry) => {
-    const { remarkPluginFrontmatter } = await render(entry);
-    return {
-      id: entry.id,
-      ...entry.data,
-      minutesRead: remarkPluginFrontmatter?.minutesRead as string | undefined,
-    };
-  })
-);
+const items = await toBroadcastItems(posts);
 ---
 <BaseLayout
   title={`Exosphere — Broadcasts tagged "${tag}"`}

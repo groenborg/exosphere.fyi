@@ -1,34 +1,23 @@
 ---
-import BrandMark from "./BrandMark.astro";
+import { navLinks } from "../data/nav-links";
 
 interface Props {
-  currentPath?: string;
+  /**
+   * Which top-level page to bracket. Nested routes pass their section, so a
+   * broadcast marks `/broadcasts` and an essay marks `/`.
+   */
+  currentPath: string;
 }
-const { currentPath = "/" } = Astro.props;
-
-const links = [
-  { href: "/", label: "Mission", match: "/" },
-  { href: "/made", label: "Made", match: "/made" },
-  { href: "/broadcasts", label: "Broadcasts", match: "/broadcasts" },
-  { href: "/about", label: "About", match: "/about" },
-];
+const { currentPath } = Astro.props;
 ---
-
 <header class="nav">
   <a class="nav__brand" href="/">
-    <BrandMark />
+    <span class="nav__brand-mark" aria-hidden="true"></span>
     <span>Exosphere</span>
   </a>
   <nav class="nav__links">
-    {
-      links.map((link) => (
-        <a
-          href={link.href}
-          aria-current={link.match === currentPath ? "page" : undefined}
-        >
-          {link.label}
-        </a>
-      ))
-    }
+    {navLinks.map(({ href, label }) => (
+      <a href={href} aria-current={href === currentPath ? "page" : undefined}>{label}</a>
+    ))}
   </nav>
 </header>

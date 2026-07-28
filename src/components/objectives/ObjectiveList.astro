@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { byOrder, isPublished } from "../../lib/content";
 import Objective from "./Objective.astro";
 
 /**
@@ -13,11 +14,8 @@ import Objective from "./Objective.astro";
  * Clicking a objective opens it in place: the description unfolds under the
  * title, with a link on to the essay itself. Only one stays open at a time.
  */
-const craft = await getCollection("craft", ({ data }) =>
-  import.meta.env.PROD ? data.draft !== true : true
-);
-
-const sorted = craft.sort((a, b) => a.data.order - b.data.order);
+const craft = await getCollection("craft", isPublished);
+const sorted = craft.sort(byOrder);
 
 const objectives = [
   {
@@ -32,18 +30,9 @@ const objectives = [
     title: entry.data.title,
     href: `/craft/${entry.id}`,
     description: entry.data.description,
-    linkLabel: "Read in full",
   })),
 ];
 ---
 <div class="cluster cluster--index">
-  {objectives.map((objective) => (
-    <Objective
-      num={objective.num}
-      title={objective.title}
-      href={objective.href}
-      description={objective.description}
-      linkLabel={objective.linkLabel}
-    />
-  ))}
+  {objectives.map((objective) => <Objective {...objective} />)}
 </div>

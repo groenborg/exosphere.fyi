@@ -1,7 +1,0 @@
----
-interface Props {
-  class?: string;
-}
-const { class: className } = Astro.props;
----
-<span class={`nav__brand-mark ${className ?? ''}`.trim()} aria-hidden="true"></span>

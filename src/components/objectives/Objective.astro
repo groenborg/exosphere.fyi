@@ -5,43 +5,27 @@ interface Props {
   title: string;
   href: string;
   /** One-line summary, revealed inline when the objective is opened. */
-  description?: string;
+  description: string;
   /** Label for the onward link inside the open panel. */
   linkLabel?: string;
-  /** Name shared by every objective so only one stays open at a time. */
-  group?: string;
 }
-const {
-  num,
-  title,
-  href,
-  description,
-  linkLabel = "Read in full",
-  group = "objective",
-} = Astro.props;
+const { num, title, href, description, linkLabel = "Read in full" } = Astro.props;
+
+/* Every objective carries the same `name`, so the browser closes the last-open
+   one for us — only one is ever unfolded, and no JS is involved. */
+const group = "objective";
 ---
-<section class="objective">
-  {description ? (
-    <details class="objective__disclosure" name={group}>
-      <summary class="objective__header">
-        <span class="objective__num">{num}.</span>
-        <span class="objective__title">{title}</span>
-      </summary>
-      <div class="objective__panel">
-        <div class="objective__panel-body">
-          <p>{description}</p>
-          <ul class="links">
-            <li><a href={href}>{`${linkLabel} →`}</a></li>
-          </ul>
-        </div>
-      </div>
-    </details>
-  ) : (
-    <div class="objective__header">
-      <a class="objective__link" href={href} aria-label={`Objective ${num}. ${title}`}>
-        <span class="objective__num">{num}.</span>
-        <span class="objective__title">{title}</span>
-      </a>
+<details class="objective" name={group}>
+  <summary class="objective__header">
+    <span class="objective__num">{num}.</span>
+    <span class="objective__title">{title}</span>
+  </summary>
+  <div class="objective__panel">
+    <div class="objective__panel-body">
+      <p>{description}</p>
+      <ul class="links">
+        <li><a href={href}>{`${linkLabel} →`}</a></li>
+      </ul>
     </div>
-  )}
-</section>
+  </div>
+</details>

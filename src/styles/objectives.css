@@ -32,7 +32,6 @@
    on the same optical left edge.                                */
 
 .objective {
-  position: relative;
   color: rgb(var(--rgb-white));
 }
 
@@ -67,14 +66,6 @@
   text-wrap: pretty;
 }
 
-/* The one objective that navigates instead of unfolding (`00`). */
-.objective__link {
-  display: flex;
-  width: 100%;
-  color: inherit;
-  text-decoration: none;
-}
-
 /* ── The open panel ──────────────────────────────────────────
    The outer element still runs at objective size, so its 2.8ch
    indent lines the text up under the title; the inner one drops
@@ -99,7 +90,7 @@
 
 /* Unfold rather than jump, where the browser can animate it. */
 @supports selector(::details-content) {
-  .objective__disclosure::details-content {
+  .objective::details-content {
     block-size: 0;
     overflow: clip;
     opacity: 0;
@@ -109,7 +100,7 @@
       content-visibility 0.3s allow-discrete;
   }
 
-  .objective__disclosure[open]::details-content {
+  .objective[open]::details-content {
     block-size: auto;
     opacity: 1;
   }
@@ -119,11 +110,11 @@
    Open one objective and the rest recede, so the thing you asked
    for is the only thing at full strength.                       */
 
-.cluster--index:has(.objective__disclosure[open]) .objective__header {
+.cluster--index:has(.objective[open]) .objective__header {
   color: rgba(var(--rgb-white), var(--dim));
 }
 
-.cluster--index .objective__disclosure[open] > .objective__header {
+.cluster--index .objective[open] > .objective__header {
   color: rgb(var(--rgb-white));
 }
 
@@ -147,7 +138,7 @@
     color: rgba(var(--rgb-white), var(--dim));
   }
 
-  .cluster--index .objective__disclosure[open] > .objective__header {
+  .cluster--index .objective[open] > .objective__header {
     color: rgb(var(--rgb-white));
   }
 }
@@ -158,7 +149,7 @@
   }
 
   @supports selector(::details-content) {
-    .objective__disclosure::details-content {
+    .objective::details-content {
       transition: none;
     }
   }

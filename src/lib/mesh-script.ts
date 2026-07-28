@@ -78,6 +78,5 @@ export const meshScript = `(function () {
        something to grain against; true black comes from blobs 0 and 1. */
     s.setProperty("--mesh-base", "hsl(" + primary.h + ", " + primary.s + "%, 7%)");
     s.setProperty("--mesh-base-dark", "hsl(" + primary.h + ", 45%, 3.5%)");
-    s.setProperty("--rgb-theme", primary.rgb);
   } catch (e) {}
 })();`;

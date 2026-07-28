@@ -1,13 +1,14 @@
 ---
+import { navLinks } from "../data/nav-links";
+
 const year = new Date().getFullYear();
 ---
 <footer>
   <div class="foot">
     <ul>
-      <li><a href="/">Mission</a></li>
-      <li><a href="/made">Made</a></li>
-      <li><a href="/broadcasts">Broadcasts</a></li>
-      <li><a href="/about">About</a></li>
+      {navLinks.map(({ href, label }) => (
+        <li><a href={href}>{label}</a></li>
+      ))}
     </ul>
     <ul>
       <li><a href="mailto:hello@exosphere.studio">hello@exosphere.studio</a></li>

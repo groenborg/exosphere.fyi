@@ -41,8 +41,9 @@
   transition: opacity 0.2s ease;
 }
 
-.made__wrap figure a:hover img,
-.made__wrap figure a:focus-visible img {
+/* Hover only — the thumbnail link is aria-hidden and tabindex="-1", so it
+   never takes focus. */
+.made__wrap figure a:hover img {
   opacity: 1;
 }
 

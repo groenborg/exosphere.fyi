@@ -15,11 +15,8 @@ html {
   font-size: 16px;
   /* Clears the fixed header when jumping to an anchor. */
   scroll-padding-top: calc(var(--font-size) * 7.4);
-}
-
-/* The ground is the fixed .mesh layer, which sits at z-index -1 —
-   so body must stay transparent or it would paint over it. */
-html {
+  /* The ground is the fixed .mesh layer, which sits at z-index -1 — so this
+     is what shows through, and body must stay transparent. */
   background: rgb(var(--rgb-ground));
 }
 

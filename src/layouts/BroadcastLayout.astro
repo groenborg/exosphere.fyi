@@ -1,22 +1,15 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { longDate } from "../lib/dates";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  title: string;
-  description: string;
-  pubDate: Date;
-  updatedDate?: Date;
-  author: string;
-  tags: string[];
+  entry: CollectionEntry<"broadcasts">;
+  /** Computed at build by the remark plugin, so it arrives separately. */
   minutesRead?: string;
-  draft?: boolean;
-  heroImage?: string;
 }
-const { title, description, pubDate, updatedDate, author, tags, minutesRead, draft, heroImage } =
-  Astro.props;
-
-const fmt = (d: Date) =>
-  d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
+const { entry, minutesRead } = Astro.props;
+const { title, description, pubDate, updatedDate, author, tags, draft, heroImage } = entry.data;
 ---
 <BaseLayout title={`${title} — Broadcasts`} description={description} currentPath="/broadcasts">
   <article class="page broadcast">
@@ -31,8 +24,8 @@ const fmt = (d: Date) =>
       <p>{description}</p>
       <ul class="meta">
         <li>{author}</li>
-        <li><time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time></li>
-        {updatedDate && <li>Updated {fmt(updatedDate)}</li>}
+        <li><time datetime={pubDate.toISOString()}>{longDate(pubDate)}</time></li>
+        {updatedDate && <li>Updated {longDate(updatedDate)}</li>}
         {minutesRead && <li>{minutesRead}</li>}
         {draft && <li>Draft</li>}
         {tags.map((tag) => (

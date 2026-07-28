@@ -16,13 +16,14 @@ import { meshScript } from "../lib/mesh-script";
 interface Props {
   title: string;
   description?: string;
-  currentPath?: string;
+  /** Which nav link to bracket — a section, not necessarily this page's URL. */
+  currentPath: string;
 }
 
 const {
   title,
   description = "A small studio building joyful, personal software.",
-  currentPath = Astro.url.pathname,
+  currentPath,
 } = Astro.props;
 
 /* Unfurlers need absolute URLs, so both are resolved against `site` from

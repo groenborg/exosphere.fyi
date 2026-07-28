@@ -1,10 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { isPublished } from "../../lib/content";
 
-const all = await getCollection("made", ({ data }) =>
-  import.meta.env.PROD ? data.draft !== true : true
-);
+const all = await getCollection("made", isPublished);
 
 const sorted = all.sort((a, b) => {
   const ao = a.data.order ?? Number.POSITIVE_INFINITY;
@@ -13,24 +12,18 @@ const sorted = all.sort((a, b) => {
   return a.data.name.localeCompare(b.data.name);
 });
 
-const typeLabel = (t: string) => {
-  switch (t) {
-    case "oss":
-      return "Open source";
-    case "tool":
-      return "Tool";
-    case "experiment":
-      return "Experiment";
-    default:
-      return "Product";
-  }
-};
+const TYPE_LABELS = {
+  oss: "Open source",
+  product: "Product",
+  tool: "Tool",
+  experiment: "Experiment",
+} as const;
 
 const isExternal = (u: string) => /^https?:\/\//i.test(u);
 
 /** Everything the cards used to carry in chips and badges, on one line. */
 const metaFor = (data: (typeof sorted)[number]["data"]) => [
-  typeLabel(data.type),
+  TYPE_LABELS[data.type],
   ...(data.year ? [String(data.year)] : []),
   ...data.tags,
 ];
