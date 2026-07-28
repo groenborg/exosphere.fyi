@@ -4,6 +4,4 @@ interface Props {
 }
 const { class: className } = Astro.props;
 ---
-<span class={`nav__brand-mark ${className ?? ''}`.trim()} aria-hidden="true">
-  <img src="/logo-64.png" alt="" width="64" height="64" decoding="async" />
-</span>
+<span class={`nav__brand-mark ${className ?? ''}`.trim()} aria-hidden="true"></span>
