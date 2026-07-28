@@ -4,16 +4,45 @@ interface Props {
   num: string;
   title: string;
   href: string;
+  /** One-line summary, revealed inline when the signal is opened. */
+  description?: string;
+  /** Label for the onward link inside the open panel. */
+  linkLabel?: string;
+  /** Name shared by every signal so only one stays open at a time. */
+  group?: string;
 }
-const { num, title, href } = Astro.props;
+const {
+  num,
+  title,
+  href,
+  description,
+  linkLabel = "Read in full",
+  group = "signal",
+} = Astro.props;
+
 ---
 <section class="signal">
-  <header class="signal__header">
-    <a href={href} aria-label={`Signal ${num}. ${title}`}>
-      <dl>
-        <dt>{num}.</dt>
-        <dd>{title}</dd>
-      </dl>
-    </a>
-  </header>
+  {description ? (
+    <details class="signal__disclosure" name={group}>
+      <summary class="signal__header">
+        <span class="signal__num">{num}.</span>
+        <span class="signal__title">{title}</span>
+      </summary>
+      <div class="signal__panel">
+        <div class="signal__panel-body">
+          <p>{description}</p>
+          <ul class="links">
+            <li><a href={href}>{`${linkLabel} →`}</a></li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  ) : (
+    <div class="signal__header">
+      <a class="signal__link" href={href} aria-label={`Signal ${num}. ${title}`}>
+        <span class="signal__num">{num}.</span>
+        <span class="signal__title">{title}</span>
+      </a>
+    </div>
+  )}
 </section>

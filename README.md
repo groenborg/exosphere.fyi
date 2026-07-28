@@ -72,7 +72,7 @@ needs new CSS:
 
 - **`.page`** — a `.page__headline` (optional `h6` label, `h1`, lede) followed
   by either a `.page__body` of prose or a `.list`.
-- **`.list`** — stacked entries behind `/made`, `/craft` and `/transmissions`:
+- **`.list`** — stacked entries behind `/made` and `/transmissions`:
   a meta line, a big linked title, a paragraph.
 - **`.meta`** and **`.links`** — a dimmed line of facts (dates, tags, counts)
   and a row of onward links. Both size themselves relative to whatever
@@ -86,8 +86,14 @@ A numbered catalogue of the studio's values, and nothing else.
   reads `src/content/craft/`, sorts by the `order` frontmatter, and numbers the
   entries `01`, `02`, … Add or reorder a Craft entry and the landing page
   renumbers itself. `00. Start here` is the one hard-coded signal (→ `/about`).
-- Each row links to the full essay at `/craft/<slug>`.
-- Hovering (or tabbing to) one signal dims all the others.
+- Each row is a disclosure: click (or tab to and press Enter on) a signal and
+  its description unfolds in place, with a `Read in full →` link on to the
+  essay at `/craft/<slug>`. Only one signal is open at a time — the `<details>`
+  elements share a `name`, so the browser closes the last one for us. No JS.
+- Hovering (or tabbing to) one signal dims all the others; an open one stays
+  lit.
+- The open panel animates via `::details-content` + `interpolate-size`, and
+  simply snaps open where that isn't supported.
 
 ### Made
 
@@ -102,9 +108,10 @@ thing itself.
 
 ### Craft
 
-`/craft` lists the same essays as the landing page, with their descriptions,
-and `/craft/<slug>` renders one. Numbering is derived from the collection's
-`order` frontmatter in both places, so the signal numbers always agree.
+The Craft collection has no index of its own — the landing page *is* the index,
+so `/craft/<slug>` just renders one essay. Numbering is derived from the
+collection's `order` frontmatter in both places, so the signal numbers always
+agree, and each essay links back to `/` ("All signals") plus its neighbours.
 
 ## ✉️ Writing a Transmission
 

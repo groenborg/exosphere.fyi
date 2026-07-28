@@ -272,9 +272,19 @@
   text-decoration: underline;
 }
 
-/* The page itself says where you are. */
-.nav__links a[aria-current="page"] {
-  text-decoration: underline;
+/* The page itself says where you are — bracketed, never underlined. */
+.nav__links a[aria-current="page"],
+.nav__links a[aria-current="page"]:hover,
+.nav__links a[aria-current="page"]:focus {
+  text-decoration: none;
+}
+
+.nav__links a[aria-current="page"]::before {
+  content: "[";
+}
+
+.nav__links a[aria-current="page"]::after {
+  content: "]";
 }
 
 /* ============================================================

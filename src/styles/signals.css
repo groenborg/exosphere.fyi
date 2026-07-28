@@ -4,7 +4,19 @@
    A catalogue of values as one big typographic list. Nothing
    else: no hero, no cards, no calls to action. The list is the
    page.
+
+   Each signal is a disclosure: click the line and its
+   description unfolds in place, with a link on to the essay.
+   Only one is open at a time (the shared `name` on <details>).
    ============================================================ */
+
+/* Lets the open/close animation below interpolate to and from
+   `auto` height. Ignored where unsupported — it just snaps. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
 
 /* ── The cluster ─────────────────────────────────────────────
    Generous air above and below so the list floats rather than
@@ -24,33 +36,101 @@
   color: rgb(var(--rgb-white));
 }
 
-.signal__header dl {
+.signal__header {
   display: flex;
   padding: 0.15em 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.signal__header dt {
+/* No triangle, no disclosure furniture — the type is the control. */
+.signal__header::marker,
+.signal__header::-webkit-details-marker {
+  display: none;
+  content: "";
+}
+
+.signal__header:focus-visible {
+  outline: 2px solid rgb(var(--rgb-white));
+  outline-offset: 0.1em;
+}
+
+.signal__num {
   flex: none;
   width: 2.8ch;
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
 }
 
-.signal__header dd {
+.signal__title {
   width: calc(100% - 2.8ch);
   text-wrap: pretty;
 }
 
-.signal__header a {
-  display: block;
+/* The one signal that navigates instead of unfolding (`00`). */
+.signal__link {
+  display: flex;
+  width: 100%;
+  color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease;
+}
+
+/* ── The open panel ──────────────────────────────────────────
+   The outer element still runs at signal size, so its 2.8ch
+   indent lines the text up under the title; the inner one drops
+   to reading size.                                              */
+
+.signal__panel {
+  padding-left: 2.8ch;
+}
+
+.signal__panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  max-width: 60ch;
+  padding: 0.3em 0 1.3em;
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+/* Unfold rather than jump, where the browser can animate it. */
+@supports selector(::details-content) {
+  .signal__disclosure::details-content {
+    block-size: 0;
+    overflow: clip;
+    opacity: 0;
+    transition:
+      block-size 0.3s ease,
+      opacity 0.3s ease,
+      content-visibility 0.3s allow-discrete;
+  }
+
+  .signal__disclosure[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* ── Attention ───────────────────────────────────────────────
+   Open one signal and the rest recede, so the thing you asked
+   for is the only thing at full strength.                       */
+
+.cluster--index:has(.signal__disclosure[open]) .signal__header {
+  color: rgba(var(--rgb-white), var(--dim));
+}
+
+.cluster--index .signal__disclosure[open] > .signal__header {
+  color: rgb(var(--rgb-white));
 }
 
 /* ── Desktop ─────────────────────────────────────────────────
    Bigger type, tighter leading, and the hover behaviour that
    makes the reference sing: point at one signal and every other
-   one recedes.                                                  */
+   one recedes. An open signal stays lit.                        */
 
 @media (min-width: 64em) and (hover: hover) and (pointer: fine) {
   .cluster {
@@ -58,18 +138,28 @@
     margin-bottom: 44.4vh;
   }
 
-  .signal__header dl {
+  .signal__header {
     padding: 0;
   }
 
-  .cluster--index:hover .signal__header a:not(:hover),
-  .cluster--index:focus-within .signal__header a:not(:focus) {
+  .cluster--index:hover .signal__header:not(:hover),
+  .cluster--index:focus-within .signal__header:not(:focus-visible) {
     color: rgba(var(--rgb-white), var(--dim));
+  }
+
+  .cluster--index .signal__disclosure[open] > .signal__header {
+    color: rgb(var(--rgb-white));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .signal__header a {
+  .signal__header {
     transition: none;
+  }
+
+  @supports selector(::details-content) {
+    .signal__disclosure::details-content {
+      transition: none;
+    }
   }
 }

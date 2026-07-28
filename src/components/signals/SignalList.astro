@@ -9,6 +9,9 @@ import Signal from "./Signal.astro";
  * by their `order` frontmatter — add or reorder a Craft entry and this list
  * renumbers itself. `00` is the standing invitation, everything after it is an
  * essay.
+ *
+ * Clicking a signal opens it in place: the description unfolds under the
+ * title, with a link on to the essay itself. Only one stays open at a time.
  */
 const craft = await getCollection("craft", ({ data }) =>
   import.meta.env.PROD ? data.draft !== true : true
@@ -17,16 +20,31 @@ const craft = await getCollection("craft", ({ data }) =>
 const sorted = craft.sort((a, b) => a.data.order - b.data.order);
 
 const signals = [
-  { num: "00", title: "Start here", href: "/about" },
+  {
+    num: "00",
+    title: "Start here",
+    href: "/about",
+    description:
+      "Who we are, what the studio is for, and how to get hold of us.",
+    linkLabel: "About the studio",
+  },
   ...sorted.map((entry, i) => ({
     num: String(i + 1).padStart(2, "0"),
     title: entry.data.title,
     href: `/craft/${entry.id}`,
+    description: entry.data.description,
+    linkLabel: "Read in full",
   })),
 ];
 ---
 <div class="cluster cluster--index">
   {signals.map((signal) => (
-    <Signal num={signal.num} title={signal.title} href={signal.href} />
+    <Signal
+      num={signal.num}
+      title={signal.title}
+      href={signal.href}
+      description={signal.description}
+      linkLabel={signal.linkLabel}
+    />
   ))}
 </div>
