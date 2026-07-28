@@ -1,13 +1,57 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AboutHero from "../components/about/AboutHero.astro";
-import Mission from "../components/about/Mission.astro";
+
+const stats = [
+  "12+ years orbiting",
+  "140 shipped projects",
+  "8 humans on board",
+  "1 mantra",
+];
 ---
 <BaseLayout
   title="Exosphere — About"
   description="A small studio building joyful software."
   currentPath="/about"
 >
-  <AboutHero />
-  <Mission />
+  <section class="page">
+    <div class="page__headline">
+      <h6>About · 2014 → now</h6>
+      <h1>A small studio orbiting fun since 2014.</h1>
+      <p>
+        Exosphere started as a side project between three friends and turned
+        into a twelve-year career. We design and build software for people who
+        still expect a little magic when they open a screen.
+      </p>
+    </div>
+
+    <div class="page__body prose">
+      <ul class="meta">
+        {stats.map((stat) => <li>{stat}</li>)}
+      </ul>
+
+      <h2>Our mission</h2>
+      <p>
+        We focus on building <strong>fun, personal and exciting</strong> software,
+        backed by many years of experience in automation, design, and a steady
+        drive for joyful experiences.
+      </p>
+      <p>
+        Software exists to put <strong>smiles on people's faces</strong>. That's
+        the only brief we never compromise on.
+      </p>
+
+      <h2>How we work</h2>
+      <p>
+        Fourteen signals hold the whole thing together — what we believe about
+        time, meetings, plain language, and shipping software cheap enough to
+        keep. They're the closest thing we have to a process.
+      </p>
+
+      <ul class="links">
+        <li><a href="/">Read the signals</a></li>
+        <li><a href="/made">See what we've made</a></li>
+        <li><a href="mailto:hello@exosphere.studio">Start a conversation</a></li>
+      </ul>
+    </div>
+  </section>
 </BaseLayout>

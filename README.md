@@ -37,25 +37,74 @@ All commands are run from the root of the project, from a terminal:
 
 - **Astro**: For building fast content sites.
 - **MDX**: For long-form posts in `src/content/transmissions/`.
-- **Vanilla CSS**: Used for styling with tokens, components, and base styles.
+- **Vanilla CSS**: Used for styling with tokens, base, layout, and page styles.
 - **TypeScript**: Typed JavaScript for better development experience.
 
-## 📡 The Signals landing page
+## 📡 The design
 
-The landing page (`/`) is a numbered catalogue of the studio's values — one
-flat, saturated colour and nothing but a list of type.
+Every page shares one treatment: a single flat, saturated colour, white type,
+and a header and footer that fade out of the ground rather than sitting on
+bars. No surfaces, no borders, no cards, one typeface.
+
+- The hue is picked per page load from `src/data/signal-themes.ts` by a small
+  inline script in `BaseLayout.astro`, before first paint, never repeating the
+  previous load in the session. With JS off it stays black.
+- **One type scale** drives everything. `--font-size` sets the body size and
+  every other size is a percentage of it (`--font-size-small`,
+  `--font-size-xxx-large`, …), while spacing is expressed in `em` and
+  `--line-height`. Both shift at the one breakpoint (`64em`, hover-capable
+  pointers), so the whole site rescales from a handful of values in
+  `tokens.css`.
+
+### Stylesheets
+
+| File          | Holds                                                        |
+| :------------ | :----------------------------------------------------------- |
+| `tokens.css`  | The scale, the colours, the fonts                            |
+| `base.css`    | Reset and element defaults                                   |
+| `layout.css`  | `.page` chrome, header, footer, and the shared primitives     |
+| `prose.css`   | `.prose` — the body of an essay or transmission (MDX output) |
+| `signals.css` | The landing list                                             |
+| `made.css`    | The optional image column on `/made`                         |
+
+Three primitives in `layout.css` cover nearly every page, so a new one rarely
+needs new CSS:
+
+- **`.page`** — a `.page__headline` (optional `h6` label, `h1`, lede) followed
+  by either a `.page__body` of prose or a `.list`.
+- **`.list`** — stacked entries behind `/made`, `/craft` and `/transmissions`:
+  a meta line, a big linked title, a paragraph.
+- **`.meta`** and **`.links`** — a dimmed line of facts (dates, tags, counts)
+  and a row of onward links. Both size themselves relative to whatever
+  container they sit in.
+
+### The landing page — Signals
+
+A numbered catalogue of the studio's values, and nothing else.
 
 - It is generated from the **Craft** collection: `src/components/signals/SignalList.astro`
   reads `src/content/craft/`, sorts by the `order` frontmatter, and numbers the
   entries `01`, `02`, … Add or reorder a Craft entry and the landing page
   renumbers itself. `00. Start here` is the one hard-coded signal (→ `/about`).
 - Each row links to the full essay at `/craft/<slug>`.
-- The background hue is picked per page load from `src/data/signal-themes.ts` by
-  a small inline script in `BaseLayout.astro`, before first paint, never
-  repeating the previous load in the session. With JS off it stays black.
-- Styles live in `src/styles/signals.css`, scoped entirely under
-  `.signals-page`. The starfield canvas and the standard footer are swapped out
-  via `variant="signals"` on `BaseLayout`.
+- Hovering (or tabbing to) one signal dims all the others.
+
+### Made
+
+`/made` is a stacked list rather than a grid: a dimmed meta line (type, year,
+stack), the project name, a paragraph, and a row of links straight out to the
+thing itself.
+
+- Add `image: "/images/…"` to an entry in `src/content/made/` and it renders
+  beside the text on wide screens, above it on narrow ones. Entries without an
+  image are pure type — no placeholder art.
+- `repo:` adds a "Read the source" link when it differs from `url:`.
+
+### Craft
+
+`/craft` lists the same essays as the landing page, with their descriptions,
+and `/craft/<slug>` renders one. Numbering is derived from the collection's
+`order` frontmatter in both places, so the signal numbers always agree.
 
 ## ✉️ Writing a Transmission
 

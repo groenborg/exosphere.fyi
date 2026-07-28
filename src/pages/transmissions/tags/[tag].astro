@@ -1,8 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import Eyebrow from "../../../components/Eyebrow.astro";
-import TransmissionCard from "../../../components/transmissions/TransmissionCard.astro";
+import TransmissionList from "../../../components/transmissions/TransmissionList.astro";
 
 export async function getStaticPaths() {
   const all = await getCollection("transmissions", ({ data }) =>
@@ -24,10 +23,14 @@ export async function getStaticPaths() {
 
 const { tag, posts } = Astro.props;
 
-const enriched = await Promise.all(
+const items = await Promise.all(
   posts.map(async (entry) => {
     const { remarkPluginFrontmatter } = await render(entry);
-    return { entry, minutesRead: remarkPluginFrontmatter?.minutesRead as string | undefined };
+    return {
+      id: entry.id,
+      ...entry.data,
+      minutesRead: remarkPluginFrontmatter?.minutesRead as string | undefined,
+    };
   })
 );
 ---
@@ -36,35 +39,16 @@ const enriched = await Promise.all(
   description={`Transmissions on the topic of ${tag}.`}
   currentPath="/transmissions"
 >
-  <section class="tx-list-hero">
-    <div class="wrap">
-      <Eyebrow>{`Tag · ${tag} · ${posts.length} ${posts.length === 1 ? 'post' : 'posts'}`}</Eyebrow>
-      <h1 class="tx-list-hero__title">
-        On <em>{tag}</em>.
-      </h1>
-      <p class="tx-list-hero__lede">
-        <a href="/transmissions/tags" style="color:var(--accent)">← All tags</a>
-      </p>
+  <section class="page">
+    <div class="page__headline">
+      <h6>{`Tag · ${items.length} ${items.length === 1 ? "post" : "posts"}`}</h6>
+      <h1>On {tag}.</h1>
+      <ul class="links">
+        <li><a href="/transmissions/tags">All tags</a></li>
+        <li><a href="/transmissions">All transmissions</a></li>
+      </ul>
     </div>
-  </section>
 
-  <section>
-    <div class="wrap">
-      <div class="tx-list">
-        {enriched.map(({ entry, minutesRead }) => (
-          <TransmissionCard
-            href={`/transmissions/${entry.id}`}
-            title={entry.data.title}
-            description={entry.data.description}
-            pubDate={entry.data.pubDate}
-            author={entry.data.author}
-            tags={entry.data.tags}
-            minutesRead={minutesRead}
-            draft={entry.data.draft}
-            heroImage={entry.data.heroImage}
-          />
-        ))}
-      </div>
-    </div>
+    <TransmissionList items={items} empty={`Nothing tagged ${tag} yet.`} />
   </section>
 </BaseLayout>

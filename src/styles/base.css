@@ -1,34 +1,115 @@
 /* ============================================================
-   EXOSPHERE — base reset + sky effect layer
+   EXOSPHERE — reset + element defaults
+
+   White type on a flat, saturated ground. Links are bold and
+   underlined by default; the chrome opts out where it needs to.
    ============================================================ */
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  /* Clears the fixed header when jumping to an anchor. */
+  scroll-padding-top: calc(var(--font-size) * 7.4);
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  background: rgb(var(--rgb-theme));
 }
 
 body {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  color: rgba(var(--rgb-white), 0.85);
+  font-family: var(--font-sans);
+  font-size: var(--font-size);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+main {
   position: relative;
+  flex: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: rgb(var(--rgb-white));
+  font-size: inherit;
+  font-weight: 700;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: rgb(var(--rgb-white));
+  font-weight: 700;
+  letter-spacing: normal;
+  text-decoration: underline;
+  text-decoration-thickness: 0.085em;
+  text-underline-offset: 0.0875em;
 }
+
+/* The browser default ring is off-palette on a saturated ground. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgb(var(--rgb-white));
+  outline-offset: 0.1em;
+}
+
+strong,
+b {
+  color: rgb(var(--rgb-white));
+  font-weight: 700;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+img,
+video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -38,24 +119,12 @@ button {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
+  background: rgba(var(--rgb-white), 0.15);
+  color: rgb(var(--rgb-white));
 }
 
-/* ============================================================
-   EFFECTS LAYER  (canvas behind everything)
-   ============================================================ */
-
-#sky {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-main,
-header,
-footer {
-  position: relative;
-  z-index: 2;
+@media (min-width: 64em) and (hover: hover) and (pointer: fine) {
+  html {
+    scroll-padding-top: 22.2vh;
+  }
 }

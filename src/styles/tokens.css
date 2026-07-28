@@ -1,22 +1,43 @@
 /* ============================================================
    EXOSPHERE — design tokens
+
+   One ground colour, one typeface, one type scale. Sizes are
+   percentages of the body size and lengths are in em, so every
+   value stays relative to whatever context it lands in — move
+   --font-size and the whole page moves with it.
    ============================================================ */
 
 :root {
   /* type */
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Lora", Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* background + foreground */
-  --bg: oklch(0 0 0);
-  --bg-2: oklch(0.17 0.03 265);
-  --surface: oklch(0.2 0.035 265 / 0.55);
-  --hairline: oklch(0.85 0.03 265 / 0.16);
-  --fg: oklch(0.96 0.01 265);
-  --fg-2: oklch(0.78 0.02 265);
-  --fg-3: oklch(0.58 0.02 265);
-  --accent: rgb(235, 238, 242);
-  --accent-2: oklch(0.72 0.18 305);
-  --star: 255, 255, 255;
+  /* colour — the ground is set before first paint by the inline
+     script in BaseLayout. Black is the no-JS fallback. */
+  --rgb-theme: 0, 0, 0;
+  --rgb-white: 255, 255, 255;
+
+  /* how far secondary text recedes */
+  --dim: 0.4375;
+
+  --font-size: calc(1em + 1vw);
+  --font-size-small: 80%;
+  --font-size-large: 105%;
+  --font-size-x-large: 110%;
+  --font-size-xxx-large: 125%;
+
+  --line-height: calc(1.3em + 1vw);
+  --spacing: 0.75em;
+}
+
+@media (min-width: 64em) and (hover: hover) and (pointer: fine) {
+  :root {
+    --font-size: calc(1.25em + 1vw);
+    --font-size-small: 65%;
+    --font-size-large: 110%;
+    --font-size-x-large: 120%;
+    --font-size-xxx-large: 150%;
+
+    --line-height: 1.3em;
+  }
 }

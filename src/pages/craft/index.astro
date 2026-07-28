@@ -1,8 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Eyebrow from "../../components/Eyebrow.astro";
-import { toRoman } from "../../lib/roman";
 
 const all = await getCollection("craft", ({ data }) =>
   import.meta.env.PROD ? data.draft !== true : true
@@ -15,39 +13,31 @@ const sorted = all.sort((a, b) => a.data.order - b.data.order);
   description="How we build, what we believe, and why. A small set of essays on the craft of a joyful software studio."
   currentPath="/craft"
 >
-  <section class="cr-hero">
-    <div class="wrap">
-      <Eyebrow>{`Craft · ${sorted.length} ${sorted.length === 1 ? 'entry' : 'entries'}`}</Eyebrow>
-      <h1 class="cr-hero__title">
-        How we build, <em>and why</em>.
-      </h1>
-      <p class="cr-hero__lede">
-        A small set of essays on the craft of a joyful software studio —
-        values, working habits, opinions strong enough to act on. Best read
-        in order, but each piece stands alone.
+  <section class="page">
+    <div class="page__headline">
+      <h6>{`Craft · ${sorted.length} ${sorted.length === 1 ? "entry" : "entries"}`}</h6>
+      <h1>How we build, and why.</h1>
+      <p>
+        The signals in full — values, working habits, and opinions strong
+        enough to act on. Best read in order, but each one stands alone.
       </p>
     </div>
-  </section>
 
-  <section>
-    <div class="wrap">
-      <ol class="cr-toc">
+    <div class="list">
+      <ol class="list__container">
         {sorted.length === 0 && (
-          <li class="cr-toc__empty">No entries yet — check back soon.</li>
+          <li class="list__empty">No entries yet — check back soon.</li>
         )}
         {sorted.map((entry, i) => (
-          <li class="cr-toc__item">
-            <a class="cr-toc__link" href={`/craft/${entry.id}`}>
-              <span class="cr-toc__num">{toRoman(i + 1)}</span>
-              <span class="cr-toc__body">
-                <span class="cr-toc__title">
-                  {entry.data.title}
-                  {entry.data.draft && <span class="cr-toc__draft">Draft</span>}
-                </span>
-                <span class="cr-toc__desc">{entry.data.description}</span>
-              </span>
-              <span class="cr-toc__arrow" aria-hidden="true">→</span>
-            </a>
+          <li class="list__item">
+            <ul class="meta">
+              <li>{`Signal ${String(i + 1).padStart(2, "0")}`}</li>
+              {entry.data.draft && <li>Draft</li>}
+            </ul>
+            <h2 class="list__title">
+              <a href={`/craft/${entry.id}`}>{entry.data.title}</a>
+            </h2>
+            <p>{entry.data.description}</p>
           </li>
         ))}
       </ol>

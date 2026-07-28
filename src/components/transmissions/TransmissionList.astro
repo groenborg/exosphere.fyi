@@ -1,0 +1,43 @@
+---
+interface Item {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+  minutesRead?: string;
+  draft?: boolean;
+}
+
+interface Props {
+  items: Item[];
+  /** Shown when there's nothing to list. */
+  empty?: string;
+}
+
+const { items, empty = "No transmissions yet — check back soon." } = Astro.props;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+---
+<div class="list">
+  <div class="list__container">
+    {items.length === 0 && <p class="list__empty">{empty}</p>}
+    {items.map((item) => (
+      <article class="list__item">
+        <ul class="meta">
+          <li><time datetime={item.pubDate.toISOString()}>{fmt(item.pubDate)}</time></li>
+          {item.minutesRead && <li>{item.minutesRead}</li>}
+          {item.draft && <li>Draft</li>}
+          {item.tags.map((tag) => (
+            <li><a href={`/transmissions/tags/${tag}`}>{tag}</a></li>
+          ))}
+        </ul>
+        <h2 class="list__title">
+          <a href={`/transmissions/${item.id}`}>{item.title}</a>
+        </h2>
+        <p>{item.description}</p>
+      </article>
+    ))}
+  </div>
+</div>

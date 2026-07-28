@@ -1,16 +1,13 @@
 ---
-import Sky from "../components/Sky.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 
 import "../styles/tokens.css";
 import "../styles/base.css";
-import "../styles/components.css";
-import "../styles/transmissions.css";
-import "../styles/craft.css";
-import "../styles/made.css";
+import "../styles/layout.css";
 import "../styles/prose.css";
 import "../styles/signals.css";
+import "../styles/made.css";
 
 import { signalThemes } from "../data/signal-themes";
 
@@ -18,25 +15,20 @@ interface Props {
   title: string;
   description?: string;
   currentPath?: string;
-  /** "signals" strips the site chrome back for the landing page. */
-  variant?: "default" | "signals";
 }
 
 const {
   title,
   description = "A small studio building joyful, personal software.",
   currentPath = Astro.url.pathname,
-  variant = "default",
 } = Astro.props;
 
-const isSignals = variant === "signals";
-
-/* Picked before first paint so there's no flash of the fallback colour.
-   Never repeats the previous load within a session. */
+/* The ground colour is picked before first paint so there's no flash of the
+   fallback, and never repeats the previous load within a session. */
 const themeScript = `(function(){var p=${JSON.stringify(signalThemes)};try{var l=sessionStorage.getItem('signal-theme');var o=p.filter(function(c){return c!==l});if(!o.length)o=p;var c=o[Math.floor(Math.random()*o.length)];sessionStorage.setItem('signal-theme',c);document.documentElement.style.setProperty('--rgb-theme',c)}catch(e){}})();`;
 ---
 <!doctype html>
-<html lang="en" class={isSignals ? "signals-page" : undefined}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -47,17 +39,16 @@ const themeScript = `(function(){var p=${JSON.stringify(signalThemes)};try{var l
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    {isSignals && <script is:inline set:html={themeScript} />}
+    <script is:inline set:html={themeScript} />
   </head>
   <body>
-    {!isSignals && <Sky />}
     <Nav currentPath={currentPath} />
     <main>
       <slot />
     </main>
-    <Footer variant={variant} />
+    <Footer />
   </body>
 </html>

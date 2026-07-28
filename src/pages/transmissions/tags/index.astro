@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import Eyebrow from "../../../components/Eyebrow.astro";
 
 const all = await getCollection("transmissions", ({ data }) =>
   import.meta.env.PROD ? data.draft !== true : true
@@ -22,29 +21,29 @@ const tags = Array.from(counts.entries())
   description="Browse Transmissions by topic."
   currentPath="/transmissions"
 >
-  <section class="tx-list-hero">
-    <div class="wrap">
-      <Eyebrow>Transmissions · Tags</Eyebrow>
-      <h1 class="tx-list-hero__title">Browse by <em>topic</em>.</h1>
-      <p class="tx-list-hero__lede">
-        <a href="/transmissions" style="color:var(--accent)">← All transmissions</a>
-      </p>
+  <section class="page">
+    <div class="page__headline">
+      <h6>Transmissions · Tags</h6>
+      <h1>Browse by topic.</h1>
+      <p>Every topic in the archive, most written about first.</p>
     </div>
-  </section>
 
-  <section>
-    <div class="wrap">
-      <div class="tx-tags">
-        {tags.length === 0 && (
-          <div class="tx-list__empty">No tags yet.</div>
-        )}
-        {tags.map(({ tag, count }) => (
-          <a class="tx-tags__chip" href={`/transmissions/tags/${tag}`}>
-            {tag}
-            <span class="tx-tags__chip-count">{count}</span>
-          </a>
-        ))}
-      </div>
+    <div class="page__body">
+      {tags.length === 0 ? (
+        <p class="list__empty">No tags yet.</p>
+      ) : (
+        <ul class="links">
+          {tags.map(({ tag, count }) => (
+            <li>
+              <a href={`/transmissions/tags/${tag}`}>{tag}</a> <small>{count}</small>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <ul class="links">
+        <li><a href="/transmissions">All transmissions</a></li>
+      </ul>
     </div>
   </section>
 </BaseLayout>
