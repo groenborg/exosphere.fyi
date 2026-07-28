@@ -88,6 +88,30 @@
   text-wrap: pretty;
 }
 
+/* ── The onward link ────────────────────────────────────────
+   No label — one long arrow does the asking. Under the pointer it
+   slides on to the right, in the direction it's already pointing.
+   The padding gives it a hit area larger than the hairline itself. */
+
+.objective__more {
+  align-self: start;
+  display: inline-flex;
+  padding: 0.5em 0.8em 0.5em 0;
+  text-decoration: none;
+}
+
+.objective__arrow {
+  width: 3.6em;
+  height: 0.72em;
+  overflow: visible;
+  transition: transform 0.25s ease;
+}
+
+.objective__more:hover .objective__arrow,
+.objective__more:focus-visible .objective__arrow {
+  transform: translateX(0.4em);
+}
+
 /* Unfold rather than jump, where the browser can animate it. */
 @supports selector(::details-content) {
   .objective::details-content {
@@ -144,7 +168,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .objective__header {
+  .objective__header,
+  .objective__arrow {
     transition: none;
   }
 

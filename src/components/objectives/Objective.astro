@@ -6,10 +6,8 @@ interface Props {
   href: string;
   /** One-line summary, revealed inline when the objective is opened. */
   description: string;
-  /** Label for the onward link inside the open panel. */
-  linkLabel?: string;
 }
-const { num, title, href, description, linkLabel = "Read in full" } = Astro.props;
+const { num, title, href, description } = Astro.props;
 
 /* Every objective carries the same `name`, so the browser closes the last-open
    one for us — only one is ever unfolded, and no JS is involved. */
@@ -23,9 +21,20 @@ const group = "objective";
   <div class="objective__panel">
     <div class="objective__panel-body">
       <p>{description}</p>
-      <ul class="links">
-        <li><a href={href}>{`${linkLabel} →`}</a></li>
-      </ul>
+      {/* No label: the arrow is the whole invitation, so the accessible name
+          has to carry the destination. */}
+      <a class="objective__more" href={href} aria-label={`Read ${title} in full`}>
+        <svg class="objective__arrow" viewBox="0 0 40 8" aria-hidden="true" focusable="false">
+          <path
+            d="M0.5 4H39M34 0.5 38.5 4 34 7.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
     </div>
   </div>
 </details>

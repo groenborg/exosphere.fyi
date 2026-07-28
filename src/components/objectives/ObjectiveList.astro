@@ -12,7 +12,7 @@ import Objective from "./Objective.astro";
  * essay.
  *
  * Clicking a objective opens it in place: the description unfolds under the
- * title, with a link on to the essay itself. Only one stays open at a time.
+ * title, with an arrow on to the essay itself. Only one stays open at a time.
  */
 const craft = await getCollection("craft", isPublished);
 const sorted = craft.sort(byOrder);
@@ -23,7 +23,6 @@ const objectives = [
     title: "Start here",
     href: "/about",
     description: "Who we are, what the studio is for, and how to get hold of us.",
-    linkLabel: "About the studio",
   },
   ...sorted.map((entry, i) => ({
     num: String(i + 1).padStart(2, "0"),
