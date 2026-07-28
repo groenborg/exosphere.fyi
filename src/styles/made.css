@@ -29,6 +29,29 @@
   display: block;
 }
 
+/* Previews come from each project's own OG image (or a screenshot of
+   the site where there isn't one), so they arrive at slightly
+   different ratios. One ratio, cropped from the centre, keeps the
+   list from going ragged. */
+.made__wrap figure img {
+  aspect-ratio: 1.9 / 1;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.made__wrap figure a:hover img,
+.made__wrap figure a:focus-visible img {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .made__wrap figure img {
+    transition: none;
+  }
+}
+
 @media (min-width: 64em) and (hover: hover) and (pointer: fine) {
   .made__wrap {
     flex-direction: row;

@@ -66,8 +66,15 @@ const metaFor = (data: (typeof sorted)[number]["data"]) => [
               <div class="made__wrap">
                 {image && (
                   <figure>
-                    <a href={url} {...out}>
-                      <img src={image} alt={name} />
+                    <a href={url} {...out} tabindex="-1" aria-hidden="true">
+                      <img
+                        src={image}
+                        alt=""
+                        width="800"
+                        height="421"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </a>
                   </figure>
                 )}

@@ -106,6 +106,12 @@ thing itself.
 - Add `image: "/images/…"` to an entry in `src/content/made/` and it renders
   beside the text on wide screens, above it on narrow ones. Entries without an
   image are pure type — no placeholder art.
+- Those previews live in `public/images/made/` and are each project's own
+  `og:image` where it has one, or a headless-Chrome screenshot of the site
+  where it doesn't (Marginalia). Keep them ~800px wide, JPEG unless the art is
+  flat, and roughly 1.9:1 — `made.css` crops whatever arrives to that ratio so
+  the column stays even. The thumbnail link is `aria-hidden` with an empty
+  `alt`: it repeats the title link, and a screenshot says nothing out loud.
 - `repo:` adds a "Read the source" link when it differs from `url:`.
 
 ### Craft
