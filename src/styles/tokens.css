@@ -14,9 +14,12 @@
   --font-chrome: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* colour — the ground is set before first paint by the inline
-     script in BaseLayout. Black is the no-JS fallback. */
-  --rgb-theme: 0, 0, 0;
+  /* colour — the ground is a mesh gradient (styles/mesh.css), cut
+     out of --rgb-ground. --rgb-theme is that mesh's tint hue, set
+     before first paint by the inline script in BaseLayout, and is
+     what accents borrow so they rotate with the ground. */
+  --rgb-ground: 0, 0, 0;
+  --rgb-theme: 28, 96, 224;
   --rgb-white: 255, 255, 255;
 
   /* how far secondary text recedes */

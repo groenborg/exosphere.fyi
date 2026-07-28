@@ -221,7 +221,7 @@
   width: 100%;
   padding: var(--spacing);
   font-family: var(--font-chrome);
-  background: linear-gradient(180deg, rgba(var(--rgb-theme), 1) 0, rgba(var(--rgb-theme), 0) 100%);
+  background: linear-gradient(180deg, rgba(var(--rgb-ground), 1) 0, rgba(var(--rgb-ground), 0) 100%);
   pointer-events: none;
 }
 
@@ -302,7 +302,7 @@ body::after {
   z-index: 3;
   width: 100%;
   height: calc(3.7em + var(--spacing));
-  background: linear-gradient(0deg, rgba(var(--rgb-theme), 1) 0, rgba(var(--rgb-theme), 0) 100%);
+  background: linear-gradient(0deg, rgba(var(--rgb-ground), 1) 0, rgba(var(--rgb-ground), 0) 100%);
   pointer-events: none;
 }
 

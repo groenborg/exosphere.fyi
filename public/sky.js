@@ -1,7 +1,7 @@
 // EXOSPHERE — sky canvas
 // Renders: parallax stars (4 depths), shooting stars.
 
-(function () {
+(() => {
   const canvas = document.getElementById("sky");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");

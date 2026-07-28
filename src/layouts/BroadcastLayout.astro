@@ -19,19 +19,16 @@ const fmt = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" });
 ---
 <BaseLayout title={`${title} — Broadcasts`} description={description} currentPath="/broadcasts">
-  <article class="page">
+  <article class="page broadcast">
+    {heroImage && (
+      <figure class="broadcast__hero">
+        <img src={heroImage} alt="" />
+      </figure>
+    )}
+
     <div class="page__headline">
       <h1>{title}</h1>
       <p>{description}</p>
-    </div>
-
-    <div class="page__body">
-      {heroImage && (
-        <figure class="page__hero">
-          <img src={heroImage} alt="" />
-        </figure>
-      )}
-
       <ul class="meta">
         <li>{author}</li>
         <li><time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time></li>
@@ -42,7 +39,9 @@ const fmt = (d: Date) =>
           <li><a href={`/broadcasts/tags/${tag}`}>{tag}</a></li>
         ))}
       </ul>
+    </div>
 
+    <div class="page__body">
       <div class="prose">
         <slot />
       </div>

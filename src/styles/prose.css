@@ -190,7 +190,7 @@
 .prose th,
 .prose td {
   padding: 0.8em 1em;
-  border: 2px solid rgb(var(--rgb-theme));
+  border: 2px solid rgb(var(--rgb-ground));
   font-size: 90%;
 }
 

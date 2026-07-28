@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!.astro/**", "!dist/**", "!**/package-lock.json"]
+    "includes": ["**", "!.astro", "!dist", "!**/package-lock.json"]
   },
   "formatter": {
     "enabled": true,

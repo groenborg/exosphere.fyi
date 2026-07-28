@@ -1,0 +1,74 @@
+/* ============================================================
+   BROADCAST — a single article, read down the middle
+
+   Everywhere else the studio hangs a page off the left edge. An
+   article is the one place that wants a classic centre: a wide
+   picture, a centred masthead, then one measure of prose. Only
+   the masthead is centre-aligned — the body keeps its left edge
+   so there's something to read down.
+   ============================================================ */
+
+.broadcast .page__headline,
+.broadcast .page__body {
+  margin-inline: auto;
+}
+
+.broadcast .page__headline {
+  align-items: center;
+  text-align: center;
+}
+
+/* Centred lines want balancing, not just a pretty last line. */
+.broadcast .page__headline h1 {
+  text-wrap: balance;
+}
+
+/* The masthead runs at the body size, so .meta — which sizes as a
+   share of its container — has to be told the small size, exactly
+   as .page__headline .links is in layout.css. */
+.broadcast .page__headline .meta {
+  justify-content: center;
+  font-size: var(--font-size-small);
+}
+
+/* ── Hero ────────────────────────────────────────────────────
+   Above the title and wider than the prose, so it sits outside
+   .page__body. Wide enough to lead the page, short enough that
+   the title is still on screen under it. The measure below is
+   quoted in ch of the small size; this element runs at the body
+   size, hence the smaller number for the wider box.            */
+
+.broadcast__hero {
+  width: 100%;
+  max-width: 48ch;
+  margin-inline: auto;
+  /* The 3.7em layout.css puts above a body, converted: that rule
+     resolves against the small size, this element runs at the body
+     size. */
+  margin-bottom: 2.4em;
+}
+
+/* Heroes arrive at whatever ratio the artwork had. One ratio —
+   the same one /made crops its previews to — keeps the top of
+   every article the same shape, and reserves the space before
+   the image loads. */
+.broadcast__hero img {
+  aspect-ratio: 1.9 / 1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.3em;
+}
+
+@media (min-width: 64em) and (hover: hover) and (pointer: fine) {
+  /* The base rule's air is there to hold a bare headline. A picture
+     at the top doesn't need it — it only needs to clear the header. */
+  .broadcast {
+    margin-top: max(9vh, 3.4em);
+  }
+
+  /* Only once .links is a row — on a phone it's a bulleted column
+     and has to keep its left edge. */
+  .broadcast .links {
+    justify-content: center;
+  }
+}

@@ -17,11 +17,16 @@ html {
   scroll-padding-top: calc(var(--font-size) * 7.4);
 }
 
+/* The ground is the fixed .mesh layer, which sits at z-index -1 —
+   so body must stay transparent or it would paint over it. */
+html {
+  background: rgb(var(--rgb-ground));
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  background: rgb(var(--rgb-theme));
 }
 
 body {

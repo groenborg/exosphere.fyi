@@ -1,0 +1,103 @@
+- generic [active] [ref=f10e1]:
+  - banner:
+    - link "Exosphere" [ref=f10e2] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=f10e8]:
+      - link "[Mission]" [ref=f10e9] [cursor=pointer]:
+        - /url: /
+      - link "Made" [ref=f10e10] [cursor=pointer]:
+        - /url: /made
+      - link "Broadcasts" [ref=f10e11] [cursor=pointer]:
+        - /url: /broadcasts
+      - link "About" [ref=f10e12] [cursor=pointer]:
+        - /url: /about
+  - main [ref=f10e13]:
+    - generic [ref=f10e14]:
+      - group [ref=f10e16]:
+        - generic "00. Start here" [ref=f10e17] [cursor=pointer]:
+          - generic [ref=f10e18]: "00."
+          - generic [ref=f10e19]: Start here
+      - group [ref=f10e21]:
+        - generic "01. Time is not a renewable resource" [ref=f10e22] [cursor=pointer]:
+          - generic [ref=f10e23]: "01."
+          - generic [ref=f10e24]: Time is not a renewable resource
+      - group [ref=f10e26]:
+        - generic "02. The case for sweating details" [ref=f10e27] [cursor=pointer]:
+          - generic [ref=f10e28]: "02."
+          - generic [ref=f10e29]: The case for sweating details
+      - group [ref=f10e31]:
+        - generic "03. Humor is load-bearing" [ref=f10e32] [cursor=pointer]:
+          - generic [ref=f10e33]: "03."
+          - generic [ref=f10e34]: Humor is load-bearing
+      - group [ref=f10e36]:
+        - generic "04. Meetings, mostly no" [ref=f10e37] [cursor=pointer]:
+          - generic [ref=f10e38]: "04."
+          - generic [ref=f10e39]: Meetings, mostly no
+      - group [ref=f10e41]:
+        - generic "05. Plain language, plainly" [ref=f10e42] [cursor=pointer]:
+          - generic [ref=f10e43]: "05."
+          - generic [ref=f10e44]: Plain language, plainly
+      - group [ref=f10e46]:
+        - generic "06. The conditions for good work" [ref=f10e47] [cursor=pointer]:
+          - generic [ref=f10e48]: "06."
+          - generic [ref=f10e49]: The conditions for good work
+      - group [ref=f10e51]:
+        - generic "07. Software should be cheap" [ref=f10e52] [cursor=pointer]:
+          - generic [ref=f10e53]: "07."
+          - generic [ref=f10e54]: Software should be cheap
+      - group [ref=f10e56]:
+        - generic "08. Enhance, then disappear" [ref=f10e57] [cursor=pointer]:
+          - generic [ref=f10e58]: "08."
+          - generic [ref=f10e59]: Enhance, then disappear
+      - group [ref=f10e61]:
+        - generic "09. Off the feed" [ref=f10e62] [cursor=pointer]:
+          - generic [ref=f10e63]: "09."
+          - generic [ref=f10e64]: Off the feed
+      - group [ref=f10e66]:
+        - generic "10. Honest to a fault" [ref=f10e67] [cursor=pointer]:
+          - generic [ref=f10e68]: "10."
+          - generic [ref=f10e69]: Honest to a fault
+      - group [ref=f10e71]:
+        - generic "11. You are not special" [ref=f10e72] [cursor=pointer]:
+          - generic [ref=f10e73]: "11."
+          - generic [ref=f10e74]: You are not special
+      - group [ref=f10e76]:
+        - generic "12. In whom we trust" [ref=f10e77] [cursor=pointer]:
+          - generic [ref=f10e78]: "12."
+          - generic [ref=f10e79]: In whom we trust
+      - group [ref=f10e81]:
+        - generic "13. Joy is a deliverable" [ref=f10e82] [cursor=pointer]:
+          - generic [ref=f10e83]: "13."
+          - generic [ref=f10e84]: Joy is a deliverable
+      - group [ref=f10e86]:
+        - generic "14. Thirty years, summarized" [ref=f10e87] [cursor=pointer]:
+          - generic [ref=f10e88]: "14."
+          - generic [ref=f10e89]: Thirty years, summarized
+  - contentinfo [ref=f10e90]:
+    - generic [ref=f10e91]:
+      - list [ref=f10e92]:
+        - listitem [ref=f10e93]:
+          - link "Mission" [ref=f10e94] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f10e95]:
+          - link "Made" [ref=f10e96] [cursor=pointer]:
+            - /url: /made
+        - listitem [ref=f10e97]:
+          - link "Broadcasts" [ref=f10e98] [cursor=pointer]:
+            - /url: /broadcasts
+        - listitem [ref=f10e99]:
+          - link "About" [ref=f10e100] [cursor=pointer]:
+            - /url: /about
+      - list [ref=f10e101]:
+        - listitem [ref=f10e102]:
+          - link "hello@exosphere.studio" [ref=f10e103] [cursor=pointer]:
+            - /url: mailto:hello@exosphere.studio
+        - listitem [ref=f10e104]:
+          - link "RSS" [ref=f10e105] [cursor=pointer]:
+            - /url: /rss.xml
+        - listitem [ref=f10e106]: © 2026 Exosphere Studio
+  - generic [ref=f10e109]:
+    - button [ref=f10e110]
+    - button [ref=f10e116]
+    - button [ref=f10e120]
+    - button [ref=f10e125]

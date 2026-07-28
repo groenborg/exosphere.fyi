@@ -1,15 +1,17 @@
 ---
-import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
 
 import "../styles/tokens.css";
 import "../styles/base.css";
+import "../styles/mesh.css";
 import "../styles/layout.css";
 import "../styles/prose.css";
 import "../styles/objectives.css";
 import "../styles/made.css";
+import "../styles/broadcast.css";
 
-import { objectiveThemes } from "../data/objective-themes";
+import { meshScript } from "../lib/mesh-script";
 
 interface Props {
   title: string;
@@ -23,9 +25,6 @@ const {
   currentPath = Astro.url.pathname,
 } = Astro.props;
 
-/* The ground colour is picked before first paint so there's no flash of the
-   fallback, and never repeats the previous load within a session. */
-const themeScript = `(function(){var p=${JSON.stringify(objectiveThemes)};try{var l=sessionStorage.getItem('objective-theme');var o=p.filter(function(c){return c!==l});if(!o.length)o=p;var c=o[Math.floor(Math.random()*o.length)];sessionStorage.setItem('objective-theme',c);document.documentElement.style.setProperty('--rgb-theme',c)}catch(e){}})();`;
 ---
 <!doctype html>
 <html lang="en">
@@ -42,9 +41,10 @@ const themeScript = `(function(){var p=${JSON.stringify(objectiveThemes)};try{va
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <script is:inline set:html={themeScript} />
+    <script is:inline set:html={meshScript} />
   </head>
   <body>
+    <div class="mesh" aria-hidden="true"></div>
     <Nav currentPath={currentPath} />
     <main>
       <slot />
