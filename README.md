@@ -11,7 +11,7 @@ Inside of this project, you'll see the following folders and files:
 ├── public/
 ├── src/
 │   ├── components/
-│   ├── content/     # the broadcasts, craft and made collections
+│   ├── content/     # the broadcasts, objectives and made collections
 │   ├── data/        # small static tables (nav links, mesh palette)
 │   ├── layouts/
 │   ├── lib/         # shared helpers (collections, dates, mesh script)
@@ -95,13 +95,13 @@ needs new CSS:
 A numbered catalogue of the studio's values — one **Objective** per value — and
 nothing else. "Mission" is the page; an "Objective" is a row on it.
 
-- It is generated from the **Craft** collection: `src/components/objectives/ObjectiveList.astro`
-  reads `src/content/craft/`, sorts by the `order` frontmatter, and numbers the
-  entries `01`, `02`, … Add or reorder a Craft entry and the page renumbers
+- It is generated from the **Objectives** collection: `src/components/objectives/ObjectiveList.astro`
+  reads `src/content/objectives/`, sorts by the `order` frontmatter, and numbers
+  the entries `01`, `02`, … Add or reorder an Objective and the page renumbers
   itself. `00. Start here` is the one hard-coded objective (→ `/about`).
 - Each row is a disclosure: click (or tab to and press Enter on) an objective
   and its description unfolds in place, with a `Read in full →` link on to the
-  essay at `/craft/<slug>`. Only one objective is open at a time — the
+  essay at `/objectives/<slug>`. Only one objective is open at a time — the
   `<details>` elements share a `name`, so the browser closes the last one for
   us. No JS.
 - Hovering (or tabbing to) one objective dims all the others; an open one stays
@@ -126,12 +126,12 @@ thing itself.
   `alt`: it repeats the title link, and a screenshot says nothing out loud.
 - `repo:` adds a "Read the source" link when it differs from `url:`.
 
-### Craft
+### Objectives
 
-The Craft collection has no index of its own — the Mission page *is* the index,
-so `/craft/<slug>` just renders one essay, headed `Objective 07`. Numbering is
-derived from the collection's `order` frontmatter in both places, so the
-objective numbers always agree, and each essay links back to `/`
+The Objectives collection has no index of its own — the Mission page *is* the
+index, so `/objectives/<slug>` just renders one essay, headed `Objective 07`.
+Numbering is derived from the collection's `order` frontmatter in both places, so
+the objective numbers always agree, and each essay links back to `/`
 ("All objectives") plus its neighbours.
 
 ## ✉️ Writing a Broadcast

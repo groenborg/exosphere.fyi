@@ -77,8 +77,8 @@
 }
 
 /* ============================================================
-   LIST — the stacked entry list behind /made, /craft and
-   /broadcasts. A meta line, a big title, a paragraph.
+   LIST — the stacked entry list behind /made and /broadcasts.
+   A meta line, a big title, a paragraph.
    ============================================================ */
 
 .list {

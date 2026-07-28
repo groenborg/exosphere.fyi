@@ -7,7 +7,7 @@ import { type CollectionEntry, render } from "astro:content";
 /**
  * The draft rule, in one place: a `draft: true` entry is visible while you're
  * writing (`npm run dev`) and dropped from production builds. Pass it straight
- * to `getCollection` — `getCollection("craft", isPublished)`.
+ * to `getCollection` — `getCollection("objectives", isPublished)`.
  *
  * The RSS feed deliberately doesn't use this: a draft never belongs in a feed,
  * dev or not.
@@ -42,8 +42,8 @@ export const byNewest = (a: CollectionEntry<"broadcasts">, b: CollectionEntry<"b
   b.data.pubDate.getTime() - a.data.pubDate.getTime();
 
 /**
- * The authored order of the Craft entries. The Mission page and each essay's
+ * The authored order of the Objective entries. The Mission page and each essay's
  * prev/next both number from this, so they can't disagree.
  */
-export const byOrder = (a: CollectionEntry<"craft">, b: CollectionEntry<"craft">) =>
+export const byOrder = (a: CollectionEntry<"objectives">, b: CollectionEntry<"objectives">) =>
   a.data.order - b.data.order;

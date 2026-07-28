@@ -1,10 +1,10 @@
 ---
 import { getCollection, render } from "astro:content";
-import CraftLayout from "../../layouts/CraftLayout.astro";
+import ObjectiveLayout from "../../layouts/ObjectiveLayout.astro";
 import { byOrder, isPublished } from "../../lib/content";
 
 export async function getStaticPaths() {
-  const all = await getCollection("craft", isPublished);
+  const all = await getCollection("objectives", isPublished);
   const sorted = all.sort(byOrder);
 
   return sorted.map((entry, i) => {
@@ -25,6 +25,6 @@ export async function getStaticPaths() {
 const { entry, position, prev, next } = Astro.props;
 const { Content } = await render(entry);
 ---
-<CraftLayout entry={entry} position={position} prev={prev} next={next}>
+<ObjectiveLayout entry={entry} position={position} prev={prev} next={next}>
   <Content />
-</CraftLayout>
+</ObjectiveLayout>

@@ -6,16 +6,15 @@ import Objective from "./Objective.astro";
 /**
  * The whole landing page: a numbered catalogue of the studio's values.
  *
- * Objectives are the Craft entries, sourced live from the collection and ordered
- * by their `order` frontmatter — add or reorder a Craft entry and this list
- * renumbers itself. `00` is the standing invitation, everything after it is an
- * essay.
+ * Objectives are sourced live from the collection and ordered by their `order`
+ * frontmatter — add or reorder an entry and this list renumbers itself. `00` is
+ * the standing invitation, everything after it is an essay.
  *
  * Clicking a objective opens it in place: the description unfolds under the
  * title, with an arrow on to the essay itself. Only one stays open at a time.
  */
-const craft = await getCollection("craft", isPublished);
-const sorted = craft.sort(byOrder);
+const entries = await getCollection("objectives", isPublished);
+const sorted = entries.sort(byOrder);
 
 const objectives = [
   {
@@ -27,7 +26,7 @@ const objectives = [
   ...sorted.map((entry, i) => ({
     num: String(i + 1).padStart(2, "0"),
     title: entry.data.title,
-    href: `/craft/${entry.id}`,
+    href: `/objectives/${entry.id}`,
     description: entry.data.description,
   })),
 ];

@@ -16,8 +16,8 @@ const broadcasts = defineCollection({
   }),
 });
 
-const craft = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/craft" }),
+const objectives = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/objectives" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -44,4 +44,4 @@ const made = defineCollection({
   }),
 });
 
-export const collections = { broadcasts, craft, made };
+export const collections = { broadcasts, objectives, made };

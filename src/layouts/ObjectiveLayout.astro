@@ -11,7 +11,7 @@ interface Neighbour {
 }
 
 interface Props {
-  entry: CollectionEntry<"craft">;
+  entry: CollectionEntry<"objectives">;
   /** Its place in the Mission list — derived from `order`, not stored. */
   position: number;
   prev?: Neighbour | null;
@@ -53,12 +53,12 @@ const num = (n: number) => String(n).padStart(2, "0");
           <li><a href="/">All objectives</a></li>
           {prev && (
             <li>
-              <a href={`/craft/${prev.id}`}>{`← ${num(prev.position)}. ${prev.title}`}</a>
+              <a href={`/objectives/${prev.id}`}>{`← ${num(prev.position)}. ${prev.title}`}</a>
             </li>
           )}
           {next && (
             <li>
-              <a href={`/craft/${next.id}`}>{`${num(next.position)}. ${next.title} →`}</a>
+              <a href={`/objectives/${next.id}`}>{`${num(next.position)}. ${next.title} →`}</a>
             </li>
           )}
         </ul>
