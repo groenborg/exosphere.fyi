@@ -32,7 +32,7 @@
    on the same optical left edge.                                */
 
 .objective {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
 }
 
 .objective__header {
@@ -50,7 +50,7 @@
 }
 
 .objective__header:focus-visible {
-  outline: 2px solid rgb(var(--rgb-white));
+  outline: 2px solid rgb(var(--rgb-ink));
   outline-offset: 0.1em;
 }
 
@@ -135,11 +135,11 @@
    for is the only thing at full strength.                       */
 
 .cluster--index:has(.objective[open]) .objective__header {
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
 }
 
 .cluster--index .objective[open] > .objective__header {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
 }
 
 /* ── Desktop ─────────────────────────────────────────────────
@@ -159,11 +159,11 @@
 
   .cluster--index:hover .objective__header:not(:hover),
   .cluster--index:focus-within .objective__header:not(:focus-visible) {
-    color: rgba(var(--rgb-white), var(--dim));
+    color: rgba(var(--rgb-ink), var(--dim));
   }
 
   .cluster--index .objective[open] > .objective__header {
-    color: rgb(var(--rgb-white));
+    color: rgb(var(--rgb-ink));
   }
 }
 

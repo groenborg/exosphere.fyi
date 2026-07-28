@@ -8,10 +8,11 @@ import { meshPalette } from "../data/mesh-palette";
  * itself (layer order, the fixed noise tile, the light/dark split) lives in
  * styles/mesh.css.
  *
- * Five radial blobs, painted last-to-first: 0 and 1 are opaque true black and
- * sit on top, carving the shape out of the 2–4 tint blooms underneath. Each
- * blob gets two colours — --c-N for light, --d-N for dark — so a change of
- * system theme needs no JS, and the geometry is shared between the two.
+ * Five radial blobs, painted last-to-first: 0 and 1 are opaque and carry the
+ * ground's own colour, so they sit on top and carve the shape out of the 2–4
+ * tint blooms underneath. Each blob gets three colours — --c-N for dark, --d-N
+ * for dark on a system that asks for dark, --l-N for light — so switching
+ * theme needs no JS beyond the attribute, and all three share one geometry.
  */
 export const meshScript = `(function () {
   var P = ${JSON.stringify(meshPalette)};
@@ -59,6 +60,7 @@ export const meshScript = `(function () {
       if (black) {
         s.setProperty("--c-" + n, "rgba(0, 0, 0, 1)");
         s.setProperty("--d-" + n, "rgba(0, 0, 0, 1)");
+        s.setProperty("--l-" + n, "rgba(255, 255, 255, 1)");
         continue;
       }
       var c = tints[(n - 2) % tints.length];
@@ -72,11 +74,22 @@ export const meshScript = `(function () {
         "--d-" + n,
         "hsla(" + h + ", " + Math.round(c.s * 0.8) + "%, " + pct(rand(13, 20)) + ", " + rand(0.1, 0.22).toFixed(2) + ")"
       );
+      /* Light: the same hue, lifted but not bleached. A tint that reads as
+         pale on its own disappears once it's over white, so this sits well
+         below the base's lightness and leans on saturation to stay a colour
+         — the fade is still soft, because blobs 0 and 1 cut white back
+         through it. */
+      s.setProperty(
+        "--l-" + n,
+        "hsla(" + h + ", " + Math.min(100, Math.round(c.s * 1.15)) + "%, " + pct(rand(64, 76)) + ", " + rand(0.5, 0.72).toFixed(2) + ")"
+      );
     }
 
-    /* The ground under the blobs. Never quite black, so the noise has
-       something to grain against; true black comes from blobs 0 and 1. */
+    /* The ground under the blobs. Never quite black — or, in light, never
+       quite white — so the grain has something to bite on; the flat extremes
+       come from blobs 0 and 1. */
     s.setProperty("--mesh-base", "hsl(" + primary.h + ", " + primary.s + "%, 7%)");
     s.setProperty("--mesh-base-dark", "hsl(" + primary.h + ", 45%, 3.5%)");
+    s.setProperty("--mesh-base-light", "hsl(" + primary.h + ", 100%, 99.5%)");
   } catch (e) {}
 })();`;

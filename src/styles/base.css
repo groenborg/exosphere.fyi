@@ -31,7 +31,7 @@ body {
   flex-direction: column;
   min-height: 100dvh;
   overflow-x: hidden;
-  color: rgba(var(--rgb-white), 0.85);
+  color: rgba(var(--rgb-ink), 0.85);
   font-family: var(--font-sans);
   font-size: var(--font-size);
   font-weight: 400;
@@ -66,7 +66,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
   font-size: inherit;
   font-weight: 700;
 }
@@ -79,7 +79,7 @@ ol {
 }
 
 a {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
   font-weight: 700;
   letter-spacing: normal;
   text-decoration: underline;
@@ -90,13 +90,13 @@ a {
 /* The browser default ring is off-palette on a saturated ground. */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid rgb(var(--rgb-white));
+  outline: 2px solid rgb(var(--rgb-ink));
   outline-offset: 0.1em;
 }
 
 strong,
 b {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
   font-weight: 700;
 }
 
@@ -121,8 +121,8 @@ button {
 }
 
 ::selection {
-  background: rgba(var(--rgb-white), 0.15);
-  color: rgb(var(--rgb-white));
+  background: rgba(var(--rgb-ink), 0.15);
+  color: rgb(var(--rgb-ink));
 }
 
 @media (min-width: 64em) and (hover: hover) and (pointer: fine) {

@@ -1,0 +1,41 @@
+---
+/**
+ * The theme switch: one circle in the bottom-right corner.
+ *
+ * Filled when the page is light, an empty ring when it's dark — the control
+ * is the state, the same way the bracketed nav link is the current page.
+ *
+ * Rendered for dark, since that's what the server has no way to know better
+ * than; the inline script in lib/theme-script.ts has already set the attribute
+ * the CSS keys off, and the script below syncs `aria-pressed` on load. Hidden
+ * altogether without JS, where it could not do anything.
+ */
+---
+<button class="theme-switch" type="button" aria-label="Light mode" aria-pressed="false">
+  <span class="theme-switch__dot" aria-hidden="true"></span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const button = document.querySelector<HTMLButtonElement>(".theme-switch");
+  const meta = document.querySelector('meta[name="theme-color"]');
+
+  const apply = (theme: "light" | "dark") => {
+    root.dataset.theme = theme;
+    button?.setAttribute("aria-pressed", String(theme === "light"));
+    meta?.setAttribute("content", theme === "light" ? "#ffffff" : "#000000");
+  };
+
+  /* The pre-paint script already chose; this only catches the markup up. */
+  apply(root.dataset.theme === "light" ? "light" : "dark");
+
+  button?.addEventListener("click", () => {
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    apply(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* Private mode, or storage full — the choice just won't outlive the page. */
+    }
+  });
+</script>

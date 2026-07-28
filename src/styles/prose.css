@@ -135,7 +135,7 @@
 
 .prose figcaption {
   margin-top: 0.5em;
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
   font-size: 85%;
   font-weight: 700;
 }
@@ -145,10 +145,10 @@
 .prose code {
   display: inline-block;
   padding: 0 0.25em;
-  border: 1px solid rgba(var(--rgb-white), 0.2);
+  border: 1px solid rgba(var(--rgb-ink), 0.2);
   border-radius: 0.15em;
-  background: rgba(var(--rgb-white), 0.2);
-  color: rgb(var(--rgb-white));
+  background: rgba(var(--rgb-ink), 0.2);
+  color: rgb(var(--rgb-ink));
   font-family: var(--font-mono);
   font-size: 75%;
   line-height: 1.3;
@@ -157,10 +157,10 @@
 .prose pre {
   overflow-x: auto;
   padding: 0.9em 1.1em;
-  border: 1px solid rgba(var(--rgb-white), 0.2);
+  border: 1px solid rgba(var(--rgb-ink), 0.2);
   border-radius: 0.3em;
-  background: rgba(var(--rgb-white), 0.12);
-  color: rgb(var(--rgb-white));
+  background: rgba(var(--rgb-ink), 0.12);
+  color: rgb(var(--rgb-ink));
   font-family: var(--font-mono);
   font-size: 75%;
   line-height: 1.5;
@@ -180,11 +180,11 @@
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
-  background: rgba(var(--rgb-white), 0.08);
+  background: rgba(var(--rgb-ink), 0.08);
 }
 
 .prose tbody tr:nth-of-type(odd) {
-  background: rgba(var(--rgb-white), 0.06);
+  background: rgba(var(--rgb-ink), 0.06);
 }
 
 .prose th,
@@ -195,7 +195,7 @@
 }
 
 .prose th {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
   font-weight: 700;
   vertical-align: middle;
 }

@@ -14,11 +14,12 @@
   --font-chrome: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* colour — the ground is a mesh gradient (styles/mesh.css), cut
-     out of --rgb-ground. Everything on top of it is white at some
-     alpha; nothing else is tinted. */
+  /* colour — two values carry the whole page. The ground is a mesh
+     gradient (styles/mesh.css) cut out of --rgb-ground; everything
+     on top of it is --rgb-ink at some alpha, and nothing else is
+     tinted. Swap the pair and the page inverts. */
   --rgb-ground: 0, 0, 0;
-  --rgb-white: 255, 255, 255;
+  --rgb-ink: 255, 255, 255;
 
   /* how far secondary text recedes */
   --dim: 0.4375;
@@ -31,6 +32,16 @@
 
   --line-height: calc(1.3em + 1vw);
   --spacing: 0.75em;
+}
+
+/* Light: ink and ground trade places. Black on white is harsher than
+   white on black at the same alpha, so secondary text has to recede a
+   little further to stay off the page without going illegible. */
+:root[data-theme="light"] {
+  --rgb-ground: 255, 255, 255;
+  --rgb-ink: 16, 16, 20;
+
+  --dim: 0.55;
 }
 
 @media (min-width: 64em) and (hover: hover) and (pointer: fine) {

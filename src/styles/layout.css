@@ -116,7 +116,7 @@
 }
 
 .list__empty {
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
 }
 
 @media (min-width: 64em) and (hover: hover) and (pointer: fine) {
@@ -142,7 +142,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
   font-size: 85%;
   font-weight: 700;
   letter-spacing: normal;
@@ -159,7 +159,7 @@
 
 .meta a:hover,
 .meta a:focus {
-  color: rgb(var(--rgb-white));
+  color: rgb(var(--rgb-ink));
 }
 
 /* A row of onward links. Bulleted and stacked on a phone, an
@@ -173,7 +173,7 @@
 }
 
 .links li::marker {
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
 }
 
 .links a:hover,
@@ -182,7 +182,7 @@
 }
 
 .links small {
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
   font-size: 85%;
   font-weight: 700;
 }
@@ -315,10 +315,12 @@
    FOOTER — a compact link list.
    ============================================================ */
 
+/* The theme switch floats over the bottom-right corner, so the last
+   line of links has to end before it. */
 footer {
   position: relative;
   z-index: 4;
-  padding: 0 var(--spacing) var(--spacing);
+  padding: 0 3.25rem var(--spacing) var(--spacing);
   font-family: var(--font-chrome);
 }
 
@@ -339,6 +341,65 @@ footer {
 }
 
 .foot__meta {
-  color: rgba(var(--rgb-white), var(--dim));
+  color: rgba(var(--rgb-ink), var(--dim));
   font-weight: 400;
+}
+
+/* ============================================================
+   THEME SWITCH — a single circle in the bottom-right corner:
+   filled on light, an empty ring on dark. Same ink as the type,
+   so it reads as a mark on the ground rather than a button.
+   ============================================================ */
+
+/* The circle is 2rem; the button is bigger so the tap target is,
+   too. Only shown once the pre-paint script has resolved a theme —
+   without JS it has nothing to switch. */
+.theme-switch {
+  position: fixed;
+  right: var(--spacing);
+  bottom: var(--spacing);
+  z-index: 105;
+  display: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-radius: 50%;
+}
+
+:root[data-theme] .theme-switch {
+  display: grid;
+}
+
+.theme-switch__dot {
+  width: 2rem;
+  height: 2rem;
+  border: 0.1875rem solid rgba(var(--rgb-ink), 0.85);
+  border-radius: 50%;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+:root[data-theme="light"] .theme-switch__dot {
+  background-color: rgba(var(--rgb-ink), 0.85);
+}
+
+.theme-switch:hover .theme-switch__dot {
+  border-color: rgb(var(--rgb-ink));
+}
+
+:root[data-theme="light"] .theme-switch:hover .theme-switch__dot {
+  background-color: rgb(var(--rgb-ink));
+}
+
+.theme-switch:active .theme-switch__dot {
+  transform: scale(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch__dot {
+    transition: none;
+  }
 }

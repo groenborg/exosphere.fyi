@@ -44,14 +44,21 @@ All commands are run from the root of the project, from a terminal:
 
 ## 📡 The design
 
-Every page shares one treatment: a single flat, saturated colour, white type,
-and a header and footer that fade out of the ground rather than sitting on
-bars. No surfaces, no borders, no cards, one typeface.
+Every page shares one treatment: a single flat, saturated colour, type in the
+one ink, and a header and footer that fade out of the ground rather than
+sitting on bars. No surfaces, no borders, no cards, one typeface.
 
 - The ground is a five-blob radial mesh. Its hue is picked per page load from
   `src/data/mesh-palette.ts` by `src/lib/mesh-script.ts`, inlined into `<head>`
   and run before first paint, never repeating the previous load in the session.
   With JS off the fallback mesh in `mesh.css` stands in.
+- **Two colours, two themes.** `--rgb-ground` and `--rgb-ink` carry the whole
+  page: everything drawn on the ground is ink at some alpha, so swapping the
+  pair inverts the site. Dark is the default; the switch in the bottom-right
+  corner (`ThemeToggle.astro`) writes `data-theme` to `<html>` and remembers
+  the choice, and `src/lib/theme-script.ts` re-applies it before first paint.
+  Each mesh blob carries a colour per theme — `--c-N` dark, `--d-N` dark on a
+  system that asks for dark, `--l-N` light — over one shared geometry.
 - **One type scale** drives everything. `--font-size` sets the body size and
   every other size is a percentage of it (`--font-size-small`,
   `--font-size-xxx-large`, …), while spacing is expressed in `em` and
@@ -66,7 +73,7 @@ bars. No surfaces, no borders, no cards, one typeface.
 | `tokens.css`     | The scale, the colours, the fonts                         |
 | `base.css`       | Reset and element defaults                                |
 | `mesh.css`       | The ground: blob geometry, grain, and the no-JS fallback   |
-| `layout.css`     | `.page` chrome, header, footer, and the shared primitives  |
+| `layout.css`     | `.page` chrome, header, footer, switch, shared primitives  |
 | `prose.css`      | `.prose` — the body of an essay or broadcast (MDX output)  |
 | `objectives.css` | The Mission list                                          |
 | `made.css`       | The optional image column on `/made`                      |
