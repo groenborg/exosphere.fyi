@@ -220,6 +220,7 @@
   gap: var(--spacing);
   width: 100%;
   padding: var(--spacing);
+  font-family: var(--font-chrome);
   background: linear-gradient(180deg, rgba(var(--rgb-theme), 1) 0, rgba(var(--rgb-theme), 0) 100%);
   pointer-events: none;
 }
@@ -309,6 +310,7 @@ footer {
   position: relative;
   z-index: 4;
   padding: 0 var(--spacing) var(--spacing);
+  font-family: var(--font-chrome);
 }
 
 .foot {

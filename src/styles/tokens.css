@@ -8,8 +8,10 @@
    ============================================================ */
 
 :root {
-  /* type */
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  /* type — Inter carries the page; Space Grotesk is kept for the
+     chrome (header and footer) so the frame stays distinct. */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-chrome: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* colour — the ground is set before first paint by the inline
