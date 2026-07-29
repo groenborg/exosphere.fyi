@@ -1,10 +1,15 @@
 /* ============================================================
    EXOSPHERE — the ground
 
-   A five-blob radial mesh over a near-flat base, grained with a
-   fixed SVG noise tile. Blobs 0 and 1 carry the base's own colour
-   and sit on top of the tinted ones, so the mesh is cut out of the
-   ground rather than laid over it.
+   A five-blob radial mesh over a near-flat base, grained with an
+   SVG noise tile. Blobs 0 and 1 carry the base's own colour and sit
+   on top of the tinted ones, so the mesh is cut out of the ground
+   rather than laid over it.
+
+   The layer is as tall as the page and scrolls with the content, so
+   the blobs are sized in vmax (--r-N) rather than against the layer:
+   they stay the size of a screen while --y-N spreads the five of them
+   down the whole page.
 
    Geometry and colours are written to :root before first paint by
    the inline script in BaseLayout; everything declared here is
@@ -29,79 +34,90 @@
 
   --x-0: 22%;
   --y-0: 71%;
-  --s-start-0: 12%;
-  --s-end-0: 49%;
+  --r-0: 44vmax;
+  --s-start-0: 24%;
   --c-0: rgba(0, 0, 0, 1);
   --d-0: rgba(0, 0, 0, 1);
   --l-0: rgba(255, 255, 255, 1);
 
   --x-1: 88%;
   --y-1: 24%;
-  --s-start-1: 8%;
-  --s-end-1: 44%;
+  --r-1: 40vmax;
+  --s-start-1: 18%;
   --c-1: rgba(0, 0, 0, 1);
   --d-1: rgba(0, 0, 0, 1);
   --l-1: rgba(255, 255, 255, 1);
 
   --x-2: 14%;
   --y-2: 16%;
-  --s-start-2: 11%;
-  --s-end-2: 38%;
+  --r-2: 34vmax;
+  --s-start-2: 29%;
   --c-2: hsla(219, 78%, 52%, 0.55);
   --d-2: hsla(219, 62%, 17%, 0.16);
   --l-2: hsla(219, 90%, 72%, 0.58);
 
   --x-3: 61%;
   --y-3: 86%;
-  --s-start-3: 6%;
-  --s-end-3: 33%;
+  --r-3: 30vmax;
+  --s-start-3: 18%;
   --c-3: hsla(267, 84%, 48%, 0.6);
   --d-3: hsla(267, 67%, 15%, 0.2);
   --l-3: hsla(267, 97%, 74%, 0.62);
 
   --x-4: 44%;
   --y-4: 38%;
-  --s-start-4: 12%;
-  --s-end-4: 41%;
+  --r-4: 37vmax;
+  --s-start-4: 29%;
   --c-4: hsla(191, 100%, 46%, 0.45);
   --d-4: hsla(191, 80%, 14%, 0.12);
   --l-4: hsla(191, 100%, 70%, 0.55);
 }
 
-/* Fixed behind everything, so the mesh reads as the sky the page
-   scrolls past rather than as a panel that travels with it. */
+/* Behind everything, and as tall as the page, so the ground travels
+   with the content instead of the content sliding over it. */
 .mesh {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -1;
   background-color: var(--mesh-base);
+  /* Each blob carries its own radius in vmax, so it stays the size it would
+     have been on one screen however long the page is; --y-N then places it
+     down the page rather than down the viewport. A radius resolved against
+     the layer instead would grow with the page, and a viewport-tall layer per
+     blob would cut the circle off at a hard line mid-page. */
   background-image:
     var(--mesh-grain),
     radial-gradient(
-      circle at var(--x-0) var(--y-0),
+      circle var(--r-0) at var(--x-0) var(--y-0),
       var(--c-0) var(--s-start-0),
-      transparent var(--s-end-0)
+      transparent 100%
     ),
     radial-gradient(
-      circle at var(--x-1) var(--y-1),
+      circle var(--r-1) at var(--x-1) var(--y-1),
       var(--c-1) var(--s-start-1),
-      transparent var(--s-end-1)
+      transparent 100%
     ),
     radial-gradient(
-      circle at var(--x-2) var(--y-2),
+      circle var(--r-2) at var(--x-2) var(--y-2),
       var(--c-2) var(--s-start-2),
-      transparent var(--s-end-2)
+      transparent 100%
     ),
     radial-gradient(
-      circle at var(--x-3) var(--y-3),
+      circle var(--r-3) at var(--x-3) var(--y-3),
       var(--c-3) var(--s-start-3),
-      transparent var(--s-end-3)
+      transparent 100%
     ),
     radial-gradient(
-      circle at var(--x-4) var(--y-4),
+      circle var(--r-4) at var(--x-4) var(--y-4),
       var(--c-4) var(--s-start-4),
-      transparent var(--s-end-4)
+      transparent 100%
     );
+  /* The noise tile carries a 1:1 viewBox and no intrinsic size, so left to
+     itself it stretches over the whole page instead of graining it. Sized
+     square to the short side — what it worked out to when this layer was the
+     viewport — it tiles down the page at the same fineness. The blobs stay
+     auto: one page-sized box each, which is what their radii expect. */
+  background-size: 100vmin 100vmin, auto, auto, auto, auto, auto;
   background-blend-mode: var(--mesh-grain-blend), normal, normal, normal, normal, normal;
   pointer-events: none;
   contain: paint;

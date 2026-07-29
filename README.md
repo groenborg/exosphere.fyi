@@ -61,6 +61,10 @@ sitting on bars. No surfaces, no borders, no cards.
   `src/data/mesh-palette.ts` by `src/lib/mesh-script.ts`, inlined into `<head>`
   and run before first paint, never repeating the previous load in the session.
   With JS off the fallback mesh in `mesh.css` stands in.
+- The mesh is as tall as the page and scrolls with the content, but every blob
+  is drawn at viewport scale and the five are spread down the page — so a long
+  page has quieter, near-flat stretches between blooms rather than five blobs
+  stretched over its whole height.
 - **Two colours, two themes.** `--rgb-ground` and `--rgb-ink` carry the whole
   page: everything drawn on the ground is ink at some alpha, so swapping the
   pair inverts the site. Dark is the default; the switch in the bottom-right
